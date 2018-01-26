@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
 </head>
 <style>
     * {
@@ -28,6 +30,9 @@
     .box ul li {
         box-sizing: border-box;
         padding: 30px 0;
+    }
+    #promise{
+        font-size: 20px;
     }
 </style>
 <body>
@@ -65,29 +70,54 @@
             <p>} else {</p>
             <p>reject(error);</p>
             <p>}</p>
+        </li>
+        <li>
+            <p><h4>用promise封装ajax</h4></p>
+            <pre id="promise"></pre>
+        </li>
+        <li>
+            <p><h5>理解</h5></p>
+            <p>Promise 对象是一个代理对象（代理一个值），被代理的值在Promise对象创建时可能是未知的。它允许你为异步操作的成功和失败分别绑定相应的处理方法（handlers）。 这让异步方法可以像同步方法那样返回值，但并不是立即返回最终执行结果，而是一个能代表未来出现的结果的promise对象
 
+                一个 Promise有以下几种状态:
 
+                pending: 初始状态，不是成功或失败状态。
+                fulfilled: 意味着操作成功完成。
+                rejected: 意味着操作失败。
+                pending 状态的 Promise 对象可能触发fulfilled 状态并传递一个值给相应的状态处理方法，也可能触发失败状态（rejected）并传递失败信息。当其中任一种情况出现时，Promise 对象的 then 方法绑定的处理方法（handlers ）就会被调用（then方法包含两个参数：onfulfilled 和 onrejected，它们都是 Function 类型。当Promise状态为fulfilled时，调用 then 的 onfulfilled 方法，当Promise状态为rejected时，调用 then 的 onrejected 方法， 所以在异步操作的完成和绑定处理方法之间不存在竞争）。
+
+                因为 Promise.prototype.then 和  Promise.prototype.catch 方法返回promise 对象， 所以它们可以被链式调用。</p>
         </li>
     </ul>
 </div>
 </body>
 </html>
-<!--<script>-->
-    <!--function loadImageAsync(url) {-->
-        <!--return new Promise(function(resolve, reject) {-->
-            <!--// const image = new Image();-->
+<script>
+    let str = `
+    // ajax函数将返回Promise对象:
+    function ajax(method, url, data) { //用promise封装一个ajax
+        var request = new XMLHttpRequest(); //实例化一个ajax请求
+        return new Promise(function (resolve, reject) {//实例化一个promiseu对象
+            request.onreadystatechange = function () { //onreadystatechange 表示ajax的请求状态
+                if (request.readyState === 4) { //ajax 发送请求 readyState 从0-4 当是4时候 表明完成请求后并收到回复
+                      //readyState 值一改变就会触发 onreadystatechange 函数
+                    if (request.status === 200) {  // 当 readyState ==4 且 status ==200 表明请求成功
+                        resolve(request.responseText);  //promise请求成功时候 调用reslove这个方法 相当于success
+                    } else {
+                        reject(request.status);  //promise失败时候调用的方法
+                    }
+                }
+            };
+            request.open(method, url);  //ajax发送请求
+            request.send(data);  //  发送请求携带的数据
+        });
+    }
 
-            <!--setTimeout(console.log('abc'),2000)-->
-
-            <!--image.onload = function() {-->
-                <!--resolve(image);-->
-            <!--};-->
-
-            <!--image.onerror = function() {-->
-                <!--reject(new Error('Could not load image at ' + url));-->
-            <!--};-->
-
-            <!--image.src = url;-->
-        <!--});-->
-    <!--}-->
-<!--</script>-->
+    //调用ajax方法
+    var p = ajax('GET', '/api/categories').then(function (text) { // 如果AJAX成功，获得响应内容
+        log.innerText = text;
+    }).catch(function (status) { // 如果AJAX失败，获得响应代码
+        log.innerText = 'ERROR: ' + status;
+    });`;
+    $("#promise").append(str)
+</script>

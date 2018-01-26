@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        margin: 0 auto;
+        box-sizing: border-box;
+        padding: 50px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+        line-height: 30px;
+
+    }
+
+    pre {
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <p><h4>fetch() 的语法如下所示：</h4></p>
+            <pre>fetch(input, init).then(function(response) { ... }); </pre>
+            <p>input 参数，即可以直接传入一个 url，也可以传入一个 Request 对象;</p>
+            <p>init 参数是可选，是一个包含了请求方法，请求头部，请求主体，模式，凭证，缓存模式等配置的对象。</p>
+            <p>从语法中可以看到，fetch() API 会返回一个 Promise。</p>
+            <pre>如：fetch('https://nodejs.org/api/http.json').then(function(response) {
+    return // 响应处理
+}).catch(function(err) {
+    // 捕获错误
+});</pre>
+            <p><h4>fetch 的post请求</h4></p>
+            <pre>fetch('/post/some/data', {
+    method: 'post',
+    body: new FormData(document.querySelector('#form'))
+});</pre>
+            <p><h4>如果是 json 格式的数据的话：</h4></p>
+            <pre>fetch('/post/some/data', {
+    method: 'post',
+    body: JSON.stringify({ user: 'lisposter', pwd: 'souche.com'})
+});
+            </pre>
+
+        </li>
+        <li>
+            <p><h4>Fetch 写法:</h4></p>
+            <pre>fetch('https://nodejs.org/api/http.json')
+    .then(function(response) { //第一个then表示fetch返回的是一个promise对象
+        return response.json();
+    })
+    .then(function(json) { //第二个then表示promise请求成功相当于resolved函数
+        // 此处的 json 已经被处理为 json 对象
+    })
+    .catch(function(err) {
+        // 捕获错误
+    });
+            </pre>
+            <p>当然也可以选择使用传统的 JSON.parse()，但无疑，使用 .json() 方法更加方便快捷，适合在 Promise 中使用。</p>
+            同理，如果你希望处理请求结果为纯文本，那么 Response.text() 将会很有帮助。除此之外，还有 .blob(), formData() 等方法可供使用。Fetch API 所支持的响应类型有如下几种：
+
+            ArrayBuffer,
+            ArrayBufferView(Uint8Array and friends),
+            Blob/File,
+            String,
+            URLSearchParams,
+            FormData
+        </li>
+        <li>
+            <p><h4>从 Response 的属性中提取到响应头部及 Metadata 的相关信息：</h4></p>
+            <pre>fetch('https://nodejs.org/api/http.json').then(function(response) {
+    console.log(response.status);
+    console.log(response.statusText);
+    console.log(response.url);
+    console.log(response.type);
+    console.log(response.headers);
+
+// 获取头部信息需要使用 .get()
+console.log(response.headers.get('Content-Type'));
+})
+            </pre>
+            <p>其中，response.headers 就是一个 Header 类型的对象，我们可以使用 Headers 类提供的各种方法来操作，除了上面代码中的 .get() 方法外，Headers 还有 .has() 方法，用于检查是否包含某个头部信息；.getAll() 方法，将制定的头部信息以数组形式全部返回，等等，具体可以参考 Headers 类型文档</p>
+        </li>
+        <li>
+            <p><h4>响应类型</h4></p>
+            <p>每当我们用 fetch 发起一个请求，其响应都会被赋予一个响应类型，'basic'，'cors' 或者 'opaque'。 如果请求是同源的，那么响应类型就是 'basic'，如果跨域的请求，则是 'cors'，如果对非同源的资源发起一个请求，并且其没有返回 CORS 头的话，则是 'opaque' 类型。'opaque' 类型的响应我们将不能读取所返回的数据或者查看请求的状态，也就是说，我们压根没办法知道请求是否成功了。</p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    // let str = `fetch('/api/data').then(res=>res.json()).then(y=>{
+    //     let strw = '';
+    //     y.d.forEach(v=>{})
+    //     div.innerHTML=strw;
+    // });`;
+
+    $("#fetch").append(str)
+</script>
