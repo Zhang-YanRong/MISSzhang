@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        margin: 50px auto 0;
+        overflow: hidden;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+
+    pre {
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <pre>class Div{
+        constructor(context){
+            var divs=document.querySelectorAll(context);
+            this.length=divs.length;
+            divs.forEach((value,index)=>{//箭头函数的thi是在定义时候的
+                this[index]=value;
+            })
+        }
+        html(val){
+            for(var i=0;i<`this.length`;i++){
+                this[i].innerHTML=(val);
+            }
+        }
+        click(callback){
+                for(var i=0;i<`this.length`;i++){
+               this[i].onclick=function () {
+                  callback();};
+            }
+       }
+        each(callback){
+            for(var i=0;i<`this.length`;i++){
+                callback.call(this[i],this[i],i); //call 改变this指向 括号里面的第一个是要指向的元素
+            }
+        }
+        html(val){
+            this.each(function (value) {
+                value.innerHTML=(val);
+            })
+        }
+        click(callback){
+            this.each(function (value) {
+                value.onclick=function () {
+                    callback();
+                };
+            })
+        }
+    }
+    var obj=new Div('div');// 这里的
+    obj.html('哈哈');
+    obj.click(function () {
+        alert(1)
+    })
+    console.log(obj)
+
+    //隐式循环 链式调用 跨平台
+    //jQuery   理念 write less do more
+    //    特点 是一个快速的 小巧的 功能丰富的javascript库，  文档的遍历和操作 事件处理 动画和Ajax等东西变得简单易用
+    //    通用性和扩展性的结合
+    //    如果有很多的DOM对象的遍历和操作 选择jQuer
+    //    数据处理选别的 m v v m
+    //    jQuery 版本
+    //    1.11 最后一个兼容性的
+    //    2       不支持IE6  7 8
+    //    3
+    //
+    //    jQuery 的核心函数
+    //    $('div',$('.par'))
+    //    $('div','.par')
+    //    $=jQuery()  括号里面放  选择器 html 标签
+    //
+        `$("<div class='00'></div>")  创建一个DIV
+        $("<div>")  div标签可以不写完整
+       $("<div>,{" +
+            "" +
+            "}")`
+
+    $(function () {
+        //相当于window.onload
+        $('div').each((index,value){  //注意这里的index 和 value 顺序
+            $('div')[0]  //这是一个DOM对象
+            $('div')    //这是一个jQuery对象
+        })
+        $('div').get()  //（）不写数字 把jQery集合转化为DOM集合  写数字 反对的是DOM对象
+        $('#box').index()  //（）不写数字  #box 在同辈的索引位置
+
+        $('div').data('aa','bb');
+        $('div').get[0].aa   //DOM对象不能访问jQuery对象的aa属性
+
+        //div:first-child  第一个必须是div 才能选中  B不是就选不中
+        //hidden 只针对display ：none的 opactiy：0的不行
+        //:parent  查找含有子元素的
+        // parent>_child
+        // attr 添加标准 非标准类名
+        // porp  添加标准的属性
+        //  removeclass 移除所有的class
+            .html() 有值 就是设置值  没值 就是获取第一个元素的值
+        $(div).html(function (index,value) {
+            console.log(index,value)        //输出所有的html(注意这里的顺序)
+        }
+        $(div).span(function (index,value) {
+            console.log(index,value)  //
+        })
+        $(div).span(function (index,value) {
+            return fdf;
+            //    this  这里的this 是DOM对象   想让这里this变成jQuery对象 $(this)
+        })
+        // 将DOM对象转化成jQuery对象  $('') 加$
+
+        $('div').css(width)  获取宽度
+        $('div').css('background','red')  设置背景色 设一种的时候用这个
+        $('div').css({background:'red',width:'500px'})设多种的时候用这个
+        $('div').width()  //获取值  $('div').width(300)设置宽  不带单位
+        $('div').innerWidth()  //要加padding值
+        $('div').outerWidth()   //要加border 值和margin值
+        $(window).scroll(function () {
+            console.log($(document.body).scrollTop())  //获取滚动条的高度
+        })
+        $(document.body).scrollTop(400)  //设置滚动条高
+
+        console.log($('div').offset())  //相对当前body的top 和 left
+        console.log($('div').offset().left())    //单一获取left
+
+        console.log($('div').position()) //和原生的offsetLeft offsetTop是一样的 但是不考虑maigin值
+
+        eq 筛选出来的还是jQuery对象
+        var divs=$('div')
+        divs.eq(0)   这里的this  由divs集合变成某个$对象
+        divs.filter('.one,.two')  选择多个类名
+        $('div,p')
+        is you
+        callback(this[i],i,this[i])  this[i] 是DOM对象
+        $("input[type='checkbox']").parent().is("form")  结果就是true
+
+        $("div").filter(".selected,:first")  选择div集合中有selected类名的第一个div
+        $('div').filter(function (index) {
+            return $('p',this).length==0;  保留子元素中不含有p的元素
+
+            has通过后代元素选择当前元素*
+            filter 和 has  是把匹配的保留
+
+            children  选择所有子元素  chidren（p）  选择子代的p
+            find 查找后代的
+            closest(‘a’)  先找自己不是 向上找找到最近的停止
+            <!--<article></article>  文章-->
+            var main=$("main")
+            next()
+            nextUntil(‘a’) 向下直到a 不包括a  （）所有的
+            parentsUntil()所有的父元素直到html  (body)寻找父元素直到body
+            parent() 查找父元素
+            parents()找所有的父元素
+            siblings()取得一个包含匹配的元素集合中每一个元素的所有唯一同辈元素的元素集合。可以用可选的表达式进行筛选。
+        $("div").siblings()  找div同辈元素的集合
+            $("div").siblings(".selected") 找div的同辈元素集合的类名是selected的元素
+            add 添加标签
+            `<p></p><span></span>` 这里的p 和 span 分别是两个集合
+            $('p').add('span')  输出就是[p,span] 把p放在span集合中
+            main.find('p').addBack()   //main 是一个集合 .find('p') 是另一个集合  addBack会把main 放在后面的集合｛mian,p｝
+                .end  返回this变化的上一次this指向
+            main.find('p').end()   这里指的就是main
+            $("p").prev()  找到每个P标签前一个同辈
+            $("p").prevAll()   找到p标签所有的同辈
+            $("p").prevUntil('div')  找到p标签所有的同辈 直到碰到div
+
+            文档操作相当于操作节点 原有节点会消失
+            $("div").append("p")  跟div里面的最后面添加一个p标签
+            after 同辈的后面
+            unwrap()  去父元素
+            wrap()  将集合里面的每一个元素都用一个标签全包住
+            wrapAll()  把所有的元素用一个公共父元素包住
+            wrapInner()将内部所有元素用一个标签全包主
+            `$("p").replaceWith("<b></b>") 把所有的p标签换成b
+            $("<b></b>").replaceAll("p") 把所有的p标签换成b`
+            $("p").remove()  删除的元素再把删除的元素加回来  这个元素就失去身上的方法和事件
+            $("p").datach()  删除的元素再把删除的元素加回来  仍会保留原有的方法和事件
+            insertAfter()把一个元素放在令一个元素知后
+            $("p").insertAfter("#foo");  把所有的P标签放在#foo之后
+            clone()  //括号里面写一个true 相当于两个true  一个true 一个false  表示只拷父元素的事件和方法  子元素的方法就不考了
+
+            $(document).ready(function () {  (能写多个)
+                //文档解构加载完毕会执行JS  window.onload(只能写一个) 是全部资源包括图片加载完毕才开始执行js
+            })
+            $(function () {
+                //和reday是一样的
+            })
+            $('div').on('click mouseover')  //on绑定事件可以用空格分开 两个事件 也可以用逗号
+            事件     选择器      事件处理程序
+            $('div').on('click','button1,button2'，function () {//事件委派的写法1
+                alert(1)
+            })  绑定谁谁有这个功能（事件委派）
+        $('div').delegate('button','click',function(){//事件委派的写法2
+            alert(1)
+        })
+            ondelegate  是删除事件委派的
+
+
+            //命名空间
+            $("div").on('click.aa',function () {//aa 方法的名字  给div绑定click方法
+                alert(1)
+            })
+            $('div').off('click.aa')    //删除这个aa方法
+            $('div').off('click'）  // 删除所有的点击事件
+            $('div').off()    //删除所有事件
+            $('div').off('click.aa',{aa:'bb'},function (e) {//触发点击事件时候 添加一个对象
+                console.log(e.data.aa)
+            })
+            one 只执行一次 完成后就会删除
+            $('div').on('click',function(){
+                alert(1);
+            })
+
+            $('div').trigger() 触发冒泡 触发每一个元素的事件
+            $('div').triggerHandler() 不触发冒泡 不触发默认之间 只触发第一个元素的事件
+            $('div').hover(
+                function () {
+                    $(this).addClass('active');     //鼠标移入效果
+                }
+            function () {
+                $(this).removeClass('active');  //鼠标移除效果
+            })
+
+            focusin事件跟focus事件区别在于，他可以在父元素上检测子元素获取焦点的情况。
+        （给input的父元素上加focusin  input获取焦点 在父元素身上能接收到信息）
+        focusout  失去焦点 父元素 获取信息
+
+            delay  只对过程变化有影响  对于颜色的变化 不能设置
+            一个元素加多个动画 会形成动画队列
+            队的特点（先进-入队 先出-出队） 先加的动画先执行
+            栈的特点 先进后出    后加的动画先执行
+            stop（）  停止当前动画 会继续后面的动画
+            stop（true）==stop(true,false) 停止整个动画 清空所有动画
+            stop(true,true)  第二个是 是否将当前动画执行完毕 清空后面所有动画
+            finsh 瞬间完成所有动画
+            动画默认的名字叫 fx
+            $(this).
+
+                $括号里面不加“”
+        $(this)
+            list 是jQuery 对象   $(list[0])
+            对each里面的value  $(value)
+            $(document.body)
+            $(window)
+            遍历完成后就是DOM对象
+
+
+            alert($(window).height()); //浏览器时下窗口可视区域高度
+            alert($(document).height()); //浏览器时下窗口文档的高度
+            alert($(document.body).height());//浏览器时下窗口文档body的高度
+            alert($(document.body).outerHeight(true));//浏览器时下窗口文档body的总高度 包括border padding margin
+            alert($(window).width()); //浏览器时下窗口可视区域宽度
+            alert($(document).width());//浏览器时下窗口文档对于象宽度
+            alert($(document.body).width());//浏览器时下窗口文档body的高度
+            alert($(document.body).outerWidth(true));//浏览器时下窗口文档body的总宽度 包括border padding margin
+
+
+            事件对象
+            $("div").click(function (e) {
+
+            })
+            $("div").on('click','button',function () {
+                console.log(e.delegateTarget)
+                e.preventDefault();//不用去做兼容  去除默认样式
+                e.stopPropagation();//阻止事件流
+                e.target()||e.srcElement  //获取目标事件源  js
+                e.target()  //jQuery 处理过了
+                e.type()  //属性
+            })
+            $("div").on('click','fun')
+            键盘事件只能加在document
+            $(document).keydown(function () {
+
+            })
+            延迟对象
+            工具  都是放在jQquery身上  用法就是$.xxx
+            $.each(arr,function (index,value) {   //each加在jQuery上  和each的方法就是用法不同
+
+            })
+            $(arr).each(function (index,value) {
+
+            })
+            $.grep(arr,function (value,index) {  //这里的下标 相反
+                console.log(value>3)  输出是 true 和 false  有几个满足 就有几个true 几个不满足就有几个 false
+            })
+            $.unIque(arr);  //去重复
+
+            jQuery.noConflict();//jQuery就会释放$的使用权  下面的代码就可以用$ 指向别的js里面的$
+// 下面的jQuery 使用$就是其他库的$  假如有多个库  每个都可以各自去除
+            (function ($) {
+                这里面就可以接着用$
+            })(jQuery)
+            mm=jQuery.noConflict(); //这里的mm相当于$
+
+            $(function () {
+                $('div').animate({width:300},1000).queue(function () {  //queue 入队 插入动画
+                    $('div').css('background','blue');//这里假如不用queue 直接加这个css 因为颜色没有过度时间 所以给的表现就是div直接是蓝色
+                    // 紧接着 执行下面的动画  但是如果只用queue 入队插入动画 是执行完前面的再在执行颜色变化  但是也就是到这里停止了
+                    $('div').dequeue();// 出队  叫下一个执行（移除一个函数并执行他）
+                }).slideToggle()
+            })
+
+            var arr=[
+                function () {
+                    console.log(1)
+                    $('div').dequeue('ms');//出队 叫下一个执行（移除一个函数并执行他）
+                },
+                function () {
+                    console.log(1)
+                }
+            ]
+            $('div').queue('ms',arr);  //ms 是自己的动画名字 由自己起
+            $('div').dequeue('ms');//出队  这里放一个 只能执行第一个函数（移除一个函数并执行他）
+
+            jQuery.fn.extend({ //放在jQuery对象 身上
+                wheel:function (fun1,fun2) {
+                    $(this).each(function () {
+                        //这里的this
+                        if(div.attachEvent){
+                            div.attachEvent('mousewheel',wheel);
+                            console.log(2);
+                        }else{
+                            div.addEventListener('mousewheel',wheel);
+                            div.addEventListener('DOMMouseScroll',wheel);
+                            console.log(3);
+                        }
+                    })
+                },
+                $(this).wheel(function () {
+
+            })
+            function wheel(e) {
+                console.log(2)
+                var e = e || window.event
+                console.dir(e)
+                if(e.preventDefault){
+                    e.preventDefault()
+                }else {
+                    e.returnValue=false
+                }
+                var l = e.wheelDelta || e.detail;
+                console.log(l)
+                if (l == -120 || l == 3) {
+
+                } else if (l == 120 || l == -3) {
+
+                }
+            })
+            $('div').aa();
+
+            jQuery.extend({  // 放在jQuery 身上
+                aa:function () {
+
+                }
+            })
+            $.aa();
+
+
+            $(function(){
+                jQuery.fn.extend({
+                    wheel:function(fun1,fun2){
+                        $(this).each(function(index,value){
+                            var e=e||window.event;//IE的兼容性处理
+                            if(e.preventDefault){
+                                e.preventDefault();//谷歌
+                            }
+                            else{
+                                e.returnValue=false;//IE
+                            }
+                            if(value.attachEvent){
+                                value.attachEvent('onmousewheel',wheel)
+                            }else{
+                                value.addEventListener('mousewheel',wheel);
+                                value.addEventListener('DOMMouseScroll',wheel);
+                            }
+                            function wheel(e){
+                                var e=e||window.event;//IE的兼容性处理
+                                if(e.preventDefault){
+                                    e.preventDefault();//谷歌
+                                }
+                                else{
+                                    e.returnValue=false;//IE
+                                }
+                                var ma=e.wheelDelta||e.datail;//谷歌和火狐
+                                if(ma==120||ma==-3){//向上
+                                    fun1.call(this);
+                                }else if(ma==-120||ma==3){//向下
+                                    fun2.call(this);
+                                }
+                            }
+                        })
+
+                    }
+                });
+                $("div").wheel(function(){
+                    console.log(1)
+                },function(){
+                    console.log(2)
+                })
+
+            })
+
+
+            action="nnn.php"// js不能直接和服务器沟通 php 是桥梁
+            label 是选中
+
+
+
+
+
+
+
+
+
+            <!--var dapei=$(".dapei-top1>.dapei-zi2>div");-->
+            <!--var da=$(".dapei-bottom1>.drbox");-->
+            <!--var peijian=$(".peijian-top>.dapei-zi2>div");-->
+            <!--var pr=$(".peijian-bottom>.drbox")-->
+            <!--var zhoubian=$(".zhoubian-top>.dapei-zi2>div");-->
+            var zr=$(".zhoubian-bottom>.drbox")
+            function dd(dape,dai){
+                dape.each(function(index,value){
+                    $(value).mouseenter(function(){
+                        <!--for(var i=0;i<dape.length;i++){-->
+                            dape.eq(i).removeClass("hot");
+                            dai.eq(i).removeClass("hot");
+                        }
+                        $(this).addClass("hot");
+                        dai.eq(index).addClass("hot")
+                    })
+                })
+            }
+            var d1=new dd(dapei,da)
+            var d2=new dd(peijian,pr)
+            var d3=new dd(zhoubian,zr)
+
+            浏览器向服务器发送信息 叫请求（http请求 超文本传输协议 TCP/IP协议 顶层  无状态的请求） 服务器接收到请求 去数据库中拿到对应文件 返回服务器 通过php进行处理 完成后 返回到浏览器 这个过程叫响应（应答）
+ajax 就是一种http请求 无刷新 无跳转的 网页局部刷新
+            http 请求两种方式 get post
+            当ajax发送请求的时候 下面的js还是能运行的
+            同步
+            异步
+            ajax 又称为异步的asynch javascript and XML
+            html 是超文本编辑语言
+            xhtml 二者的过度语言
+            xml 是可扩展的标记语言 弥补htmel的不足 存储信息
+            var ajax=xhr=new XMLHttpRequest()  在IE低版本不能用
+            var xhr=new ActiveXObject("Microsoft.XMLHTTP")
+            var xhr=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+            参数  请求方式   地址                       同步或者是异步
+            xhr.open('get','login.php',true);    默认true异步  get是通过地址栏提交 发送请求
+            xhr.send(null)  监控状态改变
+            xhr.onreadystatechange(){
+                监控状态
+                if(xhr.readyState==4){
+                    if(xhr.status==200){
+
+                    }
+                }
+            }
+
+
+
+
+        })
+        get 是在地址栏传送数据 不安全 传递的数据量很小 本身就是取的意思 想要发送数据 建议采用post
+        post 安全 传递的数据比较大 一般在200k   本身就是送的意思 数据就放在send中 格式不变 还是键值字符串的格式
+        以post方式 必须设置请求头 xhr.setRequestHeader('content-type','application/x-www-form-urlencoded') 请求的数据 格式类型
+        http请求 ：请求头部，请求体，响应头，响应体，响应内容
+
+        jsonp 可以跨域
+        ajax 完成不一定成功
+        success 和 beforsend 可以用于跨域
+            .then((data)=>{
+                这里是done 的  获取obj
+            },()=>{
+                获取失败
+            }
+    })
+
+
+    sass  css编程语言
+    后缀名写scss
+
+
+
+</pre>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+
+
+
+

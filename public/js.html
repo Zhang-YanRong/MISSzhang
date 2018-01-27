@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+<pre>arr=[[1],[23],1]  这是混合数组
+    2维数组的遍历
+    arr=[[1],[23],1，{}]  数组中｛｝ 表示对象
+
+    var result=arr instanceof Array;   检测arr是否是数组对象Arr的实例
+    console.log(result);
+    if(!(arr instanceof Array))     arr instanceof Array  表示真
+
+
+    解析JS最好的引擎是V8
+    函数：就是将实现某一特定功能的代码块封装起来  以便重复使用
+    function
+    var fun=fuction(参数){
+        功能  代码块
+    }
+    if(){
+
+    }
+    switch(){
+
+    }
+    for(){
+
+    }
+    console.log(fun);  输出就是函数
+    函数必须运行    fun();函数的运行
+    function fun(){   以function的fun命名函数
+
+    }
+    var fun=function(){     以字面量命名函数
+
+    }
+
+    function fun(num1，num2){          写在函数定义时的参数叫形式参数（形式参数就是为了接收实际参数的）
+                                        写括号里面相当于声明变量 不需要声明
+        console.log(num1+num2)    形式参数
+    }
+    fun(1，2);   1  是实际参数    输出就是3
+    形式参数可以和实际参数的个数不同
+    形式参数和实际参数一一对应接收
+    没有传值的形式参数默认为underfind
+    ！！所有的实际参数！！都会被arguments集合接收
+
+    function fun(num1=1,num2=2){
+        console.log(num1,num2);
+    }
+    fun();   当fun的实际参数不输入  启动默认  当fun（1，2） 输出就是1，2
+            当输入fun(4，undefined) 输出就是4，undefined  输入undefind 本身就是undefind
+函数默认有返回   在函数体中 碰到return 就直接返回 不会进行下面的程序
+
+    回调函数
+    当一个函数作为另一个函数的参数时候 这个函数就是回调函数
+
+    function jie(n){
+        if (n==0){
+            return 1;
+        }
+        return n*jie(n-1);
+    }
+    console.log(jie())
+    function
+    逆名函数的自运行
+    (function(){
+        akert(1);
+    })()
+    return  实现函数内部值传递到函数外部
+
+    函数的作用域
+
+    function fun(){
+        let nub=200;
+    }
+    console.log(nub)
+    这个函数nub找不到
+    解释：js运行依赖于浏览器  浏览器是js的宿主环境
+    jS运行时候是在浏览器的执行环境中运行的
+    执行环境分两类 全局环境  局部环境
+    全局环境  window  定义在全局环境中的变量称为全局变量
+    局部环境  函数内部    定义在局部环境中的变量称为局部变量
+    块级作用域
+    作用域 变量在某个范围内有意义
+    表现形式就是  全局的变量 函数内部是可以访问全局变量（函数外部）  反之不行
+    当函数1中套一个函数2  把函数2的启动放到函数1外面 函数2不会运行
+    作用域链 当函数运行的时候 会自动创建一个集合  来保存可见范围内所有的变量或者是对象 这集合就是作用域链
+
+    var nub=200;
+    function fun(){
+        var nub=300;
+        console.log(nub);
+    }
+    当没有声明300的nub 会输出200   有了300后 输出就是300   遵循由近到远的 优先当前环境
+
+    var nub=200;
+    function fun(){
+        nub=300;
+        console.log(nub);
+    }hz
+    当内部nub没有声明 会由近到远寻找nub声明  直到找不到才会报错
+    var nub=200；
+    function fun(){
+        nub=300;
+        console.log(nub);
+    }
+    输出就是300
+
+    var nub=200;
+    function aa(){
+        nub=300;
+        function bb(){
+            nub=400;
+            console.log(nub)
+        }
+        bb();                               1  12位置决定先输出谁  在上的先输出
+        console.log(nub);                   2  1 2换位置 就是先输出300 再输出400
+                                    因为400 300的nub都没声明 所以把值都给了开始的nub 都是400
+    }
+    aa();                                   3
+    console.log(nub)；                      4
+
+    js中let和var定义变量的区别，主要体现在作用域的不同。
+    var定义的变量是全局变量或者函数变量。
+    let定义的变量是块级的变量
+
+
+
+    函数的递归
+            递归就是函数自己调用自己
+
+    function fel(n){
+        if (n==1){
+            return 1;
+        }
+        if (n==2){
+            return 2;
+        }
+        return fel(n-1)+fel(n-2);
+    }
+    console.log(fel(5));
+
+
+    function jie(n) {
+        if (n==0){
+            return 1;
+        }
+        return n*jie(n-1);
+    }
+    console.log(jie(4))
+
+    //
+    // function fun() {
+    //     return 1;
+    // }
+    // fun();     这样是没有输出的  虽然返回了1  但是返回的在进函数的位置
+    // function fun() {
+    //     return 1;
+    // }
+    // console.log(fun());  这样就输出返回值了
+
+
+
+
+
+
+
+
+
+    函数的闭包
+    闭包  当一个函数嵌套另一个函数 在内部函数中使用到了外部的局部变量，在外部去访问内部函数的时候；就形成了闭包，
+        闭包的作用 保存局部变量
+
+    // function aa(){
+    //     var nub=200;
+    //     function bb(){
+    //         console.log(nub);       闭包函数
+    //     }
+    //     return bb;
+    // }
+    // var fun=aa();
+    // console.log(fun());
+
+
+
+
+
+    预解析
+    在程序真正运行之前,js会将以var声明的变量和fuction关键字声明的函数  提前加载到相应的环境里面
+    预解析是分块解析的,但是所有的script标签对又是一个整体，已经加载的script里面的内容，可
+    以在后面的script里面访问
+    var nub=200;
+    if(nub-=100){
+        var aa='abc'
+    }
+    console.log(abc);  输出undefined
+
+    fun();
+    var fun=function(){
+        console.log(1);
+    }     输出fun is not a function
+
+    var nub=100;
+    function fun(){
+        console.log(nub);   这里的nub用的是局部声明的var 但是在他输出之前没有被赋值 所以输出undefind
+        var nub=200;
+        console.log(nub);
+    }
+    fun();
+     预解析的分块解析
+    ` <script>
+         var nub=200;
+     </script>
+     <script>
+         console.log(nub);           能输出200   两个换位置就不行了
+         </script>`
+
+
+
+
+
+    垃圾处理
+    当一个对象不再被引用的时候 那么这个对象将被在某一个时刻被删除
+    函数运行完毕后 内部的局部变量会立即消除
+
+    函数的重载
+    在js实现不了
+
+
+    内置顶层函数（全局函数 在哪都可以用）
+    Number()  把字符串 true null 转化为数值(- 1 0)  12x转化就是NaN
+                undefined 转化成NaN
+    String()    把内容转化成字符串
+    Boolean()   0 false '' NaN null undefined 0.0
+    parseInt() 将字符串转化为整数 Int就是整数的意思 parseInt('123sdsf') 字母忽略转化为123
+                parseInt('123sdsf'，2)； 看作2进制 但是只有1 满足 输出就只有1  将200px转化为200
+    parseFloat()    parseFloat('123sddf')  转化为1.23
+                    parseFloat('123sddf')    必须以数字开头
+    isNaN()  是不是一个数字  console.log(isNaN('123'))  输出就是false
+    算数运算符 不是数字就会隐士的调用Number转化成数字进行运算  如果Number不能转化 输出就是NaN
+            console.log(null==undefined) 为真  null!=false
+
+    // 10、mysplice(index,num,a...)index表示要操作的位置，num表示要删除的元素个数，a...表示要添加的
+    // 元素[1,2,3,4] mysplice(0,2,"a","b") 结果为["a","b",3,4]
+    // `function mysplice(arr,index,num,x){
+    //     var brr=[];
+    //     for(var i=0;i<index;i++){
+    //         brr[brr.length]=arr[i];
+    //     }
+    //     var crr=[];
+    //     for(var i=index+num;i<arr.length;i++){
+    //         crr[crr.length]=arr[i];
+    //     }
+    //     arr.length=0;        用arr.length=0 可以清除arr中所有的元素
+    //     for (var i=0;i<brr.length;i++){
+    //         arr[arr.length]=brr[i];
+    //     }
+    //     for (var i=3;i<arguments.length;i++){
+    //         arr[arr.length]=arguments[i];
+    //     }
+    //     for (var i=0;i<crr.length;i++){
+    //         arr[arr.length]=crr[i];
+    //     }
+    // }`
+    // var arr=[1,2,3,4,5,6];
+    // mysplice(arr,2,3,'a');
+    // console.log(arr);
+
+    用原生函数写
+    // var arr=[1,2,3,4,5,6];
+    // arr.splice(2,3,'a');
+    // console.log(arr);
+
+    // 对象  人们研究的一切事物都是对象
+    ｛对象  属性称为键值 之间用逗号隔开 对象的值可以是任何类型 当属性是函数的时候 把函数称作方法｝
+    // 面向对象编程方式
+    class  类是对象的抽象  对象是类的实例化
+   1 var dbj={
+        name:'45122',
+        age:12,
+        fun:function(){
+
+        }
+    };
+    dbj.height='156cm';
+    dbj['name']='8995';
+    console.log(dbj);
+
+
+    构造函数的方式去创建对象
+    构造函数就是为了提供对象的初始化  给对象添加属性 一般用用他的属性 所以就不用返回值 内部会大量使用this
+    都是new构造函数
+   2 function person(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    var xiaoming=new perso('xiaoming',15);
+    console.log(xiaoming);
+
+   3 var obj=new Object();              任何一个对象都可以看作是object创建来的
+    console.log(obj);
+
+
+   var arr=[];
+   console.log(arr instanceof Array);      instanceof 是检测arr是不是Array的构造函数
+
+   var fun=new function('');传内容得以字符串的格式
+
+
+    创建的3种方式
+   var obj={};
+   var obj=new fun();
+   var obj=new Object();
+
+
+   function Person(name,age){
+       this.name=name;
+       this.age=age;
+       this.fun=function(){
+           console.log(this.name+'can eat');
+       }
+   }
+   let obj=new Person('小明');
+    console.log(obj.fun());
+
+    new 的时候发生了3件事情
+    创建一个空对象 obj
+    obj.__proto__==Person.prototype  (Person.prototype.__proto__==Object.prototype
+                                      Object.prototype.__proto__==null) 继承链
+    Person.call(obj);
+    Object是一个顶层类
+
+    对象分为两种 一种叫浏览器对象（宿主对象） widow
+    另一种内置对象Object Function Array String RegExp Date Math
+
+    内置对象  数学对象  数组对象  字符串对象
+    constructor  结构
+
+    var arr=[]
+    console.dir(arr)
+
+   面向对象语言的三大特点：封装 继承 多态
+     每一个函数都有prototype的这样一样属性  这个属性的值是一个对象
+    // 面向过程编程方式
+
+    判断this 指向谁  谁调用函数指向谁
+    function fun(
+        console.log(this)    fun默认是window调用
+    )
+    fun()
+
+
+    // 改变t  this的指向
+    function fun(name){
+        this.name=name;
+    }
+    var obj =new Object();
+    fun.call(obj,'333')  call  称作this指针  可以改变this的指向
+    console.log(obj);
+
+
+    function fun(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    var obj =new Object();
+    fun.apply(obj,['list',13]); 与call用法一样 就是后面要以数组的形式
+    console.log(obj);
+
+    访问一个对象的属性 没有这个属性就会返回undefind
+
+    // 删除一个对象
+    var obj=new fun();
+    obj=null;
+    // 删除数组的的属性
+    function fun(){
+        this.name='122'
+    }
+    var obj=new fun();
+    delete obj.name;
+    console.log(obj);
+
+
+    在对象中{
+        this[i]   在对象中 当i是数字的时候 写成[i]  i是字符的时候要写成['i']
+        访问对象的方法   1. 使用“ . ”来访问对象属性  2. 使用“ [ ] ”来访问对象属性
+    }
+
+    var width=document.documentElement.clientHeight;
+    var width=document.documentElement.clientWidth;
+
+
+    // 调用函数里边的某一个属性
+    // function fun(){
+    //
+    // }
+    // fun.prototype.aa='bb';
+    // var obj=new fun();
+    // obj.aa;
+    //
+    // var arr=[1,2,3]；
+    // arr.forEach(function (value,index) {   遍历数组  输出就是数组的值和下标
+    //     console.log(a,b)
+    // })
+
+
+
+    // var arr=['T恤','皮带','手表'];
+    // var brr=arr.map(function (value,index){
+    //     return value+index;    这里两个return 后面可以用+号连接同时返回两个参数
+    // })
+    // console.log(brr);
+
+    把二维的数组复制  核心就是得写出新数组的元素是一个数组  即brr[i]=[]
+    if(arr[i] instanceof Array)  判断是不是一个数组
+
+    深拷贝 烤的是复合数组的最内层元素
+    浅拷贝 考的是最外层数组 假如是混合或者二维数组 会直接把里面的数组整个拷贝
+
+
+    递归拷贝
+    // `function copy(arr,brr){
+    //     for (var i=0;i<arr.length;i++){
+    //         brr.push(arr[i]);
+    //     }
+    // }
+    // var brr=[];
+    // copy([1,2,3,5,6,4,8,5],brr);
+    // console.log(brr);
+    // 递归函数复制一维数组
+    // function copy(arr,brr){
+    //     for (var i=0;i<arr.length;i++){
+    //         brr.push(arr[i]);
+    //     }
+    // }`
+    // var brr=[];
+    // copy([1,2,3,5,6,4,8,5],brr);
+    // console.log(brr);
+    // 递归函数复制复合函数
+    // `function copy(arr,brr){
+    //     for (var i=0;i<arr.length;i++){
+    //         if(arr[i] instanceof Array){
+    //             brr[i]=[];
+    //             for (var j=0;j<arr[i].length;j++){
+    //                 brr[i][j]=arr[i][j];
+    //             }
+    //         }else {
+    //             brr[i]=arr[i];
+    //         }
+    //     }
+    // }`
+    // var brr=[];
+    // copy([1,2,3,5,6,4,8,5,[8,8,8],[6,6],brr);
+    // console.log(brr);
+
+    // 对对象的遍历
+    // var obj={
+    //     name:'list',
+    //     agr:66
+    // }
+    // for(var i in obj){
+    //     console.log(i);
+    // }
+
+    console.log(window.screen.width)
+    console.log(window.screen.height)
+
+    // setInterval()   在某个时间段内重复不断做某一件事  时间函数
+    // ClearInterval()
+
+
+    // setTimeout()
+    // clearTimeout()
+
+    setInterval(function(){
+        console.log(1);
+    },1000)
+
+    box.style.width='300px';
+
+
+    一个块元素不设置宽高，他默认的宽是父元素的宽度，他默认高是内容的高度  给内容加padding 效果跟box-szing
+    box-sizing 不支持低版本
+
+    width=getComputedStyle(box,null).width  获取的就是XXpx   获取的是设置的宽高
+    width=box.offsetwidth   获取实际宽 获取的是数值
+    当元素设置了display:none 第二种不能获取 但是第一种可以获取
+
+    var maiginleft=getComputedStyle(box,null).marginleft;  获取marginleft
+        .div{
+        margin-left:20px;
+    }
+    var bb=div.offsetLeft;值是20    获取的是距离窗口的距离
+    如果一个元素不定位  获取的left top 是依照body的
+    如果定位  left就是依照谁 这个left不包括border值
+    一个元素对他的父元素定位  父元素的padding和border对他的位置无影响
+    offsetleft  和offsettop计算的是距离定个位属性的上级元素的距离，如果没有定位属性高的上
+    级元素，计算得是距离body的值
+
+
+
+    当文本超过div  给div加overflower：scroll;  文字就只显示在div中 以有滚动条的形式
+
+    console.log(document.body.scrollTop)  谷歌浏览器   滚动条高度
+    console.log(document.doucumentElement.scrollTop)  火狐浏览器  滚动条高度
+    document.body.scrollTop=400   设置滚动条初始位置
+
+    var btn=document.querySelector('button');
+
+    SEO 搜索引擎优化
+
+    window.onscroll=function () {    //监控滚动条高度
+        var obj=document.body.scrollTop;
+        var scrolltop=
+    }
+
+
+    //调错
+    控制台里面有错  语法错误 对象某个属性不正确
+    element  想要添加的类名  想要的style是否添加上  找到添加的语句
+    从第一行代码，输入每个表达式的值
+
+
+    let div=document.querySelectorAll();
+    function click() {
+        alert(1)
+    }
+    div.onclick=function () {
+        鼠标点击 点击既是事件也是div的属性
+    }
+    div.onclick=null;  删除事件  以前的
+    之前的 如果事件重复添加  后面的也会覆盖前面的
+    window.onload=function () {
+        这个函数不能重复   不然后面的会
+    }
+    事件源  事件发生在谁的身上  谁就是事件原
+    事件类型    用户的行为
+    事件处理程序  事件发生之后的响应
+    function fun() {
+
+    }
+    div.addEventListener('事件是什么',function () { 这是逆名函数
+        用这种方式给同一个元素的同一个事件添加多个元素处理程序 不会被覆盖
+    },false);  里面的事件不加on   最后一个false 可以不写
+    div.removeEventListener('事件是什么',function () {  这里的
+
+    })  删除事件   这个时候只有两个参数
+    删除事件的时候里面不能是逆名函数
+    对fun函数进行添加删除
+    新浏览器都适用
+    div.addEventListener('click',fun,false);
+    div.removeEventListener('click',fun);
+
+    IE浏览器 6 7 80
+    div.attachEvent('onclick',fun);添加事件  必须加on
+    div.detachEvent('onclick',fun);移除事件
+
+    事件发生时候的自动创建的一个对象叫事件对象  用来保存事件发生时候的所有的信息
+    div.onclick=function (a) {
+        console.log(a)  输出事件对象  事件发生时候 就给a这个形式参数传递参数
+    }
+
+
+    div.onclick=move;
+    function move(e) {
+        console.log(e);
+    }
+    事件对象的属性
+    altkey
+    cancelBubble
+    clientX  鼠标点击的位置距离窗口（浏览器）的位置
+    clientY
+    ctrlkey
+    detail
+    offsetX    在事件元素中 鼠标距离该元素左上角的位置
+    offsetY
+    pageX      鼠标 距离body的距离
+    pageY
+    screenX  鼠标距离屏幕的位置
+    screenY
+    shiftkey
+    srcElement
+    target
+    type
+    which
+    div.onclick=move;
+    function move(e) {
+        this.innerText='x:${e.clientX}，y:${e.clientY}';
+    }
+    var ev=e||window.event;  IE浏览器中是后面
+
+    事件对象 ：
+
+	事件流  就是事件发生的顺序
+
+    定义 是当一个事件触发的时候，当前元素的父元素，乃至整个页面都会以一定的顺序来响应整个事件响应的顺序叫做事件流
+
+    这种事件想响应方式称为冒泡型事件流（从当前元素到根元素 只要是事件都会向应 除了moseenter moselive）
+
+				不加点击事件 也会知道 只有加了onclick才会响应
+
+    捕获型事件流
+    html.addEventListener('click',function(){//只有后面是true才能进行捕获
+        console.log(html)
+    },true)
+    body.addEventListener('click',function(){
+        console.log(body)
+    },true)
+    par.addEventListener('click',function(){
+        console.log(par)
+    },true)
+    son.addEventListener('click',function(){
+        console.log(son)
+    },true)
+
+    当任何事件触发 会从html进行捕获（向下触发），再从该元素进行冒泡型事件流
+`
+    var html=document.querySelector('html');
+    var body=document.querySelector('body');
+    var par=document.querySelector('.box');
+    var son=document.querySelector('.son');
+    son.onclick=function () {
+        console.log('s')
+    }
+    par.onclick=function () {    //阻止事件传递加在那个地方 就传递到哪个地方截至 该地方依旧会输出
+        if(e.stopPropagation){  //如果有这个属性 就会调用下面的方法
+            e.stopPropagation(); // 谷歌 阻止事件流
+            //e.preventDefault();       阻止默认动作
+
+        }else{
+            e.cancelBubble=true;  //IE阻止事件流
+            //e.returnValue=false;  阻止默认样式
+
+        }
+        console.log('p')
+    }
+    body.onclick=function () {
+        console.log('b')
+    }
+    html.onclick=function () {
+        console.log('h')
+    }
+    html.addEventListener('click',function(){//只有后面是true才能进行捕获
+        console.log('html')
+    },true);
+    body.addEventListener('click',function(){
+        console.log('body')
+    },true);
+    par.addEventListener('click',function(){
+        console.log('par')
+    },true);
+    son.addEventListener('click',function(){
+        console.log('son')
+    },true);
+`
+以上代码点击son输出结果是  html body par s son p b h
+s在son的前面是因为到当前元素时候 先添加的冒泡
+
+阻止事件流 是阻止事件的传递 并不会阻止事件的触发
+e.stopPropagation()
+
+if(e.stopPropagation){  //如果有这个属性 就会调用下面的方法
+e.stopPropagation(); // 阻止事件流
+//e.preventDefault();     阻止默认动作
+
+}else{
+e.cancelBubble=true;  //IE
+}
+
+
+
+var div=document.createElement('div')  //新创建一个div
+div.innerHTML='new';        //给创建的div赋一个内容
+document.body.appendChild(div)  //把这个div放在body下面的最后一个
+
+事件委托  （委派给父元素）
+1 新添加元素的时候
+2 做事件优化的时候
+3 使用ajax的时候
+（onmouseleave() 和 onmouseenter()）
+
+谁调用函数 谁就是this
+
+目标事件源 真正触发事件的元素（鼠标点击的元素）
+document.body.onclick=function (e) {
+var obj=e.target;  //
+if(obj.nodeName=='DIV'){ //判断点击的对象是不是自己想变的元素
+obj.style.background='red';
+}
+}
+document.body.onclick=function (e) {
+var obj=e.target;
+if(obj.tagName=='DIV'){ //判断点击的对象是不是自己想变的元素
+obj.style.background='red';
+}
+}
+
+
+
+height:auto;//自动高度
+******  点击创建
+`div{
+        width: 200px;
+        height: 20px;
+        background: pink;
+        margin-top: 10px;
+    }
+
+<button>新建</button>
+<div class="bb"></div>
+<div class="bb"></div>
+<div class="bb"></div>
+<div class="bb"></div>
+
+    var btn=document.querySelector('button');
+    var div=document.querySelectorAll('div')
+
+    btn.onclick=function () {
+        var div=document.createElement('div');
+        div.innerHTML='new';
+        div.classList.add('.bb');
+        document.body.appendChild(div);
+    }
+    document.body.onclick=function (e) {
+        var obj = e.target;
+        if(obj.tagName=='DIV'){
+            div.style.background='red';
+        }
+    }
+`
+
+
+box.offsetwidth 可以把下栏的高度设置0之前的高度测出来
+
+// 日期对象
+// 英国
+// 格林泥治天文台  GMT时间  根据地球的自传个公转  一段时间有偏差
+// 本初子午线  0度经线
+
+// UTC 世界协调时 很精确  根据原子碰撞 本地时间比UTC时间早8小时
+计算机的元时间  1970 1 1 0 0 0 0
+1970 之前为负 之后为正
+当前时间距离1970年的毫秒数
+
+var time=new Date(); // 用这个事件必须实例化（传参数）  当前代码运行的事时间  当前时间
+console.log(time);
+
+var time=new Date('01/12/1993 23:59:59');  //写事件规范 月日年 时分秒 不允许传星期
+var time=new Date(2111,11,11,11,11,11);  //月份是0-11 显示的是1 到 12
+console.log(time)
+console.log(time.getTime()) //获取毫秒
+getFullYear    getMonth() 月
+getDay()  星期  0-6 星期一到六  周日是0
+getDate() 日
+getMinutes()分
+getMilliseconds()秒
+
+var time=new Date( );  设置时间
+time.setTime(0);
+time.setFullYear(2008);
+time.setMonth(1)  //设置的是2月
+time.setSeconds(20) //设置的是秒
+console.log(time)
+
+//存储 分 cookle和本地存储
+cookle 是存储在计算机的一个字符串  键值对的结构 允许的存储量为4k  4096字节
+1bit(位)  1Byte(字节)  1Byte=8bit  1k=1024B 1M=1024KB 1G=1021MB 1T=1024G
+cook是按域区分的  同域原则（同一个域的cook可以相互访问）
+不能跨浏览器访问
+超过4k 浏览器会删掉部分
+cookle分两种 一种临时性 一个有生命周期的
+document.cookie='nanme=lisi'   cookie的设置 （这里设置的cookie当浏览器关掉就被删除了
+是临时性cookie 生命周期就是浏览器的打开到关掉）
+console.log(document.cookie)    cookie的访问方式（所有的 cookie）
+
+第二种有生命周期的cookie
+给一个cookie添加声明周期
+var now=new Date(); //当前时间
+now.setTime(now.getTime()+20*1000); //设置当前时间 20s后的时间
+document.cookie='aa=bb;expires='+now.toGMTSring();//设置now时间后消失
+
+setCookie();
+delCookie();
+getCookie('aa')
+
+function setcookie(key,value,time){
+if(time){
+var now=new Date();
+noe.setTime(now.getTime()+time*1000)
+document.cookie=key+'='+value;expires=now.toGMTString();
+}else {
+document.cookie=key+'='+value;
+}
+}
+setcookie(name,xiaoming,2);
+
+
+这三种存储不安全（帐号密码都在服务器）
+本地存储    存储的大小是5-10M  也是同域原则 不能跨浏览器 和不能定时 拥有相同的函数
+都只能存储字符串 存储的时候是数字 进去就是字符串
+localStorage    永久存储（除非删除）
+sessionStorage  回话级存储（窗口） 回话（窗口）关闭就没了
+localStorage.name='lisi'; 添加属性
+locatStroage.setItem('name'，'lisi');   这里的格式得注意
+console.log(locatStroage.getItem('name'))  访问name值
+delete localStorage.name;   访问name值
+localStorage.removeItem('name'); 把存储的删除
+
+var base={
+
+}
+var str=JSON.stringify()  可以把对象或数组转化字符串
+var arr=JSON.parse()    把用JSON转化的字符串转化回来
+
+var database=localStorage.database;
+if(database){
+database=JSON.parse(database)
+}else{
+database=[];  //一开始没有数据 也不能让他是undefind
+}
+获取数据库中当前点击的那一行在数组中的索引 在这之前要把每个的id赋值给每行的tr
+删除的时候只用删除这个id所在的那一行即可
+
+
+********************************正*******则*******************************
+正则是用来检测某个字符串是否符合  语法规范  的语言
+RegExp()   正则对象  用来书写定义语法规范
+1 表单验证 如密码长度
+2 信息过滤 如命案字符被禁言
+3 信息检索 意思同上
+
+正则 创建的两种方式
+1 var reg=/写语法规范（不能出现字符 不能有数字）/;
+2 var r=new RegExp();
+
+var reg=/a/; 这个意思就是必须包含a  /中间写的语法规范/  斜杠叫定界符
+test: 测试            /  /i m g 外面还能写i m g  叫模式修正符
+exec: 测试     g 是全局匹配
+
+
+/ 构成正则表达式最小的单位称为原子 /  0-9  a-z  ....@#$%
+原子还有 \d 用来匹配数字 0-9 一个\d只能匹配一个原子
+\w  配数字字母下划线 0-9  a-z A-Z
+\s 匹配空白字符     空格  \n  \r  \t  \v  \f
+\D 除了0-9 （取补集）
+\W  除了0-9  a-z A-Z
+\S  除了空白字符     空格  \n  \r  \t  \v  \f
+. 除了换行符不能匹配 其他都能匹配
+有特殊意义的称为元字符  \d . \  \ [ ]  ^
+
+原子表/[1-5]/  匹配1到5的字符
+/[1-5][a-c]/  能匹配到1a
+/[1-56][a-c]  匹配的是1到5或6 a-c
+/[0-9][0-9a-zA-Z_]/ 这是\w
+/[^0-9]/  匹配非0-9 ^取反
+/[^0-9][^0-9a-zA-Z_]/  匹配的不能是0-9 不能是0-9 a-z A-Z _0
+var reg=/^123/  尖括号放字符串前面  表示边界匹配的前面匹配必须是1
+var reg=/123^/  尖括号放在后面 也是边界匹配的后面匹配
+\是转意字符
+/http:\/\/www\.[0-9a-zA-Z]\.con/
+var reg=/ab|bc/  ab 或 bc 用了或就分成前面和后面两部分
+var reg=/a(b|c)b(\d)/  这种情况会输出两个匹配结果 第一个括号键名是1  第二个是2
+var reg=/a(b|c)b(\d)\1/   \1指第一个括号匹配的值跟下面str的第五位进行匹配
+var str='abc1b'       \1  叫做反向引用 对括号里匹配的值进行引用
+var reg=/a(?:b|c)b(\d)/    取消反向引用 就不会压入内存  想取消那个括号给哪个括号前加?:
+**当在正则表达式中加了括号 就形成了原子分组 当形成原子分组的时候 括号内匹配的东西就会压入内存
+**量词**   ｛m｝ {m,} {m,n}
+var reg=/\d{10}/
+var reg=/\d{3，5}/   就是\d匹配3 4 5次  想更多的匹配 这里匹配5次 称贪婪匹配
+/\d{3,5}?/  吝啬匹配是在匹配成功的前提下进行次数最少的匹配
+/\d??d/         第一个问号是0或者1次 第二个问号是吝啬匹配
+对‘12345’  匹配的就是5d
+var reg=/\d{3，}/   最少3次 上不封顶
+var reg=/\d{0，3}/   最多3次
+var reg=/ab(cd|ef)\1/
++ {1,}  加号意思就是匹配一次或多次
+？ {0,1} 匹配0次或1次
+* {0,} 匹配0次或多次
+var str='abcdcdg'
+result=reg.exec(str);
+console.log(result)
+输出就是 ["abcdcd", "cd", index: 0, input: "abcdcdg"]
+
+var reg=/(?:http|https):\/\/(?:www\.)?[0-9a-z]{2,}\.com/
+
+var reg=/\d/;   //如果里面是/as/
+var str='abfs123';
+var result=reg.exec(str);    //输出是1
+
+var reg=/\d\d\d/;   //如果里面是/as/
+var str='abfs123';
+var result=reg.exec(str);    //输出是123
+
+var reg=/s\d/;
+var str='abfs123';
+var result=reg.exec(str);    //输出是s1
+
+
+
+
+var reg=/a/;   //如果里面是/as/
+var str='abfs';
+var result=reg.test(str);
+console.log(result);//输出就是true  //输出就是false  必须是连着的as
+
+
+`<input type='text'>`
+
+var input=document.querySelector('input')//获取input
+input.onblur=function(){ //当input失去焦点的时候
+var val=this.value;  //把input的输入内容赋值给val
+var reg=/a/;
+var result=reg.test(val);
+if(result){
+this.style.backgroundColor:'green';
+}else{
+this.onblur()
+var var mess=document.creatElement("div");
+mess.innerHTML=value
+}
+}
+
+esec
+var bb='sfsfaf';
+var reg=/a/;
+var result=reg.exec(bb);
+for (var item in result){
+console.log(item);//输出的是键名
+console.log(result[item])//输出的是键值
+}
+如果输出的是dir   0：'a';
+index:4; 匹配的是检测字符（第一次）出现的索引位置
+input:'检测的内容'
+
+
+var bb='asfsfaf';       gim  可以同时用很多个
+var reg=/a/g;   //全局匹配   i是不区分大小写的匹配 m是多行匹配 把每一行都看作一个开头和一个结尾
+console.log(reg.lastIndex);//匹配开始的位置用lastIndex输出  0
+var result1=reg.exec(bb);
+console.log(reg.lastIndex);// 下一次匹配开始位置是1
+var result2=reg.exec(bb);
+console.log(reg.lastIndex);//下一次匹配开始位置是6
+var result3=reg.exec(bb);
+
+console.log(result1);   //[0:'a'  index:0  input:'asfsfaf']
+console.log(result2);   //[0:'a'  index:5  input:'asfsfaf']
+console.log(result3);   //null
+
+var bb='asfsfaf';
+var reg=/a/g;   //全局匹配
+console.log(reg.lastIndex);//匹配开始的位置用lastIndex输出  0
+var result1=reg.test(bb);
+console.log(reg.lastIndex);// 下一次匹配开始位置是1
+var result2=reg.test(bb);
+console.log(reg.lastIndex);//下一次匹配开始位置是6
+var result3=reg.test(bb);
+
+console.log(result1);   //true
+console.log(result2);   //true
+console.log(result3);   //false   只有两个a  第三个没有
+
+var str='a1a2c3c';
+var reg=/\d/;
+console.log(str.split(reg))   输出是aacc
+console.log(str.replace(reg,'?'))  在正则后面加g 输出才是a?a?c?c
+console.log(str.search('a'))     输出是0  第一个符合条件的下标
+console.log(str.search(reg))  加不加g返回都是第一个符合姐夫哦的下标
+var str='a1a2c3c';
+var reg=/\d/g;
+console.log(str.match(reg))  输出是['1','2','3']
+不加g  输出是1 1 ...  和exec不加g的结果一样
+
+let const
+babel  用来解析es5 es6
+let 和 var 的区别
+let在外边  跟 var 是一样的  在｛块级作用域｝里面都能访问到
+当放在｛块级作用域｝中  var 还是全局 外面的能访问到 用let声明 外面的访问不到
+
+console.log(nub);    //报错 let和const预解析  二者用法一样 必须先声明后使用
+let nub=200;        //这一行上面的所有的区域称为 暂时性死区
+console.log(nub);       //200
+
+let nub=200;
+if(nub==200){
+let aa='1230'
+}
+console.log(aa)      //结果报错  块级作用域的问题
+块级作用域 ：用｛  ｝  包起来的
+｛
+let nub=200;
+｝
+console.log(nub)  报错
+
+let nub=200;
+｛
+console.log(nub)  会输出200   let在外面声明 块级作用域里面能用
+｝
+
+do{
+let nub=200;
+console.log(nub)
+}while (nub>200);     //报错  里面的声明用的let while属于在外边用 所以用不到
+
+
+
+当一个函数包另一个函数
+
+`for(let i=0;i<div.length;i++)`{  //在这里会形成独立作用域
+div[i].onclick=function{      //如果用到的是var 出来就是i
+console.log(i)
+}
+}
+相当于
+let i=0;
+div[0].onclick=function{      //如果用到的是var 出来就是i
+console.log(0)
+}
+
+
+
+...  扩展运算符  可以将数组和字符串解析成用空格隔开的字符串  中间的空格相当于逗号
+function fun(a,b,c) {
+console.log(a+b+c);
+}
+var arr[1,2,3]
+fun(...arr)   //相当于fun(1,2,3)  传参时候就省略逗号的书写
+
+...arr  是...的逆运算  把用逗号隔开的字符串转化成数组0  放在最后面
+function fun(a,b,c,...arr) {
+console.log(arr);  //输出就是[4,4,4] 的数组
+}
+fun(1，2，3，4，4，4)
+
+//解构赋值          赋值号两边只要模式一样
+数组的解构赋值       赋值号两边都是数组
+let a,b;
+[a,b,...arr]=[1,2,3,6,9,4,6]
+console.log(a,b,arr) //输出就是 1 2 [3,6,9,4,6]
+值互换
+let a=1,b=2;
+[a,b]=[b,a]
+console.log(a,b)  //输出就是 2 1
+
+let a,b,c;
+[a='a',b,c]=[undefined,1,2]  //想启动赋默认值 要么在对应位置写undefind 要把他放在最后
+
+字符串对象
+
+数组的合并
+var str1=[1,2,3]
+var str2=[a,b,b]
+console.log([...str1,...str2]);
+
+var str='123';
+console.log([...str])   //输出就是['1','2','3']
+
+let a,b,c;
+[a,b,c]='abcd'
+console.log(a,b,c)  //输出就是 a b c
+
+对象的解构赋值
+var name='lisi';
+var age=13;
+var str='bc';
+var fun=function () {
+console.log(1)
+}
+var obj={
+name,      //或者写成 name:name;
+age,
+['a'+'b']:'123',   //输出就是ab:'123'  变量的名可以由计算得出
+[str]:'100',     //输出就是bc:'100'  这里是把变量str的值作为键名
+fun,    //写函数的简单版第一种
+aa(){   //写函数的简单版第二种
+
+}
+}
+对象里面是变量  这里会将变量的名字作为对象里面的键名  变量的值作为键值
+
+function getF() {
+let x=1;
+let y=2;
+return {x,y};
+}
+
+对象的解构赋值
+var a,b;
+({age=a,name=b}={name:'BB',age:13})
+还能写成 var {name=b,age=a}={name:'BB',age:13}
+
+var {length:len,0:aa}=[123]
+console.log(len,aa)  //输出就是3 1   3是数组的长度  1是数组中下边为0的值
+
+var {ceil:c,floor:f}=Math
+console.log(c(1.02))
+
+函数扩展
+箭头函数
+var fun=()=>{
+
+}
+
+
+var fun=a=>a;
+var fun=function (a) {
+return a;
+}
+
+var arr=['a','b','c'];
+var brr=arr.map(value=>value+'new');  //一个参数
+var brr=arr.map((value,index)=>value+'new');  //多个参数要把所有的参数括起来
+var brr=arr.map(()=>value+'new');  //没有参数也加空括号
+上面的原函数
+var brr=arr.map(function (value,index) {
+
+})
+
+箭头函数的this  是由对象来定义决定的 是当前环境的this
+箭头函数本来没有this 他的this是看上一级的this  如果上一级也是箭头函数 就一直向上
+寻找this 直到找到为止  最大的this是window
+var obj={};
+obj.fun=()=>{               //这一层也没有 继续往上一层 就只剩window了
+console.log(this)
+var div.onclick= ()=>{  // 1 这里不存在this 往上一层寻找
+console.log(this)
+}
+}
+
+
+
+
+
+
+
+function Animal() {
+this.name='name',
+this.age=13
+}
+Animal.prototype=function () {
+aa:function () {
+
+}
+}
+function Dog() {
+this.wieght='weight'
+}
+Dog.prototype=new Animal('tom');
+
+var tom=new Dog();
+console.log(tom)
+
+
+
+class Animal{  //除了constuction 的方法都添加在他的prototype中
+constructor(){
+
+}
+}          //extends 是继承的意思
+class Dog extends Animal{ //子类没有自己的this 必须手动调用super函数 相当于父类的构造函数 那么子类就会继承父类的this
+constructor(){  //自己可以不定义construction 如果自己定义了 下面必须用super
+super()//调用super 代表父类的  不调用super 就没有this  不能写this.name=XX
+}
+}
+
+
+
+手机
+tuchstart(轻触)    tuchmove(滑动)  tuchend
+手机出场有个布局视口
+e.touches 记录页面中所有的手指信息 不一定非得在元素身上
+e.targetTouches  只记录当前元素身上的手指信息
+e.changedTouches 从上次触发元素后 再从该元素身上触发的信息
+移动端 没有offsetX
+
+div.addEventLis
+
+
+
+`<canvas width="400" height="400"></canvas>`  是写在html中 宽高只能在这里面设置 其他可以在css中设置
+在JS中操作canvas  用paint=canvas.getContext('2d')启动绘画功能  画的东西选不中
+
+paint.fillRect(); 填充的巨型框    都不加单位
+paint.fillRect(0,0,0,0);  前两个是点的 x y坐标  后面的是宽高  填充颜色默认是黑的
+
+paint.strokeRect()
+paint.strokeRect(0,0,0,0)前两个是点的 x y坐标  后面的是宽高  边框颜色默认是黑的
+
+paint.clearRect(0,0,0,0)  画一个白色的矩形框
+
+img=getImgDate
+
+paint.fillStyle='red'  //颜色设定
+
+paint.lineWidth=1;  //边框的线宽
+
+路径 0
+paint.beginPath();
+paint.moveTo(10,10);
+paint.lineTo(50,50);
+paint.closePath();
+paint.fill()
+
+paint.lineCap='butt' 'round'(圆角) ‘square’（两端是方块 长一点）  线和线两端的处理
+paint.lineJoin='round' 'miter'(默认) 'bevel'(切掉)   线和线之间的处理
+
+paint.createLinearGradient(0,0,0,0)  线性渐变  前俩是开始坐标 后俩是终止坐标
+linear.addColorStop(0,'red')
+linear.addColorStop(.5,'blue')
+linear.addColorStop(1,'red')
+
+画圆
+paint.beginPath();
+paint.arc(100,100,100,0,2*Math.PI,false);  前面两个是圆心  中间的半径 0 是从0度开始 后面是画的弧度 false是顺时针画圆
+
+画字
+paint.font='20px 宋体'
+paint.textAlign='left'
+paint.fillStyle='red'
+paint.textBaseline='minddle'
+paint.fillText('九月，你好'，200，200)  //实体的字
+paint.strokeText()  //空心字
+
+function circle() {
+paint.clearRect(0,0,canvas.width,canvas.height)
+}
+window.requestAnimationFrame(circle)   //以浏览器的刷新频率进行控制动画刷新频率
+window.cancelAnimationFrame(t)   //节省浏览器的性能
+
+
+</pre>
+</body>
+</html>

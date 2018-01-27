@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <pre>cookle 是存储在计算机的一个字符串  键值对的结构 允许的存储量为4k  4096字节
+    1bit(位)  1Byte(字节)  1Byte=8bit  1k=1024B 1M=1024KB 1G=1021MB 1T=1024G
+    cook是按域区分的  同域原则（同一个域的cook可以相互访问）
+    不能跨浏览器访问
+    超过4k 浏览器会删掉部分
+    cookle分两种 一种临时性 一个有生命周期的
+    document.cookie='nanme=lisi'   cookie的设置 （这里设置的cookie当浏览器关掉就被删除了
+                                            是临时性cookie 生命周期就是浏览器的打开到关掉）
+    console.log(document.cookie)    cookie的访问方式（所有的 cookie）
+
+    第二种有生命周期的cookie
+    给一个cookie添加声明周期
+    var now=new Date(); //当前时间
+    now.setTime(now.getTime()+20*1000); //设置当前时间 20s后的时间
+    document.cookie='aa=bb;expires='+now.toGMTSring();//设置now时间后消失
+
+    setCookie();
+    delCookie();
+    getCookie('aa')
+
+    function setcookie(key,value,time){
+        if(time){
+            var now=new Date();
+            noe.setTime(now.getTime()+time*1000)
+            document.cookie=key+'='+value;expires=now.toGMTString();
+        }else {
+            document.cookie=key+'='+value;
+        }
+    }
+    setcookie(name,xiaoming,2);
+</pre>
+        </li>
+        <li>
+            <pre>
+    这三种存储不安全（帐号密码都在服务器）
+    本地存储    存储的大小是5-10M  也是同域原则 不能跨浏览器 和不能定时 拥有相同的函数
+        都只能存储字符串 存储的时候是数字 进去就是字符串
+    localStorage    永久存储（除非删除）
+    sessionStorage  回话级存储（窗口） 回话（窗口）关闭就没了
+    localStorage.name='lisi'; 添加属性
+    locatStroage.setItem('name'，'lisi');   这里的格式得注意
+    console.log(locatStroage.getItem('name'))  访问name值
+    delete localStorage.name;   访问name值
+    localStorage.removeItem('name'); 把存储的删除
+
+    var base={
+
+    }
+    var str=JSON.stringify()  可以把对象或数组转化字符串
+    var arr=JSON.parse()    把用JSON转化的字符串转化回来
+
+    var database=localStorage.database;
+    if(database){
+        database=JSON.parse(database)
+    }else{
+        database=[];  //一开始没有数据 也不能让他是undefind
+    }
+    获取数据库中当前点击的那一行在数组中的索引 在这之前要把每个的id赋值给每行的tr
+    删除的时候只用删除这个id所在的那一行即可
+</pre>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

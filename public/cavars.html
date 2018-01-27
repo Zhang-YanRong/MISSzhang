@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <pre> <canvas width="400" height="400"></canvas>  是写在html中 宽高只能在这里面设置 其他可以在css中设置
+        在JS中操作canvas  用paint=canvas.getContext('2d')启动绘画功能  画的东西选不中
+
+        paint.fillRect(); 填充的巨型框    都不加单位
+            paint.fillRect(0,0,0,0);  前两个是点的 x y坐标  后面的是宽高  填充颜色默认是黑的
+
+        paint.strokeRect()
+            paint.strokeRect(0,0,0,0)前两个是点的 x y坐标  后面的是宽高  边框颜色默认是黑的
+
+        paint.clearRect(0,0,0,0)  画一个白色的矩形框
+
+        img=getImgDate
+
+        paint.fillStyle='red'  //颜色设定
+
+        paint.lineWidth=1;  //边框的线宽
+
+    路径 0
+        paint.beginPath();
+        paint.moveTo(10,10);
+        paint.lineTo(50,50);
+        paint.closePath();
+        paint.fill()
+
+        paint.lineCap='butt' 'round'(圆角) ‘square’（两端是方块 长一点）  线和线两端的处理
+        paint.lineJoin='round' 'miter'(默认) 'bevel'(切掉)   线和线之间的处理
+
+        paint.createLinearGradient(0,0,0,0)  线性渐变  前俩是开始坐标 后俩是终止坐标
+        linear.addColorStop(0,'red')
+        linear.addColorStop(.5,'blue')
+        linear.addColorStop(1,'red')
+
+        画圆
+    paint.beginPath();
+    paint.arc(100,100,100,0,2*Math.PI,false);  前面两个是圆心  中间的半径 0 是从0度开始 后面是画的弧度 false是顺时针画圆
+
+    画字
+    paint.font='20px 宋体'
+    paint.textAlign='left'
+    paint.fillStyle='red'
+    paint.textBaseline='minddle'
+    paint.fillText('九月，你好'，200，200)  //实体的字
+    paint.strokeText()  //空心字
+
+    function circle() {
+        paint.clearRect(0,0,canvas.width,canvas.height)
+    }
+    window.requestAnimationFrame(circle)   //以浏览器的刷新频率进行控制动画刷新频率
+    window.cancelAnimationFrame(t)   //节省浏览器的性能
+
+</pre>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <pre>把a.js和b.js合并 并用es5的语法编译：
+1. 装webpack包 能够转es5并且实现合并
+2. npm init 生成package.json 或者手写
+3. 在package.json的scripts下面 写一个"build":"webpack ./a.js ./c.js"
+4. 运行 npm run build
+
+可以用import bianliangming from './a.js'    export dafault{}   （现在用）
+来替换export default{}                      module.exports={}  （之前用）
+
+
+webpack 能将require链条里面所有文件压缩成浏览器能够识别的js语法结构
+在。json中 build：'webpack'     会自动找下面的文件
+要建一个webpack.config.js
+
+webpack-dev-server 包  npm install -g webpack-dev-server  安装一个web服务器
+这个包是提供一个预览服务器
+webpack服务器是新弄一个8080端口 生成的文件都是在内存里面 要在这里写一个index.html
+把要测试的页面放进里面  直接访问3000端口就行 在这个html中请求的css直接写webpack.config.js中的filename对应的js
+在webpack.config.js 中要写 devServer:{
+                             proxy:{ //代理  在web服务器中没有api/data这个资源 所以用代理装一个包 webpack-dev-server
+                                 "/api":"http://localhost:3000"
+                             }
+                           },
+entry:'./src/app.js',   //入口
+    output:{  //文件出口
+        filename:'newnode.js',   //文件出去的名字
+        path:path.resolve('../auto/static/js'),  //出去的路径
+    },
+    module:{
+        rules:[     //定义需要编译的文件类型 要用到的包都会给提示
+            {test:/\.css$/,use:['style-loader','css-loader']},
+            {test:/\.vue$/,use:['vue-loader']}
+            //style-loader --save -dev 在head标签新建一个style标签  css-loader --savev -dev 把以css后缀的文件放到style标签里面
+            //loader把非js语法的东西转换成js || 把该文件挪动位置  不进入最终打包的js
+        ]
+    }
+每个组件都写成vue  此外 router是js文件  每个vue文件都会有export default 每个vue文件都送出去
+用到vue文件就要用npm install vue --save下载 在app.js用export default ‘../node_modules/vue/dist/vue.min.js’进行
+（在打包过程中 会压缩所有required（）链上的文件）  需要在package.json 的scripts下面写编译的命令（只需要写包的名字
+后面的在webpack.config.js中的调用发出里面的配置补全文件名和编译文件所在路径）
+
+            </pre>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

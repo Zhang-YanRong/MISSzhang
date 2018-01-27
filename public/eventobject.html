@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <pre>
+    事件对象的属性
+    altkey
+    cancelBubble
+    clientX  鼠标点击的位置距离窗口（浏览器）的位置
+    clientY
+    ctrlkey
+    detail
+    offsetX    在事件元素中 鼠标距离该元素左上角的位置
+    offsetY
+    pageX      鼠标 距离body的距离
+    pageY
+    screenX  鼠标距离屏幕的位置
+    screenY
+    shiftkey
+    srcElement
+    target
+    type
+    which
+    div.onclick=move;
+    function move(e) {
+        this.innerText='x:${e.clientX}，y:${e.clientY}';
+    }
+    var ev=e||window.event;  IE浏览器中是后面
+
+    事件对象 ：
+
+	事件流  就是事件发生的顺序
+
+    定义 是当一个事件触发的时候，当前元素的父元素，乃至整个页面都会以一定的顺序来响应整个事件响应的顺序叫做事件流
+
+    这种事件想响应方式称为冒泡型事件流（从当前元素到根元素 只要是事件都会向应 除了moseenter moselive）
+
+				不加点击事件 也会知道 只有加了onclick才会响应
+
+    捕获型事件流
+    html.addEventListener('click',function(){//只有后面是true才能进行捕获
+        console.log(html)
+    },true)
+    body.addEventListener('click',function(){
+        console.log(body)
+    },true)
+    par.addEventListener('click',function(){
+        console.log(par)
+    },true)
+    son.addEventListener('click',function(){
+        console.log(son)
+    },true)
+
+    当任何事件触发 会从html进行捕获（向下触发），再从该元素进行冒泡型事件流
+</pre>
+        </li>
+        <li>
+            <pre>width=getComputedStyle(box,null).width  获取的就是XXpx   获取的是设置的宽高
+    width=box.offsetwidth   获取实际宽 获取的是数值
+    当元素设置了display:none 第二种不能获取 但是第一种可以获取
+
+    var maiginleft=getComputedStyle(box,null).marginleft;  获取marginleft
+        .div{
+        margin-left:20px;
+    }
+    var bb=div.offsetLeft;值是20    获取的是距离窗口的距离
+    如果一个元素不定位  获取的left top 是依照body的
+    如果定位  left就是依照谁 这个left不包括border值
+    一个元素对他的父元素定位  父元素的padding和border对他的位置无影响
+    offsetleft  和offsettop计算的是距离定个位属性的上级元素的距离，如果没有定位属性高的上
+    级元素，计算得是距离body的值
+
+
+
+    当文本超过div  给div加overflower：scroll;  文字就只显示在div中 以有滚动条的形式
+
+    console.log(document.body.scrollTop)  谷歌浏览器   滚动条高度
+    console.log(document.doucumentElement.scrollTop)  火狐浏览器  滚动条高度
+    document.body.scrollTop=400   设置滚动条初始位置
+
+    var btn=document.querySelector('button');
+
+    SEO 搜索引擎优化
+
+    window.onscroll=function () {    //监控滚动条高度
+        var obj=document.body.scrollTop;
+        var scrolltop=
+    }
+</pre>
+        </li>
+        <li>
+            <pre>div.addEventListener('事件是什么',function () { 这是逆名函数
+        用这种方式给同一个元素的同一个事件添加多个元素处理程序 不会被覆盖
+    },false);  里面的事件不加on   最后一个false 可以不写
+    div.removeEventListener('事件是什么',function () {  这里的
+
+    })  删除事件   这个时候只有两个参数
+    删除事件的时候里面不能是逆名函数
+    对fun函数进行添加删除
+    新浏览器都适用
+    div.addEventListener('click',fun,false);
+    div.removeEventListener('click',fun);
+
+    IE浏览器 6 7 80
+    div.attachEvent('onclick',fun);添加事件  必须加on
+    div.detachEvent('onclick',fun);移除事件
+
+    事件发生时候的自动创建的一个对象叫事件对象  用来保存事件发生时候的所有的信息
+    div.onclick=function (a) {
+        console.log(a)  输出事件对象  事件发生时候 就给a这个形式参数传递参数
+    }
+</pre>
+        </li>
+
+    </ul>
+</div>
+</body>
+</html>

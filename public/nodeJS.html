@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+<pre>node.js是基于chrome V8 引擎的js运行环境
+node.js是运行环境  可以让js停留在服务器 也可以变成后台语言
+
+node的作用
+1 在服务器上开发脚本（小程序）
+2 在程序员电脑上 前端自动化
+3 提供web服务
+
+nodejs把所有关于DOM操作的方法全给删了  因为数据库里面不需要操作DOM元素
+
+一边用 module.experots ="";
+另一边用 require 接收
+
+requrie 的参数能写
+        1绝对路径
+        2相对路径
+        3.js可以省略(默认找 .js .json )（如果是文件夹 默认找其下的index.js）
+        4直接写字符串（引入内置模块和node_modules文件夹下的模块 const c = require('a') 直接写a 就寻找a文件夹下的index.jsx）
+
+npm  node  package manager
+
+npm init
+npm install request --save
+npm login (需要npmjs.com注册一个帐号)
+npm publish
+
+    包的名字
+    包的版本号
+5如果想做成可安装到用户电脑的小程序
+      要在开头首行添加#!/usr/bin/env/ node
+      package.json 中添加 bin 字段（程序的名字 ‘./index.js’）
+      npm install -g xyz_hello
+
+1创建一个包
+reqe('reqs')
+
+request.get().pipe(fs )
+
+
+由很多模块组成以及依赖其他的包来实现一个功能 这些模块和包共同组成包
+
+1 package.json
+    - name,version；
+    - scripts
+    - (dev)(d|D)ependencies
+2 npm
+ - npm init 只是为了生成package.json
+ - npm install (-g) (--save||--save-dev) (name)   //--save-dev  辅助开发 -g是安装在C:
+ - npm unistall name (--save)  移除某个包  //--save 会自动更新package.json的依赖项
+ - npm login
+ - npm publish
+ - npm run name
+
+explorer http://www.baidu.com
+
+child_process = requi
+re('child_process');
+child_process.spanwnSync('open',['http://localhost:3000'])
+
+0 += fs.readFileSync(
+        path.join('./componts',v)
+    )
+    + os.EOL;
+
+ fs.writeFileSync()
+
+ socket.io  自动刷新的包
+
+ buffer  新的数据类型  表示文件最原始的存储方式 由一个一个的字节存储 16进制 两位代表一个字节
+
+ 流
+ const fs = require('fs');
+ var t = fs.readFileSync('./1.txt');
+ fs.writeFileSync('./2.txt',t);
+
+var r = fs.createReadStream('/1.mkv')  读流
+r.pipe(w);可读流有一个管道流的方法 流给下面的w
+var w = fs.createWriteStream('/2.mkv')  写流
+
+如果不用管道流 可以在可读流上用on绑定data， 用一个回调函数传一个chunk 把data一片一片的传进去
+ t.on('data',(chunk)=>{
+     console.log(t);
+     w.write(chunk);
+ })
+
+
+request.get('http://www.baide.com')
+    .pipe('fs.create')
+
+
+const events = require('events');
+
+
+全局
+__dirname   当前文件所在的目录
+__filename  当前文件的名字
+
+setImmediate(fn) = setTimeout(fn,0);  //setImmediate 相当于时间等于0的setTimeout 作用是将函数转化时间函数也就是异步函数
+事件循环机制（时间相关）（网络请求相关） 被设计为异步
+setTimeout(()=>{    进入栈区 因为是时间函数 所以函数出去 把函数放在等待区 继续执行下面的代码 就直接输出1 当时间到了  就把回调函数扔到待执行区 就等循环机制刷新的时间
+    console.log(0);
+})
+    console.log(1);
+
+   这里先输出1 在输出0
+
+
+`{
+function add(nub){
+    let r=0;
+    for(let i=0;i<nub;i++){
+        r ++;
+    }
+    return;
+}
+add(10);  //这个函数是异步的  需要优化成同步的
+}`
+
+{
+function add(nub,fun){
+    setImmediate(()=> {   //将这个函数转化成同步函数
+        let r = 0;
+        for (let i = 0; i < nub; i++) {
+            r++;
+        }
+        fun(r);
+    })
+}
+add(10,function(n){
+    console.log(n);
+});  //这个函数的r值如果在里面返回不出去 需要用回调函数
+}
+
+process.argv0
+输出node安装路径
+输出当前文件在的路径
+输出.json文件中的scripts里面传递的参数
+
+内置模块os-path-fs
+
+new data
+按时间整理某个文件夹下面的图片
+
+//HTTP
+const http = require('http');
+const fn = (req,res)=>{
+    res.end("ok")
+}
+//req  IncomingMessage类的实例（events）   识别用户发过来的字符串  可读可写流
+res 做用户回应的  是ServerResponse的实例  给用户组织回应字符串 可读可写流
+const server = http.createServer(fn)     //createServer 必须有一个回调函数 创建的这个服务器 一旦比访问 就会调用回调函数 并且传两个参数进去 这两个参数都是内部实例的对象 所以在写回调函数时候要写两个形式参数
+//server 是server的实例（events）
+const port
+server.listen(3000,()=>{
+
+});
+express包替换http.createserver方法
+request包替换http.request
+url是资源
+`<form enctype="miltipart/form-data">`
+
+
+包
+multer  中间件
+ejs 模版
+express 创建服务器的
+
+
+process.argv
+url
+queryString
+
+二级目录解释一级目录的返回值
+
+http.createServer()  这个方法被express包替代
+ b n
+cheerio  正则表达式
+
+大批量数据(布隆过滤器)  bloom-filter-x
+优点：内存可控
+缺点：有几率误判
+原理：用一串可控制长度的空字节，当一条数据进来，用3个哈希函数将这个数据进行相对这一串空字节进行取余，给对应的位置换成1，
+相同数据取余的位置是一样的，假如有相同数据进来，判断取余位置，发现三和位置都是1,就判定这个数据是重复的，
+
+爬虫系统
+1地址队列
+2数据清洗
+3数据存储(布隆过滤器)（hadoop 用这个软件 分成块存储在局域网的3台电脑）
+
+
+在js中 . 是 [] 的简写
+
+单页面不用加window
+
+
+！！！***************前端自动化（Relact）*******************！！！
+
+中间件
+server.use(express.static('./static'))
+在html中link时候直接写css/index.css  不用写static
+
+server.get('/',(req.res)=>{
+    res.render('index')
+})
+// 中间件的两种写法
+// server.use((req,res,next)=>{  方法1
+//     if(req.url.indexOf('.')!==-1){
+//         let x = path.resolve(path.join('./static',req.url))
+//         console.log(x);
+//         res.sendFile(x);
+//     }else{
+//         next();
+//     }
+// })
+server.use(express.static('./static'));  //方法2
+
+单页面应用 Single Page Appliction
+
+前端路由
+在js中 window.onhaschange=()=>{
+    switch(localtion.hash){
+        case 'a';break;
+    }
+}
+
+后端路由
+
+npm install -g vue-cli
+vue init webpack 012-ktv  下载并创建012-ktv文件夹  router-Y No No
+npm install  装所有依赖的包
+
+src 和 static 用来上传服务器
+
+
+浏览器的ajax
+vue 中resource 相当于fetch和ajax
+fetch('/index').then( res=>res.json/text(res) ).then(data=>{
+    在这个回调函数中把得到的data赋值给想要的变量
+}) fetch不能返回具体的值但是能返回一个对象必须用回调函数掉用data
+
+promise
+
+前端自动化要装的包
+bable 包 将ES6转化成ES5
+npm install -g babel-cli  // 编译文件
+npm install babel-preset-es2015 //  把js编译成
+babel a.js --presets-es2015 //
+babel a.js --presets=es2015 --out-file /././.jses5 //--out-file文件编译完成后导出  /././.jses5  导出的路径和文件名
+babel note.js --presets=es2015 --out-file ../auto-note-template/static/js/note.js
+
+npm install -g webpack  装webpack这个包
+
+把a.js编译成c.js:
+1. 装babel-cli包
+2. npm init 生成package.json 或者手写
+3. 在package.json的scripts下面 写一个"build":"babel ./a.js --out-file ./c.js"
+4. 运行 npm run build
+
+把a.js用es5的语法编译：
+1. 装babel-cli包 和 babel-preset-es2015包
+2. npm init 生成package.json 或者手写
+3. 在package.json的scripts下面 写一个"build":"babel ./a.js --presets=es2015 --out-file ./c.js"
+4. 运行 npm run build
+
+把a.js和b.js合并 并用es5的语法编译：
+1. 装webpack包 能够转es5并且实现合并
+2. npm init 生成package.json 或者手写
+3. 在package.json的scripts下面 写一个"build":"webpack ./a.js ./c.js"
+4. 运行 npm run build
+
+可以用import bianliangming from './a.js'    export dafault{}   （现在用）
+来替换export default{}                      module.exports={}  （之前用）
+
+
+webpack 能将require链条里面所有文件压缩成浏览器能够识别的js语法结构
+在。json中 build：'webpack'     会自动找下面的文件
+要建一个webpack.config.js
+
+webpack-dev-server 包  npm install -g webpack-dev-server  安装一个web服务器
+这个包是提供一个预览服务器
+webpack服务器是新弄一个8080端口 生成的文件都是在内存里面 要在这里写一个index.html
+把要测试的页面放进里面  直接访问3000端口就行 在这个html中请求的css直接写webpack.config.js中的filename对应的js
+在webpack.config.js 中要写 devServer:{
+                             proxy:{ //代理  在web服务器中没有api/data这个资源 所以用代理装一个包 webpack-dev-server
+                                 "/api":"http://localhost:3000"
+                             }
+                           },
+entry:'./src/app.js',   //入口
+    output:{  //文件出口
+        filename:'newnode.js',   //文件出去的名字
+        path:path.resolve('../auto/static/js'),  //出去的路径
+    },
+    module:{
+        rules:[     //定义需要编译的文件类型 要用到的包都会给提示
+            {test:/\.css$/,use:['style-loader','css-loader']},
+            {test:/\.vue$/,use:['vue-loader']}
+            //style-loader --save -dev 在head标签新建一个style标签  css-loader --savev -dev 把以css后缀的文件放到style标签里面
+            //loader把非js语法的东西转换成js || 把该文件挪动位置  不进入最终打包的js
+        ]
+    }
+每个组件都写成vue  此外 router是js文件  每个vue文件都会有export default 每个vue文件都送出去
+用到vue文件就要用npm install vue --save下载 在app.js用export default ‘../node_modules/vue/dist/vue.min.js’进行
+（在打包过程中 会压缩所有required（）链上的文件）  需要在package.json 的scripts下面写编译的命令（只需要写包的名字
+后面的在webpack.config.js中的调用发出里面的配置补全文件名和编译文件所在路径）
+
+
+ktv 后台迁移到node
+百度云上建立一个项目
+010-ktv-server 真实服务器
+012-ktv  临时服务器
+
+
+React-native 可以将js转化成Java 等的原生代码 可以用来做原生app
+const el = `<div></div>`   被编译成var el =document.createElement('div')
+babel-loader rules写  babel-core babel-preset-react
+react --save  要用到react变量
+react-dom --save将react创建的dom编译成真正的dom
+module:{
+    rules:[{
+        test:/\.jsx$/,
+        use:{
+   4         loader:'babel-loader',
+            options:{
+                presets:'react'
+            }
+        }
+    }]
+}
+
+ReactDOM.render(el,document.queryselect("#app"))
+react 一般以
+sacc-loader -> css-loader -> style-loader
+
+
+表达式 任何有值的东西
+var a;   a是一个表达式  值为undefind
+()=>{}  表达式 值是函数
+var f = ()=>{}  是语句
+var d = ()=>5
+d 值是函数
+d()//函数调用的表达式 值是函数的返回值
+d.push  值是undefind
+if(true){} 是语句
+类都是函数
+class A {
+    constructor(){
+        this.a=12;
+    }
+}
+var d = new A();
+var e = 'a',
+d[e],   这个相当于d['a']    js所有的 . 都相当于 ['']
+
+在react中html元素中｛ ｝  是表达式求值qi
+1浏览器的console选项就是表达式求值器
+2断点调试工具可以直接运行表达式，进行求值
+
+编程模式（组件嵌套）
+所有jsx文件 都只能有一个跟元素
+最大优势 多人协作 好维护
+
+history.pushState({},'','')   用这个方法可以改变地址栏 不发生请求 来达到去掉#
+window.onpopstate=(e)=>{}   e是上面传的对象
+
+函数身上永远有 call aplay bind 方法
+bind 可以永远改this的指向  f=()=>console.bind(1)  把this永远绑定在1
+
+hestory.pushState | hash  更改浏览器地址 但不会发起请求
+window.onpopstate  浏览器点击后退前进按钮触发
+history.state = 调用pushState函数时的第一个参数
+
+用 hash 或者 history.pushState 可以解决单页面应用中url 改变不向服务器发送请求
+
+在React中 `<span>123</span>`  标签里面的123相当于 这个标签的外部数据props的children的值
+
+react 搭建环境配置包
+1 npm i create-react-app -g  安装包
+2 create-react-app +要创建文件夹的名字
+3 进入文件夹运行 npm run eject  显示所有配置  这样就能自己进行配置
+4 “scripts”:“node scripts/build.js” -> config/webpack.config.prod.js -> config/path
+5 path.js 的 appBuild 修改为 path.resolve(__dirname,'../../想要编译到的文件夹名/public/admin')
+6 webpack.config.prod.js 'static/css/..' 'css/....' static 去掉 共四处
+7 scripts/build.js 49行   fe.empryDirSync 注释掉
+8 服务器上的回文件的代码换成 res.sendFile(path.resolve('./public/ad/index.html'))
+9 package.json  "homepage": "http://localhost:18080/admin",'
+10 npm run build
+12 在package.json加代理 "proxy":"http://localhost:18080",
+11 npm i react-router-dom --save  路由包
+（router 只用一次 几个页面就用几个route）
+
+
+
+ JSON.stringify(array);  将数组转化成json对象
+ JSON.parse(str)  将数组形式的字符串转化成相同形式的数组
+
+ data.affectedRows  影响行数
+ 在table组件加事件：
+ `1 <span onClick={this.del.bind(this,text)}
+         2 <span onClick={()=>this.del(v.id)}`
+
+ 删除方式：
+ 1 del(text,e) {
+           e.target.parentNode.parentNode.parentNode.remove();
+           fetch('/api/admin/goods/del?id='+text).then(r=>r.json()).then(d=>{
+               if(d === 'ok'){
+               }
+           })
+       }
+ 2 del(id){
+
+ }
+
+
+ 获取input的值
+ input 的onChange={(e)=>console.log(e.target.value)}
+
+'Content-Type': 'application/json'
+body.JSON.stringfy(this.state)
+
+.gitkeep  在git文件夹下面建这个文件  git push 就不会忽略空文件夹
+
+content-Type   text/html   res.sendFile
+               text/plain  纯文本 会把标签也显示出来
+               image/img
+               applocation
+头信息
+
+res.writeHead(200,{'content-Type':'text/html'})
+cookie 由服务器设置‘Set-Cookie’ 让浏览器存储cookie
+之后的同域名请求都会带上这个cookie的值
+所以要用到 cookie隔离技术 eg:将图片的地址放到别的域名下
+在PHP 中取cookie $_cookie
+
+在node.js 中取cookie
+npm i cookie-parser -s
+
+
+
+native 自动化环境
+1 npm install -g create-react-native-app
+2 create-react-native-app AwesomeProject
+3 cd AwesomeProject
+4 npm start
+expo  在国内市场找这个安装包
+
+
+1 检查有没有 node -v
+2 Python2
+3 检查上面的Python2  choco -v
+4 choco  install python2    用 python -v 检查
+5 choco  install jdk8(java官网也能安装)
+6 npm install -g react-native-cli
+7 装一个编辑器 Install Android Studio
+8 Install the Android SDK   用编辑器装的 装的时候要注意路径（参考图）
+9 react-native init AwesomeProject
+10  用新的编辑器打开 AwesomeProject文件夹  （连上真机 图标有个设备按钮）
+11 装 模拟器（参考图） 注意：HAXM错误  根据指示修改BIOS设置   虚拟机安装成功后要启动
+12 cd AwesomeProject
+   react-native run-android   把代码发到手机或者虚拟设备（最后一步）
+
+
+
+
+
+</pre>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

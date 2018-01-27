@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        margin: 50px auto 0;
+        overflow: hidden;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+
+    pre {
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <pre>是window下的软件 是集成开发环境
+静态网页没有链接数据库 浏览器 编辑器
+动态网页就是链接数据库 数据库 web服务器 php(数据库)
+wamp windows操作系统 mamap苹果系统 lampLinux系统     a apache web服务器 数据库服务器  服务器就是提供某种特定功能的代码块，接收请求，处理请求  m mysql数据库服务 数据的操作定义 access     p php
+路由器 是网络解调器
+js不能获取数据库里面的数据
+数据库服务器 数据库的增删改差 数据的存储
+浏览器只是绘制数据
+数据库一共分两类 关系性的数据库 关系模型建立的数据库  一类是非关系性的 mangodb
+php是运行在服务器端的脚本语言
+file：// 本地协议
+http://127.0.0.1  或者 localhost
+www 是默认的访问目录
+Mysql是一个关系型数据库管理系统
+服务器如何处理用户请求
+先接收请求数据（一种叫静态资源：.html .css .js .jpg .png .gif  另一种叫动态资源 .php）  假如请求的静态资源会直接返回  碰到.php 时
+ php运行在服务器端 解析php echo 返回浏览器接收到 .html 开始一行一行解析 碰到 link src herf url
+ ajax 之类的 就会不断向服务器发送请求  直到最终页面呈现出来  解析的过程不会解析查询字符串？
+浏览器碰到什么类型 就会以相应的方式解析
+如果php写在html中 服务器不会去解析
+当在地址栏键下地址的时候 浏览器结合我们的软硬件将http请求发送到网络中，服务器接收到我们的请求，开始处理
+我们的请求，请求的资源分为静态资源和动态资源，静态资源向.html .css .js等这些后缀名的文件，动态资源.
+像.php .java 这些资源，服务器碰到请求是静态资源会直接进行返回，碰到动态资源会先进性解析，php文件最终
+输出的内容将会交给服务器，最后服务器返回输出的内容，当浏览器接受到返回的内容，开始绘制，
+碰到href src rul这些东西的时候，会再次向服务器发送请求，最终呈现整个页面
+
+
+php是什么？
+php是一种超文本预处理语言，是运行在服务器端能和html进行嵌套用于制作动态网页的语言
+
+
+php的特点
+运行在服务器端的脚本语言
+能支持绝大部分的操作系统
+能支持大部分的服务器  apache IIS
+能支持大部分的数据库  mysql  sql  server  Access
+能操作数据库
+能操作文件
+能操作图片
+能操作cokey
+能操作localstory
+...
+
+php 只有放在服务器环境下才能解析
+
+htm和php相互嵌套
+php 中嵌套html
+这时要`<?php?>` 封闭
+php 里面嵌套的html 中也可以嵌套php  在服务器中那个运行这个php文件 就会解析  最里面的php在html的什么位置
+
+基础语法
+                `<?php
+输出 echo  1;  'ff';  (1);  输出的都是字符串 数字1输出 直接就转化成字符串输出
+输出类型(任何)和值 var_dump(expression:123);   expression 是编辑器给的   int 整值
+变量的定义(不存在先声明 后赋值的情况)   没有重复定义   $nub  var_dump($nub);   未赋值的变量为null；
+php每句话写完必须加分号  if语句不需要加分号
+变量不能以数字开头
+变量的作用域
+$str=200;
+echo str;
+
+php 只有是致命性的错误（error）才会停止运行  warning notice 都不是 不会停止运行 会继续执行
+
+常量的定义只能用const define  常量可以在任何位置被访问
+常量 （用方法定义 define）  常量的名字一般大写 不加$符号 定义完成 不能被更改
+define("PI",3.14);
+var_dump(expression:PI);  输出 float 3.14
+常量的值不能延迟求值，只能是标量(const不可以，define可以)
+function name{
+    return 200;
+}
+define('PI',name());  正常
+const=('PI',name());  错误 后面只能用标量
+
+用const定义
+const PI=123;
+var_dump(expression:PI);
+
+检测变量有没有被定义  没有重复定义
+
+$nub=200;       输出就是boolean true;   定义了
+$nub=null;      输出就是boolean false;  未被定义
+var_dump(isset($nub));
+
+检测常量有没有被定义
+define("PI",3.14);
+var_dump(defined(name:"PI"))  这里注意要加引号
+
+删除变量
+$nub=200;
+var_dump($nub);  200
+unset($nub)      不允许删除常量的
+var_dump($nub);  undefind
+
+变量引用
+
+$nub=200;
+$nub2=$nub;
+$nub=300;
+echo $nub2;  输出200
+
+$nub=200;
+$nub2=&$nub; &是引用地址
+$nub=300;
+echo $nub2;  输出300
+
+
+可变变量（名字可变）  用一个变量的值作为另一个变量的名
+$nub='name';  name 是&nub的值
+$$nub='123';    $($nub)就是$(name)
+var_dump($name);或者var_dump($$nub);
+
+.表示链接 可以连接两个标量类型 链接成字符串   双引号可以解析变量
+数据类型一共有8种
+4种标量类型
+2种复合类型
+2特殊类型
+.
+4种标量类型  整形 int     整数
+            浮点型  float  也作double   弱类型
+            字符型  string     $str=""；$str=''；
+                $nub=200;
+                $str1="这是一个数字".$nub;   .表示连接 成字符串
+                $str2='这是一个数字'.$nub;
+
+                $str1="这是一个数字$nub"；  双引号可以解析变量  这里不能写做"这是一个数字$nub1"
+                        需要加｛｝ "这是一个数字{$nub}1sk"
+            布尔类型  boolean
+    弱类型语言  不用强制性要求变量什么类型
+    强类型语言  int a=200;  a只能赋值整数
+2种复合类型  对象  先有类 才有对象
+                class person{
+
+                }
+                $obj=new person();  只能new 类
+            数组 关联数组    数组的键名必须加引号
+                    $arr=array(
+                          'name' => 'lisi',`
+                          'age' => 12,
+                    );
+                    $arr=array(
+                          'name' => array('a','b')
+                          'age' => 12,
+                    );
+                    echo $arr['name'][0]=0
+                    var_dump($arr)  什么类型都能输出
+                    数组的遍历
+                    $arr=array('1','2','3');
+                    echo count($arr)
+                    `for($i;$i<count($arr);$i++){
+
+                    }`
+                    $arr=array('1','2','3');
+                    foreach($arr as $item=>$value){
+                        echo $item.'=>'.$value;
+                    }
+                    exit;  只运行到这里  退出 也可以写exit(123);
+                 索引数组   下标可以不连续
+                $arr=array('1','2');    var_dump($arr)
+
+               ` echo  "<pre>"`
+                $arr=array('1','2');
+
+                 $arr=array('1','2');
+                $arr=array(
+                    0 => '4',
+                    1 => '2',
+                );
+                  $arr[0]; 或者 $arr['0'];
+                  $bb="这是数组的第一个数$arr['0']"  不能这么写 得写成 $bb="这是数组的第一个数{$arr['0']}"
+
+把数据放页面中
+1 先在php组合好字符串
+$str=''；
+foreach($arr as $item=>$value){
+    echo str.="<li>$value</li>"
+        }
+        2 再在html的body中
+        `<?php
+    echo $str;
+?>
+
+        第二种方法 直接在html中的php中
+        <?php
+    foreach($arr as $item=>$value){
+        echo "<li>$value</li>"
+        }
+        ?>`
+
+        2种特殊类型  null  空
+        (int) null  转化成0
+        resource  引用
+        连接数据库 $link=new mysqli(host:'localhost',username:'root',passwd:'',dbname:'');
+        var_dump(id_resource($link))   判断是不是资源
+
+        $nub=123;
+
+        $result=gettype($nub);  获取数据类型  int
+        var_dump($result);
+
+        var_dump(is_int($nub));   判断是不是整形   var_dump(is_integer($nub));
+        var_dump(is_float($nub));   var_dump(is_double($nub));
+        var_dump(is_bool($nub));
+        var_dump(is_string($nub));
+        var_dump(is_resource($nub));
+        var_dump(is_null($nub));
+        var_dump(is_array($nub));
+        var_dump(is_object($nub));
+
+
+        类型的转化
+
+        标量之间的相互转化（强制性转化）
+        $nub=123;
+        var_dump(strval($nub));    将 true 转化成1  将 false 转化成 '' 空  echo 输出也一样
+        var_dump(intval($nub));
+        var_dump(floatval($nub));
+        var_dump(boolval($nub));
+
+        var_dump( (string) $nub)
+        (int)
+        (float)
+        (bool)
+        (double)
+        (boolean)
+
+        false 的情况
+        var_dump(boolval(var:0 "0" "" false)) 是假   字符"0.0" 是真
+        var_dump(boolval($str))  空数组是假
+
+        $nub='123';
+        settpye()   不建议改变  因为会改变原来的类型
+
+        echo()
+        var_dump(strlen(string:'sffs'));
+        trim()  去两边的空格
+        var_dump(strtoLwer(str:'AS')); 变小写
+        stroupper()
+        var_dump(strrev(str:'123')) 反转
+        vad_dump(md5(str:123))   转成16进制  加密 不可逆
+        var_dump(explode(delimiter:"n",$arr))   分割  用n把字符串$arr分开 形成数组
+        var_dump(str(string:'',star:0,length:4))   从开始位置截取指定长度  这里按字节截取
+        var_dump(mb_substr(string:'',star:0,length:4,encoding:'utf8'))   按长度去截取
+        var_dump(strstr(haystack:'abcd',neddle:'b')) 输出bcd 截取 从找到的第一个字符截取到最后 包括找到的那个字符
+        最后的参数决定了是向前还是向后截取
+        var_dump(strstr(haystack:'abcd',neddle:'b'，defore neddle:true)) 字符串 要查找的字符 默认的(false)是从这个字符往后截取 true 是往前截取
+        var_dump(strpos(haystack:'abcd'，neddle:'b',offset:3)) 查找指定字符首次出现的位置的 offset 指要跨过的字符数  但是输出的位置还是按本身的位置来计算
+        var_dump(strrpos(haystack:'abcd',neddle:'b',offset:2))  最后一次出现的位置
+        var_dump(str_replace(search:'',replace:'',subject:"")) 正常替换 区分大小写
+        var_dump(str_replace(array('a','s'),replace:'2',subject:"as"))   22
+        var_dump(str_replace(array('a','s'),array(1),subject:"as"))  1  当后面的array是两个参数  就是对应的替换 如果前面的多
+        那就把没有匹配的就给删除了 当前面的少于后面 只是去掉前面的  多余的不管
+        var_dump(str_ireplace())   不区分大小写
+
+
+        数组  这里的数组不是对象sub
+        $arr=array(1,2,3);  php版本5之后可以$arr=[1,2,3]
+        count() 用来定义数组的长度
+        $arr=array(
+        'name'='lisi'
+        )
+        var_dump(count($arr))
+        in_array()  判断某个值在不在数组里 可以启用全等(strict)  默认false 不启全等
+        var_dump(in_array(needle:1,$arr,strict:true))
+        array_search()    查找某个值对应的某个键  若找不不到 就是false  这里只看第一个
+        var_dump(array_search(needle:1,$arr))
+        array_key_exists() 判断某个值是不是数组的键  在就返回真 不在 返回假
+        var_dump(array_key_exists())
+        array_filter()   筛选 返回值是新数组 接收回调函数
+        var_dump(array_filter($arr,function($value){
+        return true;   保留
+        })
+        array_walk()      类似foreach 将每一个值都执行一个函数
+        var_dump(array_walk($arr,function($value,$item){
+        echo $item.$value;
+        })
+        array_map()  映射
+        var_dump(array_map(function($value){
+
+        })
+        array_push()   将数组的后面推进去值  可以是多个
+        array_push($arr,var:'123'，:'dfds')
+        array_pop()
+        array_pop()  在后面删除元素 返回删除的元素
+        array_shift()   在前面删除
+        array_shift()
+        array_unshift()   在前面推入
+        array_unshift($arr,var:'123'，:'dfds')
+        array_keys()  返回键组成的数组  如果有第二个参数 那么直接返回与第二个参数匹配的键
+        var_dump(array_keys($arr))
+        var_dump(array_keys($arr,search value:'lisi'))
+        array_values()  把所有值组成 数组
+        var_dump(array_values($arr))
+        array_sum()  求和  当有字符串的时候 把字符串 翻译成0
+        var_dump(array_sum($arr))
+        array_merge()  合并数组 如果有相同的键值 后者就会覆盖前者
+        var_dump(array_merge($arr，$brr))
+        array_unique()  去重复  键不会重排  去除后面重复的
+        array_rand() 在一个数组里面随机的取值，如果取多个 要用req 组成的是键组成的数组 但不会重复
+        array_rand($arr,num req:2)
+        sort()   升序 会影响到原数组
+        rsort()  降序
+        asort()  升序 键不换
+        arsort() 降序 键不换
+        ksort()  按照键进行升序排序  当键是多个字母  按第一个字母的asc码进行排序
+        krsort() 按照键进行降序排序
+        var_dump(array_sum($arrs));  数组求和
+        var_dump(array_merge($arrs,$brrs));合并两个数组
+        var_dump(array_unique($brrs)); 去重复 把后面重复的就删了
+        var_dump(array_rand($brrs));  键的随机值
+        var_dump(ksort($brrs)); 这里输出的是返回值 true  按键的顺序升序排列
+        var_dump($brrs);        要输出原数组
+        var_dump(krsort($brrs));  按键的顺序降序排列
+        var_dump($brrs);
+
+        abs() 绝对值
+        ceil() 向上取整
+        floor() 向下取整
+        max() 最大值
+        min() 最小值
+        round() 范围
+        mt_rand(20,30)   随机数 整数
+        pow() 次幂
+
+
+        函数
+        function fun($a,$b){  这里定义了形式参数  就必须传实际参数  形式参数可以少于实际参数 也可以给形式参数设置默认值
+        echo "123";
+        }
+        fun(2,3);
+        函数不能去输出  如var_dump(fun)
+
+        var_dump(function_exists(funciont name:'fun'));   检测函数存在与否  不能直接写fun  要以字符串的形式
+
+        $name='fun';
+        $name();  $name()=fun() 这就可以运行这个函数  可变函数去运行变量
+
+        $nub 是全局变量
+        $nub=200;
+        function fun(){
+        echo $nub;   报错  全局变量不能在局部环境中用 反之也不行
+        }
+        fun();
+
+        $nub=200;
+        function fun($aa){  传值
+        $aa=300;
+        echo $aa;
+        }
+        fun($nub);    300
+        echo $nub;      200
+
+        $nub=200;
+        function fun(&$aa){    传址
+        $aa=300;
+        echo $aa;
+        }
+        fun($nub);    300
+        echo $nub;      300
+
+        $nub=200;
+        function fun(){
+        global $nub;   想在局部用全局变量  就要用这句话
+        echo $nub;
+        }
+        fun();
+
+        除了常量可以在任何地方访问 还有超全局变量
+        $nub=200;
+        function fun(){
+        $GLOBALS['nub'];
+        echo $nub;
+        }
+        fun();
+
+        超全局变量
+        $_GET
+        $_POST
+        $_REQUEST
+        $_FILES  文件
+        $_SERVER  环境
+        $_SESSION 服务器端
+        $_COOKIE 所有的cookie
+
+
+        function aa(){
+        echo 11;
+        }
+        function fun(){
+        aa();
+        }
+        fun();  输出就是11  这里就可以访问上面的function   function 不是数据类型 相当于JS中的if 在哪都可以用
+
+        function fun(){
+        static $nub=200;  当生成静态变量 他就属于函数的变量
+        $nub+=1;
+        echo $nub;
+        }
+        fun();  输出201
+        fun();  输出202
+
+        exit(); 和 die(); 作用一样 都是退出
+
+        function aa(){              回调函数的用法
+        echo 2;
+        }
+        function fun($callback){
+        $callback();
+        }
+        fun(callback:'aa')
+
+        $fun=function(){
+        echo 1;
+        }
+        $fun();
+
+        代码块复用
+        require ''
+        include 'bb.php';    bb.php 中有fun函数  在这个文件可以引入另一个文件  但是不能重复引用
+        fun();
+
+        require_once '' 能检测有没有引入过同一个文件  引入出错 error 不能继续运行
+        include_once ''                             引入出错 可以继续运行代码
+
+        时间
+        date_default_timezone_get; 获取的是巴黎的
+
+        date_default_timezone_set(timezone identifier:"Asia/Shanghai");  先设置时间
+        var_dump(date_default_timezone_get)  再获取时间  就能得到上海的时间
+
+        var_dump(time()); 获取当前时间距离1970年的秒数
+
+        var_dump(microtime()) 现在时间+微秒
+        var_dump(microtime(get as float:true));  把上面的秒精确到微秒
+        funtion
+        var_dump(microtime(get as float:true));
+
+        var_dump(getdate());
+        ？？时间戳
+        $arr=getdate();
+        $str=$arr['year'].'-'.$arr['mon'].'-'. $arr['mday']
+
+        var_dump(date(format:"Y-m-d H:i:s"))  当前时间
+        var_dump(date(format:"现在是北京时间Y年m月d号F H:i:s"))
+
+        $time=mktime(hour:'',minute:0,second:0,month:8,day:8,year:2008);
+        $arr=gettime()
+
+        格式化时间
+        a:am/pm
+        d:01-30日
+        D:星期几 星期的前三个字母
+        F：月份
+        h:12小时制 01-12
+        H：24小时制 00-23
+        g:12小时制 1-12 没有0
+        G：24小时制 0-23 没有0
+        j:几日 从1-31
+        l:星期几 英文全名
+        m:月  两位数字 01-12
+        n:月 1-12
+        M：月 英文3字母
+        s:秒 00-59
+        S：字尾加英文序数，两个英文字母 如‘21th’
+        t:指定月分的天数 28-31
+        U：总秒数
+        w:数字型的星期几 0-6
+        Y：年  四位数字
+        y:年 两位数字
+        z:一年中的第几天 1-366
+
+
+        cookie 存储在客户端 不安全
+        session  存在服务器端
+
+        var_dump($_COOKIE);
+        setcookie(name:'name',value:'123',expire:time()+20);  不加expire:time()+20 是会话级的  加了就是有生命周期的
+        var_dump($_COOKIE['name']); 调用name  这里的name是上面存入的名字 存什么这里写什么
+        setcookie(name:'name',value:'123',expire:time()-1);删除cookie 设置过期时间
+
+        session 存在服务器端 当用到session 服务器就会给一个session id
+        session_start();  要用session  必须要开启一次 给浏览器分配一个32位的id  这个id存在cookie里面
+        $_SESSION['name']='123';  存储一个session
+        var_dump($_SESSION);
+        unset($_SESSION['name']); 删除session里面的name 这一条  必须跟键名 不跟就删除session这个全局变量了 后面就不能用了
+        这里的name是上面存入的名字 存什么这里写什么
+        session_destroy()  删除session id
+
+        http 是无状态的协议 是响应和应答的机制
+
+        验证码
+        $img=imagecreate('','');
+        $img=imagecreatetruecolor('','');  //色彩多
+        创建颜色
+        $color=imagecolorallocate();//有rgb
+        imagefill($img,0,0,$color);  //填充背景色
+        $color=imagecolorallocatealpha();//可以有rgba
+        for($i=0;$i<20;$i++){
+        $color1=imagecolorallocate();//有rgb
+        imagesetpixel('',mt_rand(),mt_rand());  //画点
+        }
+        for($i=0;$i<20;$i++){
+        $color=imagecolorallocate();//有rgb
+        imageline('','','','','',''); //画线
+        }
+        imagettftext('','','','','','','','');   //字体
+
+        header('content-type:image/png');  //说明要绘制图片  jpeg
+        imagepng($img);
+        imagejpeg();
+
+        imagedestroy($img);  //释放资源
+
+
+        //$img=imagecreate('','');
+        header('content-type:image/png');  //说明要绘制图片  jpeg
+        $img=imagecreatetruecolor(1000,600);  //色彩多 创建图片
+        //创建颜色
+        $color=imagecolorallocate($img,0,255,0);//有rgb
+        imagefill($img,0,0,$color);  //填充背景色
+        for($i=0;$i<20;$i++){
+        $color1=imagecolorallocate($img,mt_rand(0,255),mt_rand(0,255),mt_rand(0,255));//有rgb
+        imagesetpixel($img,mt_rand(0,1000),mt_rand(0,600),$color1);  //画点
+        }
+        for($i=0;$i<20;$i++){
+        $color1=imagecolorallocate($img,mt_rand(0,255),mt_rand(0,255),mt_rand(0,255));//有rgb
+        imageline($img,mt_rand(0,255),mt_rand(0,255),mt_rand(0,255),mt_rand(0,255),$color1); //画线
+        }
+        $color3=imagecolorallocate($img,mt_rand(0,255),mt_rand(0,255),mt_rand(0,255));//有rgb
+        imagettftext($img,20,mt_rand(0,180),mt_rand(0,1000),mt_rand(0,600),$color3,'a.ttf','Z');   //字体
+        imagettftext($img,20,mt_rand(0,180),mt_rand(0,1000),mt_rand(0,600),$color3,'a.ttf','Y');   //字体
+        imagettftext($img,20,mt_rand(0,180),mt_rand(0,1000),mt_rand(0,600),$color3,'a.ttf','R');   //字体
+
+        imagepng($img);   //告诉浏览器图片格式
+        //imagejpeg();
+        imagedestroy($img);  //释放资源
+
+        魔术常量
+        var_dump(expresson:__DIR__);  //当前路径
+        var_dump(expresson:__FILE__);  //当前路径包括本本件名
+        var_dump(expresson:__LINE__);   // 在代码中的行
+
+        var_dump(basename(path:__FILE__)); //从路径中返回文件名字
+        var_dump(dirname(path:__FILE__));  //返回路径
+
+        var_dump(file_exists(filename:'相对改文件的路径'))  //判断相对这个文件存在不存在
+        if(file_exists(filename:'相对改文件的路径')){
+
+        }
+        is_file()  判断是不是一个文件  只能识别当前路径  如果需要识别上或下级 需要写相对路径
+        is_dir() 判断是不是一个路径  只能识别当前路径  需要写相对路径
+
+        mkdir(dd)  创建一个dd文件夹
+        var_dump(rmdir()
+        var_dump(unlink(filename:'aa.php'))   //删除文件
+
+        var_dump(scandir(director:))  差找当前目录的所有文件名
+        str_repeat(input:' ',$n)
+        function tree($path,$n){
+        $path=str_replace(search:'\\','/',$path);
+        if(!is_dir($path)){
+        return;
+        }
+        $arr=scandir($path);获取所有文件和文件夹
+        foreach ($arr $value){
+        if($value=='.'||$value=='..'){
+        continue;
+        }
+        $pathname=$path.'/'.$value;
+        if(is_file($pathname){
+        echo '$value';
+        }else if(is_dir($pathname)){
+        echo '$value';
+        tree($pathname);
+        }
+        })
+        }
+        tree(path:__DIR__)
+
+
+
+        上传文件
+        `<form>
+            <input type=''>
+        </form>`
+
+        php中用$_FILES接收
+        if(is_uploaded_file($file['tmp_name'])){
+        move_unloaded_file($file['tmp_name'])
+        }
+
+
+        mysql  数据库 能够永久存储信息的集合 也能对信息进行管理
+        姓名 年龄 ...  都叫 字段
+        列
+        sql 语句（控制台）
+        SQL   结构化查询语言 1 数据库的定义语言  2 数据库的操作语言(增删改10% 查90%)  3 权限管理
+        show databases
+        每句话完了跟一个分号
+        use + 数据库名字；  进入数据库
+        selext
+
+        show create table
+        建立叫206class的数据库 create database 206class  charset utf8
+        数据库的名字要是纯数字 要写成`123`   要说明存储的格式charset utf8
+
+        一个学生的信息就是一个表
+
+        存储引擎 engine (两种引擎)
+        innodb  效率低 安全性比较高  一般用这个
+        myisam  效率高 安全性比较低
+        create database创建数据库
+        create table user (
+        id tinyint(10) unsigned'无符号数' not null primary key‘主键’ auto_increment'自增'，
+        name char(100) not null unique key'让名字唯一'，
+        grade float(5,2)'一共是5位 小数部分占两位' not null default 0.00,
+        updatetime datetime default current_timestamp on update current_timestamp'当前时间戳'
+        )engine innodb charset=utf8;
+
+        username'自己定的表名' char(255)'字符''255字符' not n7ull'不能为空',
+        pass'密码' varchar(10) not null
+        ) engine'存储引擎' innodb'引擎名' charset=utf8;
+        comment 注释
+        drop database删除数据库
+        alter table student change '旧字段' ‘新字段’ int(10) nut null修改表里面的字段
+        num'字段名字' char(20) not null;  添加num
+        alter table student drop num'要删除的字段名'； 删除num
+        alter table student change grade grades int(10) not null;修改 grade 成grades 后面要跟新的内容 相当于整个一起改
+        alter table student modify grades float(5,2) not null;  只能改内容
+        alter table student modify times datetime default current_timestamp'默认当前时间' on update current_timestamp;
+        desc +表名 看表的字段
+
+        rename table aa to user;  更改表的名字
+
+        有符号数 有正负 128
+        无符号数 无正负 256
+
+        查寻所有数据 select * from  ‘表名’
+        查寻id这一列的所有数据 select id from  ‘表名’ where id=5；(投影运算)
+        查寻id和name这两列的所有数据 select id,name from  ‘表名’
+        insert into user val,ues ();
+        insert into user() values (‘’);  一一对应插入
+        insert into user() values (‘’),(‘’); 插入两行
+        insert into user(name,age) values ('李四'，12)；
+        selct 字段 from 表
+        insert into 表（字段） values （要插入的数据一一对应）
+
+        删除某一行
+        delete from student'表名' where id=7;   删除id=7的整行数据
+        删除某一行的某一列 叫做修改 不存在删除列
+
+        update  （数据）更新
+        update student‘表名’ set name='lis';   把所有的名字都变成lis
+        update student set name='lis' where id=10; 把id=10的名字都变成lis
+        update student set name='lis'，pass=125 where id=10; 把id=10的名字都变成lis pss改成125（同时改两个）
+
+        select * from student where id!=1;
+        id>1;
+        id=<1;
+        id>8 and id<10;
+        id>2 and pass=123;
+        id>2 or pass=123;
+        id between 8 and 10;   这里的区间包括两极8 和 10
+        select * from student where id in (1,2,10);   选择id在1 2 10这个集合里面的所有的行
+        select * from student where name like '电%'；   查询名字中第一个字是电字的所有的数据
+        select * from student where name like '%电%'；  查询名字中含有电字的   （模糊查询）
+        '%电'    以电结尾的
+        '电_'    以电开头 后面有几个_表示 几个字
+
+        空字符串('')并不代表空(null)
+
+        某一个字符串是 null 上面的查询方法查不出来
+        select * from goods where name is null;   查询名字是null
+        select * from goods where name is not null;  查询名字不是null
+
+        select id,name,(shop_price-price)*count as ‘新名字’ from goods; 起名字 用 as
+        select id,name,ceil(price) from goods;  价格向上取整
+        select id,name,shop_price-price from goods where shop_price-price >200;  利润大于200
+        update goods set shop_price=shop_price+20;  每个进价都涨价20块
+        select id,name,shop_price-price as profit from goods having profit>200; 创建一个profit名字 同一行后面用到前面创建的字段时候用到是having
+        select id,name,shop_price-price as profit from goods where id>3 having profit>200; 先判断范围  再写having
+
+        以下运算不能同时输出表格里面其他字段  求出来的都是只有一个 没有对应关系
+        select sum(age) as zongnianling from rr;  列求和
+        select max(age) from rr;   最大值
+        select avg(age) from rr;   平均值
+        select count(age) from rr; 求数量和
+
+        select * from goods group by type;  根据type进行分组
+        select count(*) from goods group by type; 显示根据type进行分组的没组的个数
+        select sum(age) from goods group by type; 对每组商品个数进行求和
+        select sum(age),type from goods group by type; 显示对每组商品个数进行求和 和 type类型
+        select * from student order by grades asc'升序';   根据成绩从小到大排序
+        desc;降序
+        select * from student order by grades asc，id asc;先按照成绩排  有相同的按id进行排序
+        select * from goods group by type order by count desc;  先按类型进行分组  再把显示的进行排序
+        select * from goods order by count desc limit 3; 限制输出条数为3
+        select * from goods order by count desc limit 3,3; 第一个3指下次显示要跳过的数量  第二个是每页显示的数量
+        n*3,3;  正常分页的写法 一页三个
+        where   group by   having   order by   limit   一行里面的书写顺序
+
+        select id,name from goods where count = (select max(count) from goods);  where形子查询(只能单行单列 因为前面是等号)  查找count最大值对应的id和name
+        select id,name from goods where count in (select count from goods where id>1); where形子查询(只能多行单列 因为前面是in)
+
+        select id,name from (select id,name from goods) as tamp;  在上次查询的结果中查询   as tmp 是临时表的意思
+        select id,name from (select id,name from goods) as tamp where id>3;
+        select id,name from (select id,name from goods where id>3) as tamp;
+
+        select * from goods where exists (select name from goods where id>1);   exists 相当于if  后面有结果 就是真 就能运行前面的查询
+
+        连表查询
+        select news.id,news.title,user.username from news inner join user where new.uid = user.id;   inner join 是内链接两个表
+        select * from news left join user on news.uid=user.id；  左连 以左边数据的uid为标准  右边没有相匹配的id会报错 所以改用on 没有数据的显示null
+        select * from news right join user on news.uid=user.id； 右连 以右边数据的id为标准   左边没有匹配的的id会报错 所以改用on 没有数据的显示null
+
+
+        TINYINT 256
+        SMALLINT 16次方
+        MEDIUMINT 32次方
+        BIGINT 64次方
+
+        时间指定的时候不能给长度
+        主键 唯一来标识这行数据的信息
+
+        $link=new myspli()
+        if($link->connect_errno){
+        echo '数据库连接错误'；
+        }
+        $link->query($sql)  数据库的查询结果要进行处理
+
+        fetch_array()  从结果集中抓去第一条数据，处理成数组形式，有三种数组可选
+        MYSQLI_ASSOC MYSQLI_NUM  MYSQLI_BOTH
+        feth_row() 从结果集中抓去第一条数据，处理成索引数组形式
+        feth_assoc() 从结果集中抓去第一条数据，处理成关联数组形式
+
+
+        内容管理系统 CMS content manige syster
+
+        $row=$db->affected_rows; 影响的行数
+
+        top 当有多个窗口 top指向顶层窗口 top.localtion.href
+
+        $db->close();  关闭数据库
+
+        mul
+
+        var fileread=new FileReader();  h5 将一个文件读取到浏览器里面
+        fileread.readAsDataURL(file);  开启图片阅读器 将图片度成数据的地址格式
+        fileread.onload=function(e){
+        `$('<img>').attr( )`
+        }
+
+        $('#go').click(function(){
+        var ajax=new XMLHttpRequest();  //创建表单对象
+        var formdata=new FormData();  帮助发送数据FormData
+        aja
+        })
+
+        ajax.upload.on..=function(){  上传文件的进度
+
+        }
+        ajax.onload=function(){
+        看本次ajax什么时候结束
+        }
+
+
+        面向过程  一个功能对应一个函数
+        面向对象   将整个项目中的每一部分抽象为一个对象，我们关注的是对象和对象之间的联系，
+        然后我们实现对象带的成员方法，从而构建我们整个项目
+
+        js中的 对象的属性和方法 在php中叫成员变量和成员方法
+
+        对象是什么
+
+        对象和类的关系
+
+        类是对象的抽象
+        我们在具有某种相似特征的对象的基础上，抽象为一个用来描述或者用来创建这些对象的类
+        eg:我们将所有人的特称抽象为人类的这个概念
+
+        对象是类的实例化
+        有了包含一些特称的抽象出来的类以后，那么我们可以通过这个类，去创建对象
+
+        所以我们说是对象的实例化
+
+
+        php  js java都是面向对象的一种语言 都是弱类型的语言
+        c是面向过程的语言 没有类的概念
+
+        面向对象语言的特征  封装 继承 多态
+        封装  我们将对象的成员变量 或者是成员方法通过一些关键字 比如public private protected 等去封装在类的内部 只留和外界的接口  这就是封装
+
+        封装一般满足
+        强内聚 倾向于将更多的方法或者是变量封装在类的内部
+
+        低耦合  我们倾向于将更少的方法暴露的外部
+        继承 一个类继承另外一个类，从而获取这个类的成员变量和成员方法，通过 extends去继承
+        子类 父类
+
+        多态 不同的对象调用同一个方法 或者是相同的操作，结果不同，就是多态
+
+        class Person{  构建一个类
+        const AA='123';  类常量 不属于对象 不可以用修饰词修饰
+        static $sta='uek';  静态常量 静态变量  属于类的 所以要用访问类的方式访问 但是要加$ 可以用修饰词修饰 修饰词不写默认都是public
+
+        public $name=123;  类的成员变量(   当一个成员变量或者是成员方法被public修饰的时候 在任何位置都可以被访问)
+        private $sge=12;  被private 私有的 或者是protected受保护 修饰的时候 只能在类的内部使用
+        protected $num='gjij';
+        function __construct()  构造函数  作用 是提供对象的初始化  构造函数不用人为调用
+        {
+        为了提供对象的初始化 并且在对象的时候 构造函数会自动被调用
+        }
+        在php中构建类和js中构建类的方式是一样的
+        static function sta(){  可以创建静态方法  访问的方式也是类的方式访问  Person::sta();
+        echo '123';
+        }
+        function fun(){
+        echo "fun";
+        $this->name;  在方法里面调用外面的对象  $this 指向每一个实例化的对象（$obj）
+        }
+        function aa(){
+        echo 'my name is '.$this->age;
+        }
+        }
+        $obj=new Person();  实例化一个person
+        $obj->fun($obj);  调用对象成员的方法
+        $obj->name;  调用成员变量 这里没有$
+        var_dump(Person::AA) 类常量的访问方式
+
+        继承
+        class Person{   一个类可以被多个类所继成  但是一个类不能继承多个类
+
+        }
+        class Man extends Person{  继承的时候不能继承私有的
+        function __construct()      //如果子类里面有和父类相同名字方法 就会覆盖 包括 __construct
+        {
+        parent::construct(); //如果想用父类的方法 需要这样去调用
+        }
+        function show(){
+        echo $this->name;  //调用这个函数 就能输出
+        echo $this->num;    //调用这个函数 就能输出
+        echo Man::$sta;  //调用静态的 也可以访问自身其他的属性和方法
+        echo self::$sta; //调用静态的 也可以访问自身其他的属性和方法
+        echo Person::$sta; //调用静态的 也可以访问Person其他的属性和方法
+        echo parent::$sta;//调用静态的 也可以访问父类其他的属性和方法
+        }
+        static function (){     //静态方法只能被静态方法放覆盖
+        echo $this->name;  //静态方法里面只能用静态属性 这里不能调用$this 因为$this 指向的是对象 2️而静态方法属于类 不能调用对象的方法
+        }
+        }
+        $xm=new Man();
+        $xm->show();
+        vat_dump(Man::AA);
+        vat_dump(Man::$sta);
+        Person::$sta='sddsdsd';  //这样就更改的Person的$sta值
+        vat_dump(Man::$sta);  //1  1 2 结果一样
+        vat_dump(Person::$sta); //2
+
+        public 在任何位置都可使用
+        private 私有的  只能在类的内部去使用 不能被继承
+        protected 受保护的 只能在类的内部去访问
+        静态属性和方法也能被继承，同样受关键词约束
+
+        如果子类里面有和父类相同名字方法 就会覆盖 包括 __construct
+
+        静态方法不能被重写
+
+        在组合图品
+
+        git add *
+        git commit -m 'ff'
+        git push
+        git config http.postBuffer 524288000
+
+        rollback  回滚事件  事件中断 之前所有的操作全取消
+
+        视图 方便查询 实现权限控制 不能修改
+
+
+
+        首页 一级栏目  产品 公司新闻  关于我们  公司文化    3 层
+
+        产品列表   UI  WUIF
+
+        详情页
+
+
+        首页 一级栏目  产品    4 层
+
+        二级栏目页     衣服
+        化妆品
+
+        衣服列表页     上衣
+        裤子
+
+        衣服详情页
+
+
+
+
+        </pre>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

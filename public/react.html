@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <pre>history.pushState({},'','')   用这个方法可以改变地址栏 不发生请求 来达到去掉#
+window.onpopstate=(e)=>{}   e是上面传的对象
+
+函数身上永远有 call aplay bind 方法
+bind 可以永远改this的指向  f=()=>console.bind(1)  把this永远绑定在1
+
+hestory.pushState | hash  更改浏览器地址 但不会发起请求
+window.onpopstate  浏览器点击后退前进按钮触发
+history.state = 调用pushState函数时的第一个参数
+
+用 hash 或者 history.pushState 可以解决单页面应用中url 改变不向服务器发送请求
+
+在React中 `<span>123</span>`  标签里面的123相当于 这个标签的外部数据props的children的值
+
+react 搭建环境配置包
+1 npm i create-react-app -g  安装包
+2 create-react-app +要创建文件夹的名字
+3 进入文件夹运行 npm run eject  显示所有配置  这样就能自己进行配置
+4 “scripts”:“node scripts/build.js” -> config/webpack.config.prod.js -> config/path
+5 path.js 的 appBuild 修改为 path.resolve(__dirname,'../../想要编译到的文件夹名/public/admin')
+6 webpack.config.prod.js 'static/css/..' 'css/....' static 去掉 共四处
+7 scripts/build.js 49行   fe.empryDirSync 注释掉
+8 服务器上的回文件的代码换成 res.sendFile(path.resolve('./public/ad/index.html'))
+9 package.json  "homepage": "http://localhost:18080/admin",'
+10 npm run build
+12 在package.json加代理 "proxy":"http://localhost:18080",
+11 npm i react-router-dom --save  路由包
+（router 只用一次 几个页面就用几个route）
+
+
+
+ JSON.stringify(array);  将数组转化成json对象
+ JSON.parse(str)  将数组形式的字符串转化成相同形式的数组
+
+ data.affectedRows  影响行数
+ 在table组件加事件：
+ `1 <span onClick={this.del.bind(this,text)}
+          2 <span onClick={()=>this.del(v.id)}`
+
+ 删除方式：
+ 1 del(text,e) {
+           e.target.parentNode.parentNode.parentNode.remove();
+           fetch('/api/admin/goods/del?id='+text).then(r=>r.json()).then(d=>{
+               if(d === 'ok'){
+               }
+           })
+       }
+ 2 del(id){
+
+ }
+
+
+ 获取input的值
+ input 的onChange={(e)=>console.log(e.target.value)}
+
+'Content-Type': 'application/json'
+body.JSON.stringfy(this.state)
+
+.gitkeep  在git文件夹下面建这个文件  git push 就不会忽略空文件夹
+
+content-Type   text/html   res.sendFile
+               text/plain  纯文本 会把标签也显示出来
+               image/img
+               applocation
+头信息
+
+res.writeHead(200,{'content-Type':'text/html'})
+cookie 由服务器设置‘Set-Cookie’ 让浏览器存储cookie
+之后的同域名请求都会带上这个cookie的值
+所以要用到 cookie隔离技术 eg:将图片的地址放到别的域名下
+在PHP 中取cookie $_cookie
+
+在node.js 中取cookie
+npm i cookie-parser -s
+
+
+
+native 自动化环境
+1 npm install -g create-react-native-app
+2 create-react-native-app AwesomeProject
+3 cd AwesomeProject
+4 npm start
+expo  在国内市场找这个安装包
+
+
+1 检查有没有 node -v
+2 Python2
+3 检查上面的Python2  choco -v
+4 choco  install python2    用 python -v 检查
+5 choco  install jdk8(java官网也能安装)
+6 npm install -g react-native-cli
+7 装一个编辑器 Install Android Studio
+8 Install the Android SDK   用编辑器装的 装的时候要注意路径（参考图）
+9 react-native init AwesomeProject
+10  用新的编辑器打开 AwesomeProject文件夹  （连上真机 图标有个设备按钮）
+11 装 模拟器（参考图） 注意：HAXM错误  根据指示修改BIOS设置   虚拟机安装成功后要启动
+12 cd AwesomeProject
+   react-native run-android   把代码发到手机或者虚拟设备（最后一步）
+</pre>
+</li>
+    </ul>
+</div>
+</body>
+</html>
