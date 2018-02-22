@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: 500px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <h4>函数名带括号与不带括号的区别</h4>
+            <pre>`function callback() {
+        console.log('Done');
+}
+
+console.log('before setTimeout()');
+setTimeout(callback, 1000); // 1秒钟后调用callback函数
+console.log('after setTimeout()');`</pre>
+            <pre> </pre>
+            <p>*  上面的结果是 1秒钟后调用callback函数 即为'Done'</p>
+            <pre> </pre>
+            <p>*  如果给callback  加上括号 即为callback()，结果是立即显示结果，定时不起作用</p>
+            <pre> </pre>
+            <p>*  带括号表示立即运行，不受时间函数或者说异步函数控制</p>
+            <pre> </pre>
+            <pre>  不带括号表示引用，var a = fun 表示把函数名fun这个指针拷贝一份给变量a，
+但是这不是指函数本身被复制了一份。就好比，地图上上海市（对应函数对象）只
+有一个，但指向上海市的路标（对应指针）有很多，而且你还可以继续添加（复制）
+无数个指向上海市的路标，但上海市本身不会被复制。</pre>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+
+</script>

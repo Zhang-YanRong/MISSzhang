@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/server/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+        line-height: 30px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <h4>什么是内存泄漏</h4>
+            <pre>1.当一个对象已经不需要再使用本该被回收时，另外一个正在使用的对象持有它的引用从而导致它不能被回
+  收，这导致本该被回收的对象不能被回收而停留在堆内存中，这就产生了内存泄漏。
+2.内存泄露是指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。浏览器中也是采用自动
+  垃圾回收方法管理内存，但由于浏览器垃圾回收方法有bug，会产生内存泄露。
+3.当页面中元素被移除或替换时，若元素绑定的事件仍没被移除，在IE中不会作出恰当处理，此时要先手工
+  移事件，不然会存在内存泄露。</pre>
+            <img src="../img/ram.png" style="width: auto; height: auto;display: block;"  alt="">
+        </li>
+        <li>
+            <h4>理解</h4>
+            <pre>onclick=null 能够清除点击事件，但是会造成这个按钮不能再点击，因为点击事件已被删除，所以只适用
+  单次的点击</pre>
+        </li>
+    </ul>
+
+
+</div>
+
+</body>
+</html>
+<script>
+</script>
