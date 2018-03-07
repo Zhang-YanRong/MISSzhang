@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<!--<script>-->
+<!--var checkPossibility = function (nums) {-->
+<!--var bb = Math.max(parseInt(nums.join(",")));-->
+<!--var aa = nums.length-->
+<!--var cc = [];-->
+<!--for (let i = 0; i < aa; i++) {-->
+<!--let cc = nums;-->
+<!--if (cc[i] <= cc[i + 1]) {-->
+<!--console.log(cc[i])-->
+<!--for (let j = 0; j <= bb; j++) {-->
+<!--cc[i] = j;-->
+<!--for (let m = 0; m < aa; m++) {-->
+<!--if(( m + 1 ) < aa){-->
+<!--if (cc[m] <= cc[m + 1]) {-->
+<!--console.log(false,cc[m])-->
+<!--console.log('no')-->
+<!--}-->
+<!--}-->
+<!--}-->
+<!--}-->
+<!--return-->
+<!--}-->
+<!--}-->
+<!--};-->
+
+<!--var nums = [ 4, 2, 3]-->
+<!--checkPossibility(nums)-->
+<!--</script>-->
+
+<script>
+    //定义主函数，回调函数作为参数
+    function A(callback) {
+        callback();
+        for (let i = 0; i < 300; i++) {
+            console.log('我是主函数',i);
+
+            if(i==299){
+                console.log('我是回调函数')
+
+            }
+        }
+    }
+
+    //定义回调函数
+    function B() {
+        setTimeout("", 3000);//模仿耗时操作
+    }
+
+    //调用主函数，将函数B传进去
+    A(B);
+</script>

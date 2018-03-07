@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 8px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <h2>刷题锦集</h2>
+    <ul>
+        <li>
+            <p>getElementById() 方法可返回对拥有指定 ID 的第一个对象的引用。W3C的官方解释|即getElementById()选择结果是一个对象</p>
+        </li>
+        <li>
+            <pre>var myObject = {
+    foo: "bar",
+    func: function() {
+        var self = this;
+        console.log(this.foo);
+        console.log(self.foo);
+        (function() {
+            console.log(this.foo);
+            console.log(self.foo);
+        }());
+    }
+};
+myObject.func();</pre>
+            <p>第一个this.foo输出bar是因为this的指向是myObject</p>
+            <p>第二个self.foo输出是bar是因为self是this的副本，也指向myObject对象</p>
+            <p>第三个this.foo输出undefind是因为这个自运行函数后面跟的（）表示立即运行，这里的this指向window</p>
+            <p>第四个self.foo输出bar是因为这个匿名函数所处的上下文没有self,所以通过作用域链向上查找，从包含她的父函数中找到了
+                指向myObject对象
+            </p>
+        </li>
+        <li>
+            <p>面向对象开发中，引用传递意味着传递的并不是实际的对象，而是对象的引用，因此，外部对引用对象所做的改变[会]反映到所引用的对象上
+                也就是说引用对象传递参数的时候，改变了所引用对象的值那么就一定会改变这个值
+            </p>
+        </li>
+    </ul>
+
+</body>
+</html>
