@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 10px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <h4>wepy开始</h4>
+        <li><p>npm install wepy-cli -g  全局安装</p></li>
+        <li><p>使用 wepy init standard myproject 初始化项目，使用 wepy list 查看项目模板</p></li>
+        <li><p>使用 wepy init standard myproject 初始化项目，使用 wepy list 查看项目模板</p></li>
+        <li><p>cd myproject 切换到项目目录</p></li>
+        <li><p>npm  install 初始配置文件</p></li>
+        <li><p>wepy build --watch  开始编译（生成一个dist文件夹编译成小程序的文件格式）</p></li>
+        <li>
+            <h5>注意：</h5>
+            <p>在小程序编辑器最右上角有个详情要把里面的所有选项全去掉</p>
+            <p>webstorm 需要调高亮状态 （1.在设置里面找到 Plugins -> 搜索vue.js;2:在编辑器下面的文件类型（File Types）中的上面找到（Vue.js Template），再在下面添加*.wpy）</p>
+        </li>
+        <li>
+            <p>原 bindtap="click" 替换为 @tap="click"</p>
+            <p> 原bindtap="click" data-index={{index}}替换为@tap="click({{index}})"。</p>
+            <p>自定义组件命名应避开微信原生组件名称以及功能标签</p>
+        </li>
+        <li>
+            <h5>组件的用法：</h5>
+            <p>1.在组件中，引入wepy “import wepy from 'wepy'”;</p>
+            <p>2.在组件中，export default class XXXX extends wepy.page {}</p>
+            <p>3.在app.wepy中，在 config 下面的 pages 下以键值对的形式声明组件</p>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
