@@ -33,6 +33,7 @@
     }
     pre{
         font-size: 20px;
+        line-height: 30px;
     }
 </style>
 <body>
@@ -67,6 +68,19 @@ console.log('after setTimeout()');`</pre>
             <p>f();</p>
             <p>可以确定(不考虑bind，以及严格模式时情况下)，f里面的this就是指全局对象window。</p>
             <p>没有被调用的都指向window,包括自运行函数</p>
+        </li>
+        <li>
+            <h4>setTimeOut</h4>
+            <pre>$("#xxcyc-main").fadeToggle("slow");
+setTimeout(function () { $('#xxcyc-main').fadeOut('slow');  },1500 );
+setTimeout("alert(1)",200)  --> 写法正确
+setTimeout("a_fun",200)  --> 写法正确
+setTimeout("a_fun()",200)  --> 写法错误
+注意：因为setTimeout要求的第一个参数是函数...比如setTimeout(a_fun,1000)这样是可以的,
+a_fun是一个函数.但是setTimeout(a_fun(),1000);这样就不行了.因为这里a_fun()其实是函数
+的返回值了.
+【所以用setTimeOut方法的时候，要把整个方法放进去，这个时候不用加引号】
+            </pre>
         </li>
     </ul>
 </div>
