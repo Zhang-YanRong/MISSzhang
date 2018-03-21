@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta name="format-detection" content="telephone=no">
     <title>Title</title>
     <script src="../jquery-3.2.1.min.js"></script>
     <script src="../../../newssss/servers/index.js"></script>
@@ -184,6 +186,43 @@ model.init = async(action, param) => {
 
 module.exports = model;
 
+</pre>
+            <p> &nbsp;</p>
+            <p>封装ajax</p>
+            <pre>import wepy from 'wepy';
+import app from '@/utils/app';
+let ajax = {};
+let api = 'https://dev.wezchina.com/api/';
+let header = {'Content-Type': 'application/json'};
+ajax.method = async(method, url, param) => {
+  try{
+    let apiUrl = api+url;
+
+    //如果链接需要拼接url
+    if(param && param.apiUrlSuffix){
+      apiUrl = apiUrl + '/' + param.apiUrlSuffix;
+    }
+
+    //根据用户信息加上token头
+    const userInfo = wepy.getStorageSync('userInfo').user_info;
+    if(userInfo && !app.empty(userInfo)){
+      header['Token'] = userInfo.token
+    }
+
+    let res = await wepy.request({
+      url : apiUrl,
+      method : method,
+      data : param && !param.apiUrlSuffix ? param : {},
+      header : header
+    });
+
+    return res
+
+  }catch(e){
+    console.log(e)
+  }
+};
+export default ajax;
 </pre>
         </li>
     </ul>
