@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta name="format-detection" content="telephone=no">
+>>>>>>> 9b69b24ab813b5c7fbb2ef3d69d8592dd0281645
     <title>Title</title>
     <script src="../jquery-3.2.1.min.js"></script>
     <script src="../../../newssss/servers/index.js"></script>
@@ -46,10 +51,53 @@
         <li><p>cd myproject 切换到项目目录</p></li>
         <li><p>npm  install 初始配置文件</p></li>
         <li><p>wepy build --watch  开始编译（生成一个dist文件夹编译成小程序的文件格式）</p></li>
+<<<<<<< HEAD
         <li>
             <h5>注意：</h5>
             <p>在小程序编辑器最右上角有个详情要把里面的所有选项全去掉</p>
             <p>webstorm 需要调高亮状态 （1.在设置里面找到 Plugins -> 搜索vue.js;2:在编辑器下面的文件类型（File Types）中的上面找到（Vue.js Template），再在下面添加*.wpy）</p>
+=======
+        <>
+            <h5>注意：</h5>
+            <p>在小程序编辑器最右上角有个详情要把里面的所有选项全去掉</p>
+            <p>webstorm 需要调高亮状态 （1.在设置里面找到 Plugins -> 搜索vue.js;2:在编辑器下面的文件类型（File Types）中的上面找到（Vue.js Template），再在下面添加*.wpy）</p>
+            <p>wepy中，如果不是页面里面用@tap绑定的方法，这个方法就得与methods同级，调用的时候 this.fun</p>
+            <pre>export default class MyComponent extends wepy.component {
+    customData = {}  // 自定义数据
+
+    customFunction ()　{}  //自定义方法
+
+    onLoad () {}  // 在Page和Component共用的生命周期函数
+
+    onShow () {}  // 只在Page中存在的页面生命周期函数
+
+    config = {};  // 只在Page实例中存在的配置数据，对应于原生的page.json文件
+
+    data = {};  // 页面所需数据均需在这里声明，可用于模板数据绑定
+
+    components = {};  // 声明页面中所引用的组件，或声明组件中所引用的子组件
+
+    mixins = [];  // 声明页面所引用的Mixin实例
+
+    computed = {};  // 声明计算属性（详见后文介绍）
+
+    watch = {};  // 声明数据watcher（详见后文介绍）
+
+    methods = {};  // 声明页面wxml中标签的事件处理函数。注意，此处只用于声明页面wxml中标签的bind、catch事件，自定义方法需以自定义方法的方式声明
+
+    events = {};  // 声明组件之间的事件处理函数
+}</pre>
+
+
+        </li>
+        <li>
+            <h4>在config = {}中</h4>
+            <p> navigationBarTitleText: '秦商新闻'  导航title</p>
+            <p>wx.setNavigationBarTitle({  title: this.tit})  在script中更改导航title</p>
+            <p>'enablePullDownRefresh': true  开启下拉刷新（哪个页面需要就在那个页面加，全局需要在app.wpy window下面写）</p>
+            <p>"backgroundTextStyle": "dark"  开启刷新点点</p>
+            <p>"onReachBottomDistance": 80    据底部多高开始调用onReachBottom()</p>
+>>>>>>> 9b69b24ab813b5c7fbb2ef3d69d8592dd0281645
         </li>
         <li>
             <p>原 bindtap="click" 替换为 @tap="click"</p>
@@ -63,6 +111,7 @@
             <p>3.在app.wepy中，在 config 下面的 pages 下以键值对的形式声明组件</p>
         </li>
         <li>
+<<<<<<< HEAD
             <h4>小程序转义html文件</h4>
             <p>1.在项目中放入 htmlParser.wepy 文件 <a href="./htmlParser.txt">htmlParser.wepy</a></p>
             <p>2.在需要转义的页面引入上面的文件 import htmlParser from '@/components/htmlParser'</p>
@@ -72,6 +121,131 @@
             <pre>5.在script中调用需要转义的数据
 this.$apply(); //要在这个数据变化完成后调用
 this.$invoke('htmlParser', 'htmlParserNotice'); //调用转义方法</pre>
+=======
+            <h4>下拉刷新</h4>
+            <p>1.'enablePullDownRefresh': true  开启下拉刷新（哪个页面需要就在那个页面config = {}加，全局需要在app.wpy window下面写）</p>
+            <p>2.写一个与methods同级的onPullDownRefresh方法
+                <pre>如：onPullDownRefresh(){
+      wx.showNavigationBarLoading()  //在导航条上显示加载状态
+      this.gtedatas() // 一个与methods同级的请求数据的方法
+    }</pre>
+            </p>
+        </li>
+        <li>
+            <h4>写法：</h4>
+            <p>1.三元表达式绑定类名 如下：</p>
+            <p>《view class="{{ active == item.domain ? 'active type_name' : 'type_name'}}"》《/view》</p>
+            <p>2.循环：</p>
+            <p>《view class="" wx:for="{{item}}" wx:for-item="col" wx:for-index="ind" wx:key="ind"》{{col.name}}《/view》</p>
+            <p>3.a标签：</p>
+            <p>《navigator hover-class="none" class="cons_li_a" url="content?weid={{item.weid}}"》《/navigator》</p>
+            <p>hover-class="none"  去掉点击时候的颜色</p>
+            <p>url 是跳转路径，需要在app.wey的page下面设定跳转页面的相对路径</p>
+            <pre>export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/content'
+    ],
+}</pre>
+            <p>携带参数就可以用查询字符串</p>
+        </li>
+        <li><h4>特别要注意的是《view》《/view》 后面的标签中不能存在空格，像《/view  &nbsp;》这样就会报错</h4></li>
+        <li>
+            <p>在与components同级创建model文件夹</p>
+            <p>文件结构：</p>
+            <img src="../img/2018-03-20_115717.png" alt="">
+            <img src="../img/2018-03-20_115734.png" alt="">
+            <p>  .</p>
+            <p>在index.js文件中封装一个请求方法</p>
+            <pre>import wepy from 'wepy';
+import ajax from '../utils/ajax';
+//业务相关接口
+import news from '../model/news'; //新闻模块接口
+import activity from '../model/activity'; //活动模块接口
+import common from '../model/common'; //公共接口
+
+let model={};
+model.apiUrl = {
+  'common': common,
+  'news' : news,
+  'activity' : activity
+};
+model.login = async() => {
+  var login = await wepy.login();
+  var getOpenId = await model.init('common.get_session_key',{'js_code': login.code});
+  wepy.setStorageSync('userInfo' , getOpenId.data);
+  console.log('start-userinfo',getOpenId.data)
+};
+model.init = async(action, param) => {
+  let apiArr = action.split('.');
+  let apiInfo = model.apiUrl[apiArr[0]][apiArr[1]];
+  var getUserInfo = wepy.getStorageSync('userInfo');
+  if(!getUserInfo.user_info){
+    console.log('需要激活');
+    wx.redirectTo({
+      url: '/pages/login'
+    })
+  }
+  let res = await ajax.method(apiInfo.method, apiInfo.api, param);
+  if(res.data.uptoken){
+    return res.data;
+  }
+  switch (res.data.code){
+    case 200:
+      return res.data;
+    case 401:
+      //重新登录
+      model.login();
+    case -200:
+      wepy.showToast({
+        title: res.data.message,
+        icon: "none"
+      });
+      break;
+  }
+};
+
+module.exports = model;
+
+</pre>
+            <p> &nbsp;</p>
+            <p>封装ajax</p>
+            <pre>import wepy from 'wepy';
+import app from '@/utils/app';
+let ajax = {};
+let api = 'https://dev.wezchina.com/api/';
+let header = {'Content-Type': 'application/json'};
+ajax.method = async(method, url, param) => {
+  try{
+    let apiUrl = api+url;
+
+    //如果链接需要拼接url
+    if(param && param.apiUrlSuffix){
+      apiUrl = apiUrl + '/' + param.apiUrlSuffix;
+    }
+
+    //根据用户信息加上token头
+    const userInfo = wepy.getStorageSync('userInfo').user_info;
+    if(userInfo && !app.empty(userInfo)){
+      header['Token'] = userInfo.token
+    }
+
+    let res = await wepy.request({
+      url : apiUrl,
+      method : method,
+      data : param && !param.apiUrlSuffix ? param : {},
+      header : header
+    });
+
+    return res
+
+  }catch(e){
+    console.log(e)
+  }
+};
+export default ajax;
+</pre>
+>>>>>>> 9b69b24ab813b5c7fbb2ef3d69d8592dd0281645
         </li>
     </ul>
 </div>

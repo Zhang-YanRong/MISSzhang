@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta name="format-detection" content="telephone=no">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: 500px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+        line-height: 30px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <h4>async 表示函数里有异步操作，await 表示紧跟在后面的表达式需要等待结果</h4>
+            <p> async 函数的 await 命令后面，可以跟 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时等同于同步操作）</p>
+            <p>await 命令后面的 Promise 对象，运行结果可能是 rejected，所以最好把 await 命令放在 try...catch 代码块中。</p>
+        </li>
+        <li><h4>用定时模拟异步请求</h4>
+            <pre>function timeout(ms) {
+    return new Promise((resolve) => {   //这么写的目的就是想返回一个promise对象
+        setTimeout(resolve, ms); //resolve 表示 promise 的两种结果 fulfilled/rejected
+    });
+}
+async function asyncPrint(value, ms) {
+    await timeout(ms); //要把 await 写在 async 里面  如果用在普通函数，就会报错。
+    console.log(value)
+}
+asyncPrint('alert',2000)</pre></li>
+        <li><pre>async function dbFuc(db) {
+  let docs = [{}, {}, {}];
+
+  // 报错
+  docs.forEach(function (doc) {
+    await db.post(doc);
+  });
+}</pre>
+            <p>代码会报错，因为 await 用在普通函数之中了。但是，如果将 forEach 方法的参数改成 async 函数，也有问题。</p>
+        </li>
+        <li><pre>async function dbFuc(db) {
+  let docs = [{}, {}, {}];
+
+  // 可能得到错误结果
+  docs.forEach(async function (doc) {
+    await db.post(doc);
+  });
+}</pre>
+            <p>上面代码可能不会正常工作，原因是这时三个 db.post 操作将是并发执行，也就是同时执行，而不是继发执行。正确的写法是采用 for 循环。</p>
+        </li>
+        <li><pre>async function dbFuc(db) {
+  let docs = [{}, {}, {}];
+
+  for (let doc of docs) {
+    await db.post(doc);
+  }
+}</pre></li>
+        <li>
+            <h4>如果确实希望多个请求并发执行，可以使用 Promise.all 方法。</h4>
+            <pre>async function dbFuc(db) {
+  let docs = [{}, {}, {}];
+  let promises = docs.map((doc) => db.post(doc));
+
+  let results = await Promise.all(promises);
+  console.log(results);
+}
+
+// 或者使用下面的写法
+
+async function dbFuc(db) {
+  let docs = [{}, {}, {}];
+  let promises = docs.map((doc) => db.post(doc));
+
+  let results = [];
+  for (let promise of promises) {
+    results.push(await promise);
+  }
+  console.log(results);
+}
+</pre>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    function timeout(ms) {
+        return new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        });
+    }
+    async function asyncPrint(value, ms) {
+        await timeout(ms);
+        console.log(value)
+    }
+    asyncPrint('alert',2000)
+</script>
