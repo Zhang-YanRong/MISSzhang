@@ -57,7 +57,8 @@ async function asyncPrint(value, ms) {
     console.log(value)
 }
 asyncPrint('alert',2000)</pre></li>
-        <li><pre>async function dbFuc(db) {
+        <li>
+            <pre>async function dbFuc(db) {
   let docs = [{}, {}, {}];
 
   // 报错
@@ -66,6 +67,93 @@ asyncPrint('alert',2000)</pre></li>
   });
 }</pre>
             <p>代码会报错，因为 await 用在普通函数之中了。但是，如果将 forEach 方法的参数改成 async 函数，也有问题。</p>
+        </li>
+        <li>
+            <h4>基本用法</h4>
+            <p>async函数返回的是一个promise对象，可以使用then方法添加回调函数。当函数执行的时候，一旦遇到await就会先返回，</p>
+            <p>等到异步操作完成，再接着执行函数体内后面的语句。</p>
+            <p>举例如下：</p>
+            <pre>function timeout(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+async function asyncPrint(value, ms) {
+  await timeout(ms);
+  console.log(value);
+}
+
+asyncPrint('hello world', 5000);</pre>
+            <p>上面代码指定5秒后输出hello world。</p>
+            <p>&nbsp;</p>
+            <p>async函数多种使用形式</p>
+            <pre>//函数声明
+async function foo() {}
+
+//函数表达式
+const foo = async function () {}
+
+//对象的方法
+let obj = { async foo() {} }
+obj.foo().then(...)
+
+//箭头函数
+const foo = async () => {};
+
+//class方法
+class Storage {
+  constructor() {
+    this.cachePromise = caches.open('avatars');
+  }
+
+  async getAvatar(name) {
+    const cache = await this.cachePromise;
+    return cache.match(`/avatars/${name}.jpg`);
+  }
+}</pre>
+        </li>
+        <li>
+            <p>只要一个await语句后面的promise变成了reject，那么整个async函数都会中断执行。</p>
+            <pre>async function f() {
+    await Promise.reject('出错了');
+    await Promise.resolve('hello world'); // 不会执行
+}</pre>
+            <p>上面代码中，第二个await语句是不会执行的，因为第一个await语句状态变成了reject。</p>
+        </li>
+        <li>
+            <h4>await命令:</h4>
+            <p>正常情况下，await命令后边是一个promise对象。如果不是，会被转成一个一个立即resolve的promise对象。</p>
+            <pre>async function f() {
+  return await 123;
+}
+
+f().then(v => console.log(v))</pre>
+            <pre>上面结果：
+Promise {《resolved》: undefined}
+  1>__proto__:Promise
+    [[PromiseStatus]:"resolved"
+    [[PromiseValue]]:undefined
+            </pre>
+            <p>上面代码中，await命令的参数是数值123，他被转成promise对象，并立即resolve。</p>
+            <p>await命令后边的promise对象如果变成reject状态，则reject的参数会被catch方法的回调函数接收到。</p>
+            <p>---------------------------------------------------------------------------------------------------------------------------</p>
+            <p>举个例子</p>
+            <pre>async function f() {
+  await Promise.reject('出错了');
+}
+
+f()
+.then(v => console.log(v))
+.catch(e => console.log(e))</pre>
+            <pre>上面结果：
+出错了
+Promise {《resolved》: undefined}
+    1>__proto__:Promise
+        [[PromiseStatus]]:"resolved"
+        [[PromiseValue]]:undefined            </pre>
+            <p>上面代码中，await语句前面没有return，但是reject方法的参数依然传入catch方法的回调函数，这里</p>
+            <p>如果在wawait前面加上return，效果是一样的。</p>
         </li>
         <li><pre>async function dbFuc(db) {
   let docs = [{}, {}, {}];
