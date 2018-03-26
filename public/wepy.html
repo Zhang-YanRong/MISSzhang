@@ -62,6 +62,17 @@
             <p>2.在组件中，export default class XXXX extends wepy.page {}</p>
             <p>3.在app.wepy中，在 config 下面的 pages 下以键值对的形式声明组件</p>
         </li>
+        <li>
+            <h4>小程序转义html文件</h4>
+            <p>1.在项目中放入 htmlParser.wepy 文件 <a href="./htmlParser.txt">htmlParser.wepy</a></p>
+            <p>2.在需要转义的页面引入上面的文件 import htmlParser from '@/components/htmlParser'</p>
+            <pre>3.在compontents中定义组件名：components = {
+      htmlParser: htmlParser
+    };</pre>
+            <pre>5.在script中调用需要转义的数据
+this.$apply(); //要在这个数据变化完成后调用
+this.$invoke('htmlParser', 'htmlParserNotice'); //调用转义方法</pre>
+        </li>
     </ul>
 </div>
 
