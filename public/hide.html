@@ -71,7 +71,7 @@ pushHistory() {
         <li>
             <h4>监听手机软键盘的回车</h4>
             <p>方法一：(VUE)</p>
-            <p><input type="text" placeholder="请输入" @keyup="show($event)"></p>
+            <p>《input type="text" placeholder="请输入" @keyup="show($event)"》</p>
             <pre>show:function(ev){
     if(ev.keyCode == 13){
         alert('你按回车键了');
@@ -82,7 +82,7 @@ pushHistory() {
         <li>
             <h4>搜索完成后隐藏手机软键盘</h4>
             <p>var input = document.getElementById("input-id"); </p>
-            <p>input.blur(); </p>
+            <p>input.blur(); （jQuery 写法）</p>
         </li>
     </ul>
 </div>
