@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta name="format-detection" content="telephone=no">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <h4>监听手机和浏览器的返回键</h4>
+            <pre>//监听手机返回
+default_back() {
+    this.pushHistory();
+    window.addEventListener("popstate", (e)=> {
+        this.back()
+    }, false);
+},
+//给history添加#号
+pushHistory() {
+    var state = {
+        title: "title",
+        url: "#"
+    };
+    window.history.pushState(state, "title", "#");
+}</pre>
+            <p>进入页面直接调用default_back（）方法即可</p>
+            <p> pushState（）方法，接收三个参数</p>
+            <p>a state object, a title (which is currentlyignored), and (optionally) a URL</p>
+            <p> state对象保存的是被pushState页面的信息的一个拷贝，也就是说以后你要用到的信息，都可以放到这个对象中</p>
+            <p>>url是可选的，负责改变浏览器的地址栏中显示的url,如果没有指定url，你点击前进后退按钮页面还是会变化，只是浏</p>
+            <p>览器的地址栏上显示的url会一直保持不变。</p>
+            <p>replaceState（）方法，与pushState方法相同，主要用于改变当前历史记录中记录的当前页面的state对象和url信息。</p>
+            <p> onpopstate事件,每次点击浏览器的前进和后退按钮，就会触发window的Onpopstate事件。</p>
+            <p> 最后使用history.state获取当前所在页面的state对象，也就是在上面pushState中保存的</p>
+        </li>
+        <li>
+            <h4>监听手机软键盘的回车</h4>
+            <p>方法一：(VUE)</p>
+            <p><input type="text" placeholder="请输入" @keyup="show($event)"></p>
+            <pre>show:function(ev){
+    if(ev.keyCode == 13){
+        alert('你按回车键了');
+    }
+}</pre>
+            <p></p>
+        </li>
+        <li>
+            <h4>搜索完成后隐藏手机软键盘</h4>
+            <p>var input = document.getElementById("input-id"); </p>
+            <p>input.blur(); </p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
