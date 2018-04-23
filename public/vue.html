@@ -1,17 +1,3 @@
-<template>
-
-</template>
-
-<!--因为 AJAX 库和通用工具的生态已经相当丰富，Vue 核心代码没有重复 -->
-<!-- 提供这些功能以保持精简。这也可以让你自由选择自己更熟悉的工具。 -->
-<script>
-    import Vue from 'vue'
-</script>
-
-<style scoped>
-
-</style>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -267,6 +253,41 @@ computed: {
   }
 }</pre>
             <p>注意在 JavaScript 中对象和数组是引用类型，指向同一个内存空间，如果 prop 是一个对象或数组，在子组件内部改变它会影响父组件的状态。</p>
+            <h4>Prop 验证</h4>
+            <pre>Vue.component('example', {
+  props: {
+    // 基础类型检测 (`null` 指允许任何类型)
+    propA: Number,
+    // 可能是多种类型
+    propB: [String, Number],
+    // 必传且是字符串
+    propC: {
+      type: String,
+      required: true
+    },
+    // 数值且有默认值
+    propD: {
+      type: Number,
+      default: 100
+    },
+    // 数组/对象的默认值应当由一个工厂函数返回
+    propE: {
+      type: Object,
+      default: function () {
+        return { message: 'hello' }
+      }
+    },
+    // 自定义验证函数
+    propF: {
+      validator: function (value) {
+        return value > 10
+      }
+    }
+  }
+})</pre>
+            <h4>非 Prop 特性</h4>
+            <p>所谓非 prop 特性，就是指它可以直接传入组件，而不需要定义相应的 prop。</p>
+            <h4>非 Prop 特性 ??????????  【看不懂】</h4>
         </li>
         //阻止修改data里面的属性和方法
         <li>

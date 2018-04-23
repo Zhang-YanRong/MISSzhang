@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
-=======
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
     <meta name="format-detection" content="telephone=no">
->>>>>>> 9b69b24ab813b5c7fbb2ef3d69d8592dd0281645
     <title>Title</title>
     <script src="../jquery-3.2.1.min.js"></script>
     <script src="../../../newssss/servers/index.js"></script>
@@ -51,13 +48,10 @@
         <li><p>cd myproject 切换到项目目录</p></li>
         <li><p>npm  install 初始配置文件</p></li>
         <li><p>wepy build --watch  开始编译（生成一个dist文件夹编译成小程序的文件格式）</p></li>
-<<<<<<< HEAD
         <li>
             <h5>注意：</h5>
             <p>在小程序编辑器最右上角有个详情要把里面的所有选项全去掉</p>
             <p>webstorm 需要调高亮状态 （1.在设置里面找到 Plugins -> 搜索vue.js;2:在编辑器下面的文件类型（File Types）中的上面找到（Vue.js Template），再在下面添加*.wpy）</p>
-=======
-        <>
             <h5>注意：</h5>
             <p>在小程序编辑器最右上角有个详情要把里面的所有选项全去掉</p>
             <p>webstorm 需要调高亮状态 （1.在设置里面找到 Plugins -> 搜索vue.js;2:在编辑器下面的文件类型（File Types）中的上面找到（Vue.js Template），再在下面添加*.wpy）</p>
@@ -97,7 +91,6 @@
             <p>'enablePullDownRefresh': true  开启下拉刷新（哪个页面需要就在那个页面加，全局需要在app.wpy window下面写）</p>
             <p>"backgroundTextStyle": "dark"  开启刷新点点</p>
             <p>"onReachBottomDistance": 80    据底部多高开始调用onReachBottom()</p>
->>>>>>> 9b69b24ab813b5c7fbb2ef3d69d8592dd0281645
         </li>
         <li>
             <p>原 bindtap="click" 替换为 @tap="click"</p>
@@ -111,7 +104,6 @@
             <p>3.在app.wepy中，在 config 下面的 pages 下以键值对的形式声明组件</p>
         </li>
         <li>
-<<<<<<< HEAD
             <h4>小程序转义html文件</h4>
             <p>1.在项目中放入 htmlParser.wepy 文件 <a href="./htmlParser.txt">htmlParser.wepy</a></p>
             <p>2.在需要转义的页面引入上面的文件 import htmlParser from '@/components/htmlParser'</p>
@@ -121,15 +113,13 @@
             <pre>5.在script中调用需要转义的数据
 this.$apply(); //要在这个数据变化完成后调用
 this.$invoke('htmlParser', 'htmlParserNotice'); //调用转义方法</pre>
-=======
             <h4>下拉刷新</h4>
             <p>1.'enablePullDownRefresh': true  开启下拉刷新（哪个页面需要就在那个页面config = {}加，全局需要在app.wpy window下面写）</p>
-            <p>2.写一个与methods同级的onPullDownRefresh方法
+            <p>2.写一个与methods同级的onPullDownRefresh方法</p>
                 <pre>如：onPullDownRefresh(){
       wx.showNavigationBarLoading()  //在导航条上显示加载状态
       this.gtedatas() // 一个与methods同级的请求数据的方法
     }</pre>
-            </p>
         </li>
         <li>
             <h4>写法：</h4>
@@ -245,7 +235,6 @@ ajax.method = async(method, url, param) => {
 };
 export default ajax;
 </pre>
->>>>>>> 9b69b24ab813b5c7fbb2ef3d69d8592dd0281645
         </li>
     </ul>
 </div>
