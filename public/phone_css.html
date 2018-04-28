@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta name="format-detection" content="telephone=no">
+    <title>Title</title>
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../../../newssss/servers/index.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: 500px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+    }
+    pre{
+        font-size: 20px;
+        line-height: 30px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <p>文本行高一般  0.44rem/22px</p>
+            <p>字体大小一般最小12px/0.24rem</p>
+        </li>
+            <p>文本行高一般  0.52rem/27px</p>
+            <p>字体大小一般最小17px/0.34rem</p>
+        <li>
+        </li>
+        <li>
+            <h4>在head标签里加入viewport元标签</h4>
+            <p>网页宽=屏幕宽,原始缩放比0.5,一开始不会呀，后来翻了淘宝的移动页面，才发这个</p>
+            <p>《meta name="viewport" content="width=device-width, initial-scale=0.5" /》</p>
+            <p>viewport是网页默认宽度和高度，为啥0.5？这个涉及现在安卓，苹果手机的DPI问题。有空再讨论，</p>
+            <p>在这我们需要知道就是：设置为0.5后，原本500px*300px的图，在手机屏幕上只会占250px*150px</p>
+        </li>
+        <li>
+            <h4>不固定宽度</h4>
+            <p>width : xx%; 或 width : auto;</p>
+        </li>
+        <li><h4>字体相对大小em</h4>
+            <pre>//100%，即浏览器默认，好像一般是16px
+　　body {
+　　　　font: normal 100% Helvetica, Arial, sans-serif;
+　　}
+      //1.5倍,16*1.5
+　　p {
+　　　　font-size: 1.5em;
+　　}
+            </pre>
+        </li>
+        <li>
+            <pre>　　.rDiv {
+　　　　float: right;
+　　　　width: 70%;
+　　}
+　　.lDiv {
+　　　　float: left;
+　　　　width: 25%;
+　　}
+      //别刚好加起来100%,应当小于100%</pre>
+        </li>
+        <li>
+            <p>图片自适应</p>
+            <p>自动缩放</p>
+            <p>img,object { max-width: 100%;}</p>
+        </li>
+        <li>
+            <p>IE兼容</p>
+            <pre>//算了，还是加上吧
+    //老版本的IE不支持max-width，所以只好写成：
+　　img { width: 100%; }
+    //此外，windows平台缩放图片时，可能出现图像失真现象。然后就放IE的专有技能吧：
+　　img { -ms-interpolation-mode: bicubic; }
+    //或者，Ethan Marcotte的imgSizer.js。
+　　addLoadEvent(function() {
+　　　　var imgs = document.getElementById("content").getElementsByTagName("img");
+　　　　imgSizer.collate(imgs);
+　　});
+</pre>
+        </li>
+        <li><h4>"自适应网页设计"的核心，就是CSS3引入的Media Query模块。
+            它的意思就是，自动探测屏幕宽度，然后加载相应的CSS文件。</h4>
+            <p>《link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="tinyScreen.css" /》</p>
+            <p>如果屏幕宽度小于400像素（max-device-width: 400px），就加载tinyScreen.css文件</p>
+            <h4>《link rel="stylesheet" type="text/css" media="screen and (min-width: 400px) and (max-device-width: 600px)"
+href="smallScreen.css" /》</h4>
+            <p>如果屏幕宽度在400像素到600像素之间，则加载smallScreen.css文件。</p>
+            <p>除了用html标签加载CSS文件，还可以在现有CSS文件中加载。 -> @import url("tinyScreen.css") screen and (max-device-width: 400px);</p>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

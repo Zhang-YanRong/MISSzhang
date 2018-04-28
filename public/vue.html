@@ -39,6 +39,38 @@
 <body>
 <div class="box">
     <ul>
+        <li><h4>VUE-懒加载</h4>
+            <a href="./js/Vue-Lazyload.txt">Vue-Lazyload.js</a>
+            <pre><h4>cdn用法</h4>
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  attempt: 1
+});
+在下面的vue里面对所有的图片地址以 对象 的形式进行 添加错误和加载的图片 处理
+new Vue({
+  el: 'body',
+  data:{
+       cover_default:"",
+       covers:''
+  },
+  methods:{
+        //数据处理
+        req(){
+            ajax.get('',{}).then(function(res){
+                this.covers = {
+                   'src' : res.imgURl,
+                   'loading' : this.cover_default, //加载图片
+                   'error' : this.cover_default, //图片错误显示的图片
+                };
+            })
+        }
+  }
+})
+在html中：
+《img v-lazy="covers" alt=""》
+            </pre>
+            <img src="../img/lazy.png" alt="">
+        </li>
         <li><h4>vue引用值</h4>
             <pre>《div id="app"》  //app 是下面js的作用范围
     {{ message }}   //vue 引用data里面的值用 {{}}
