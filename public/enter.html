@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta name="format-detection" content="telephone=no">
+    <title>PC浏览器兼容性问题</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+        font-size: 16px;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    p{
+        color: #0c91e5;
+    }
+    span{
+        color: #00a65a;
+    }
+    pre{
+        color: #0c91e5;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <span>问题</span>
+            <h4>现象</h4>
+            <p>解决方案</p>
+        </li>
+        <li>DOCTYPE，或者称为 Document Type Declaration（文档类型声明，缩写 DTD）,这个页面在所有的浏览器中均返回一致的结果，页面上打印出了“BackCompat”。 document.compatMode 属性最初由微软在 IE 中创造出来，这是一个只读的属性，返回一个字符串，只可能存在两种返回值：
+
+            BackCompat：标准兼容模式（Standards-compliant mode）未开启；
+            CSS1Compat：标准兼容模式已开启。</li>
+        <li>
+            <h4>随便写几个标签，不加样式控制的情况下，各自的margin 和padding差异较大。</h4>
+            <p>解决方案：CSS里加 *{margin:0;padding:0;}</p>
+            <p>备注：几乎所有的CSS文件开头都会用通配符*来设置各个标签的内外补丁是0。</p>
+        </li>
+        <li>
+            <span>##块属性标签float后，又有横行的margin情况下，在IE6显示margin比设置的大（即双倍边距bug</span>
+            <h4>常见症状是IE6中后面的一块被顶到下一行</h4>
+            <p>在float的标签样式控制中加入 display:inline;将其转化为行内属性</p>
+        </li>
+        <li>
+            <span>设置较小高度标签（一般小于10px），在IE6，IE7，遨游中高度超出自己设置高度</span>
+            <h4>IE6、7和遨游里这个标签的高度不受控制，超出自己设置的高度</h4>
+            <p>给超出高度的标签设置overflow:hidden;或者设置行高line-height 小于你设置的高度</p>
+            <p>备注：这种情况一般出现在我们设置小圆角背景的标签里。出现这个问题的原因是IE8之前的浏览</p>
+            <p>器都会给标签一个最小默认的行高的高度。即使你的标签是空的，这个标签的高度还是会达到默认的行高。</p>
+        </li>
+        <li>
+            <span>行内属性标签，设置display:block后采用float布局，又有横行的margin的情况，IE6间距bug</span>
+            <h4>IE6里的间距比超过设置的间距</h4>
+            <p>在display:block;后面加入display:inline;display:table;</p>
+            <pre>备注：行内属性标签，为了设置宽高，我们需要设置display:block;(除了input标签比较特殊)。在用float
+布局并有横向的margin后，在IE6下，他就具有了块属性float后的横向margin的bug。不过因为它本身就是行内属性标签，所以我们
+再加上display:inline的话，它的高宽就不可设了。这时候我们还需要在display:inline后面加入display:table。</pre>
+        </li>
+        <li>
+            <span>图片默认有间距</span>
+            <h4>几个img标签放在一起的时候，有些浏览器会有默认的间距，加了问题一中提到的通配符也不起作用。</h4>
+            <p>使用float属性为img布局</p>
+            <pre>因为img标签是行内属性标签，所以只要不超出容器宽度，img标签都会排在一行里，但是部分浏览器的img标
+签之间会有个间距。使用float是正道。</pre>
+        </li>
+        <li>
+            <span>标签最低高度设置min-height不兼容</span>
+            <h4>因为min-height本身就是一个不兼容的CSS属性，所以设置min-height是不能很好的被各个浏览器兼容</h4>
+            <pre>如果我们要设置一个标签的最小高度200px，需要进行的设置为：{min-height:200px; height:auto !important;
+height:200px; overflow:visible;}</pre>
+            <pre>在B/S系统前端开时，有很多情况下我们又这种需求。当内容小于一个值（如300px）时。容器的高度为300px；当内容高度
+大于这个值时，容器高度被撑高，而不是出现滚动条。这时候我们就会面临这个兼容性问题。</pre>
+        </li>
+        <li>
+            <span>IE6双倍边距bug,</span>
+            <h4>例如“margin-left:10px” 在IE6中，该值就会被解析为20px</h4>
+            <p>需要在该元素中加入display:inline 或 display:block 明确其元素类型</p>
+        </li>
+        <li>
+            <span>IE6中3像素问题及解决办法</span>
+            <span>当元素使用float浮动后，元素与相邻的元素之间会产生3px的间隙。诡异的是如果右侧的容器没设<br/></span>
+            <span>置高度时3px的间隙在相邻容器的内部，当设定高度后又跑到容器的相反侧了。</span>
+            <h4>解决方案：需要使布局在同一行的元素都加上float浮动。</h4>
+        </li>
+        <li>
+            <span>IE6中奇数宽高的BUG</span>
+            <span>IE6中奇数的高宽显示大小与偶数高宽显示大小存在一定的不同。其中要问题是出在奇数高宽上<br/></span>
+            <h4>需要尽量将外部定位的div高宽写成偶数即可。</h4>
+        </li>
+        <li>
+            <span>IE6中图片链接的下方有间隙</span>
+            <span>IE6中图片的下方会存在一定的间隙，尤其在图片垂直挨着图片的时候，即可看到这样的间隙。<br/></span>
+            <h4>需要将img标签定义为display:block 或定义vertical-align对应的属性。也可以为img对应的样式写入font-size:0</h4>
+        </li>
+        <li>
+            <span>重复文字的BUG</span>
+            <span>在某些比较复杂的排版中，有时候浮动元素的最后一些字符会出现在clear清除元素的下面<br/></span>
+            <h4>
+                <pre>解决方法如下：1.确保元素都带有display:inline2.在最后一个元素上使用“margin-right:-3px3.为浮动元素的最后
+一个条目加上条件注释，<!–[if !IE]>xxx<![endif]–>4.在容器的最后元素使用一个空白的div，为这个div指定不超过容器的宽度。</pre>
+            </h4>
+        </li>
+        <li>
+            <span>IE6中 z-index失效</span>
+            <span>具体BUG为，元素的父级元素设置的z-index为1，那么其子级元素再设置z-index时会失效，其层级会继承父级元素的设置，造成某些层级调整上的BUG<br/></span>
+            <span>原因：z-index起作用有个小小前提，就是元素的position属性要 是relative，absolute或是fixed。</span>
+            <h4>
+                <pre>1.position:relative改为position:absolute；
+2.去除浮动；
+3.浮动元素添加position属性（如relative，absolute等）。
+</pre>
+            </h4>
+        </li>
+        <li>
+            <span>子元素不会继承透明效果</span>
+            <h4><pre>.opacity{
+    background-color: #000000;
+	filter: alpha(opacity=50);
+	background-color: rgba(0, 0, 0, 0.5);
+}</pre></h4>
+        </li>
+        <li><h4>##避免使用负的margin和padding</h4></li>
+        <li><h4><pre>**IE6结语：实际上中，很多BUG的解决方法都可以使用display:inline、font-size:0、float解决。因此我们在书写
+代码时要记住，一旦使用了float浮动，就为元素增加一个display:inline样式，可以有效的避免浮动造成的样式错乱问题。
+使用空DIV时，为了避免其高度影响布局美观，也可以为其加上font-size:0 这样就很容易避免一些兼容上的问题。**</pre></h4></li>
+    </ul>
+</div>
+
+</body>
+</html>
