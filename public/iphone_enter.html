@@ -48,6 +48,12 @@
 <div class="box">
     <ul>
         <li>
+            <h4>1、安卓浏览器看背景图片，有些设备会模糊。</h4>
+            <span>经过研究，是devicePixelRatio作怪，因为手机分辨率太小，如果按照分辨率来显示网页，这样字会非常小，所以苹果当初就</span>
+            <span>把iPhone 4的960*640分辨率，在网页里只显示了480*320，这样devicePixelRatio＝2。现在android比较乱，有1.5的，有2的也有3的。<br/></span>
+            <p>background:url(../images/icon/all.png)</p>
+            <p>no-repeat center center;</p>
+            <p></p>
         </li>
     </ul>
 </div>
