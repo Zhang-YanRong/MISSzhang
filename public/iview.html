@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta name="format-detection" content="telephone=no">
+    <title>iview</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <h4>Select 组件</h4>
+            <pre>《Select v-model="model" style="width:200px"》
+    《Option v-for="item in statusTypelist" :value="item.value" :key="item.value"》{{ item.label }}《/Option》
+《/Select》</pre>
+            <pre>model:'0',
+                statusTypelist:[
+    {
+        value: '0',
+        label: '全部'
+    }
+]
+            </pre>
+            <p>这里的双向绑定model，想要默认显示，model的默认值就必须跟statusTypelist里面的value值类型一样，是字符串，model也必须是字符串</p>
+        </li>
+        <li>
+            <h4>时间选择器</h4>
+            <p>《DatePicker type="daterange" @on-change="days" format="yyyy-MM-dd" placement="bottom" placeholder="Select date" 》《/DatePicker>》</p>
+            <p>注：on-change  日期发生变化时触发  返回两个值，已经格式化后的日期，比如 2016-01-01，和当前的日期类型，比如 date</p>
+            <p>所有注释里面的方法在html中写的时候都要加 ‘@’，所有的返回值都是直接在方法里面接收，不用行内传值，例子如下：</p>
+            <pre>days(res){
+    console.log(res);  // '2016-01-01';
+}
+            </pre>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta name="format-detection" content="telephone=no">
+    <title>js易错</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <h4>forEach 与 for 区别性特点</h4>
+            <p>forEach()返回值是undefined，不可以链式调用</p>
+            <p>但是for循环可以</p>
+            <p>封装获取查询字符串的值</p>
+            <pre>写法一:
+getSearch(x) {
+    var info = window.location.search;
+    var arrs = info.slice(1,info.length).split('&');
+    var y;
+    arrs.forEach((v)=>{
+        var arrAy = v.split('&');
+        var objarr = arrAy[0].split('=')
+        if(objarr[0] == x){
+            y = objarr[1];
+        }
+    });
+    return y;
+}
+写法二:
+getSearch(x) {
+    var info = window.location.search;
+    var arrs = info.slice(1,info.length).split('&');
+    for(var i=0;i <= arrs.length;i++){
+         var arrAy = arrs[i].split('&');
+         var objarr = arrAy[0].split('=')
+         return objarr[1];
+    }
+}
+            </pre>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

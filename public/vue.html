@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>VUE</title>
-    <script src="../jquery-3.2.1.min.js"></script>
-    <script src="../../../newssss/servers/index.js"></script>
 </head>
 <style>
     * {
@@ -39,6 +37,7 @@
 <body>
 <div class="box">
     <ul>
+        <li><a href="./iview.html"><h4>vue-iview UI框架小细节</h4></a></li>
         <li><h4>VUE-懒加载</h4>
             <a href="./js/Vue-Lazyload.txt">Vue-Lazyload.js</a>
             <pre><h4>cdn用法</h4>
@@ -679,6 +678,43 @@ data: {
             <p>1.《router-link to="/home"》home《/router-link》</p>
             <p>2.《router-link to="｛name:'home'｝"》home《/router-link》</p>
             <p>第二种的name对应的值是在router文件夹下面的index.js文件中配置的 /home 对应的 name 值</p>
+        </li>
+        <li>
+            <pre>1.标签
+《li v-for=" el in hotLins" 》
+    《router-link :to="{path:‘details‘,query: {id:el.tog_line_id}}"》
+        《img :src="el.image_list[0]"》
+        《h3》{{el.tourism_name}} {{el.tog_line_id}}《/h3》
+        《p》{{el.address}}《/p》
+    《/router-link》
+《/li》
+2.在组件中，需要传动态参数时，可以如上例子
+《router-link :to="{path:‘details‘,query: {id:el.tog_line_id}}"》
+
+3.query中的参数id就是要传的参数，在组件中获取的方法为：
+created: function() {
+    var id = this.$route.query.id;
+    this.getData(id);
+}，//这种获取值有个小BUG  就是页面刷新  就不能获取值了  所以不好采用这个方法传值
+4.如上述，this.$route.query.id就可以获取该参数，也可以通过，this.$root.id = id;传给父组件，父组件中通过
+// 根组件构造器
+var vm = Vue.extend({
+    router: router,
+    data: function() {
+        return {
+            id: ‘11484‘ //城会玩明细id
+        }
+    }
+})
+5.定义data中的id，然后子组件中用props传递参数
+props: {
+    id: {
+        type: String,
+        required: true
+    }
+},
+6.router-view中，传递该参数：
+《router-view :id="id" :order-info="orderInfo"》《/router-view》</pre>
         </li>
     </ul>
 </div>
