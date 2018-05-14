@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VUE</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+    img{
+        width: auto;
+        max-width: 1140px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <p>父组件中：</p>
+            <p>1.引入子组件并在components中声明子组件</p>
+            <img src="../img/yinruzizujian.png" alt="">
+            <p>2.在data中创建数组来控制显示组件</p>
+            <img src="../img/shuzukongzhi.png" alt="">
+            <p>3.在每次获取列表时候都要重新生成show数组</p>
+            <img src="../img/zuheshuzu.png" alt="">
+            <p>4.在html中动态调用子组件</p>
+            <p>《component style="margin-left: 34px;" :callbackdata="dataList[index]" v-bind:is="show[index]">《/component></p>
+            <p>这里的 :callbackdata="dataList[index]" 给调用的子组件传递数据</p>
+            <p>v-bind:is="show[index]"  根据index值选择show数组里面相应的组件名来显示</p>
+            <p>5.在bus.js中注册监听事件getData</p>
+            <img src="../img/fuzujian.png" alt="">
+            <p>注：要引入bus.js</p>
+        </li>
+        <li>
+            <p>子组件中：</p>
+            <img src="../img/zizujian.png" alt="">
+            <p>注：要引入bus.js</p>
+        </li>
+        <li>
+            <p>bus.js中：</p>
+            <p>bus文件的位置</p>
+            <img src="../img/bus.png" alt="">
+            <p>bus文件的写法</p>
+            <img src="../img/bus.js.png" alt="">
+            <p>在父组件中给bus.js中注册监听事件，不需要在bus.js文件中写出来</p>
+        </li>
+    </ul>
+</div>
+
+    
+
+</body>
+</html>

@@ -267,6 +267,135 @@ data(){
   }
 }
 这样就不会相互影响了</pre>
+            <h4>动态子组件（动态组件）</h4>
+            <p>在父组件中调用子组件：《component :is="current" :nxet='index' :callbackdata="callbackdata"》《/component》</p>
+            <p>:is  动态绑定子组件的名字</p>
+            <p><h5>:callbackdata  给所调用的子组件传值  (:nxet  也是动态传值，也就是说 可以同时传多个值)</h5></p>
+            <p>在父组件中：</p>
+            <pre>
+                《template v-for="(item,index) in list">
+                    《component v-bind:is="show[index]" :nxet='index' :callbackdata="datalist[index]"》《/component》
+                    //组件在调用的时候  可以根据index 在 show 数组中选取该显示的类型
+                《/template>
+                《script>
+                    export default {
+                        data(){
+                            return{
+                                arr:['first','second','third','fourth','five','six','seven','eighth','ninth'],
+                                show:[],
+                            }
+                        },
+                        methods:{
+                            getData(){
+                                ajax({
+                                    => dataList;
+                                    this.dataList.forEach(v =>{
+                                        this.show.push(this.arr[v.order_status-1]);//给show数组中添加要显示的组件类型
+                                    })
+                                })
+
+                            }
+                        }
+                    }
+                《/script>
+            </pre>
+            <p>在子组件中：</p>
+            <pre>
+《template>
+    《div>
+        <h5>《Logi v-if="callbackdata.send.length > 0" :listnub="logisticsData">《/Logi>   //子组件中用的另一个组件</h5>
+        《Button style="margin: 5px auto 0!important;display: block;width: 80px;height: 32px;" type="ghost" @click="Confirmreceipt">确认收货</Button>
+    《/div>
+《/template>
+
+《script>
+    import Logi from '@path/components/orderListBtn/Logistics.vue';//引入另一个子组件
+
+    export default {
+        components:{  //在组件模板中声明引入的子组件
+            Logi
+        },
+        name: 'third',
+        data(){
+            return{
+                logisticsData:{
+                    weid:''
+                },
+            };
+        },
+        props: { //获取父组件的传值
+            callbackdata: {
+                type: Object,//如果传的值是对象的时候 ，default 值应写成方法 并return
+                default: function () {
+                    return {};
+                }
+            },//接受父组件的传值   可以同时传多个
+            nxet:{
+                type:Number,
+                default:0
+            }
+        },
+        methods:{
+            Confirmreceipt(){},
+        },
+        mounted(){
+            this.logisticsData.weid = this.callbackdata.weid;
+        }
+    };
+《/script>
+
+            </pre>
+            <h4>动态组件的事件传递</h4>
+            <pre>
+实例化一个空的vue实例bus
+这里实例化一个bus 空vue实例，主要为了统一管理子组件和父组件相互通信，通过bus 作为媒介，
+首先新建一个bus.js 文件，在里面新建一个对象，父组件为table.vue， 子组件为tableColumn.vue
+
+  // bus.js
+ import Vue from "vue";
+ export var bus = new Vue({
+     data:{
+       scrollY:false
+     },
+     methods:{
+        updateScrollY(flag){
+          this.scrollY = flag;
+        }
+     }
+   })
+然后分别引入：
+
+ // table.vue
+ 《script>
+  import {bus}  from "./bus"
+  export default {
+      created(){
+          bus.$on('getData',(argsData)=>{
+              // 这里获取子组件传来的参数
+              console.log(argsData);
+          })
+
+      }
+  }
+
+  《/script>
+
+  // tableColumn.vue
+  《script>
+    import {bus} from "./bus"
+    export default{
+        methods(){
+            handleClick(){
+                bus.$emit('getData',{data:"from tableColumn!"})
+            }
+        }
+    }
+  《/script>
+上面的父子组件中，父组件中利用bus注册监听事件getData,子组件中一旦有状态变化，就触发bus上对应的事件。
+
+这种利用空实例的方式，相当于创建了一个事件中心，所以这种通信同样适用于非父子组件间的通信，
+            </pre>
+            <p><a href="./dongtaizujian.html">动态组件事件传递示例</a></p>
             <h4>prop 特性</h4>
             <p>prop是单向数据流，为了防止子组件无意间修改了父组件的状态。</p>
             <p>另外，每次父组件更新时，子组件的所有 prop 都会更新为最新值。这意味着你不应该在子组件内部改变 prop。如果你这么做了，Vue 会在控制台给出警告</p>
