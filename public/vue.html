@@ -873,6 +873,22 @@ props: {
 6.router-view中，传递该参数：
 《router-view :id="id" :order-info="orderInfo"》《/router-view》</pre>
         </li>
+        <li>
+            <h4>vue-cli中 如何引入全局的js</h4>
+            <p>在main.js中</p>
+            <p>import test from './assets/js/test.js'</p>
+            <p>Vue.prototype.test = test   // 将这个js挂载到vue的prototype属性上</p>
+            <p>在组件中</p>
+            <pre>methods:{
+    test:function(){
+      this.test_log()
+    }
+}</pre>
+            <p>test.js</p>
+            <pre>export default function test_log() {
+    console.log(123)
+}</pre>
+        </li>
     </ul>
 </div>
 
