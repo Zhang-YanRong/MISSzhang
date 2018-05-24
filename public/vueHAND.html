@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VUE</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+
+    pre {
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <p>npm install webpack -g 全局安装webpack</p>
+        </li>
+        <li><p>npm install 创建package-lock.json文件</p></li>
+        <li><p>npm install webpack-dev-server --save-dev 将webpack增加到package.json文件中</p></li>
+        <li><p> npm i vue -S</p></li>
+        <li><p> npm i vue-loader -D</p></li>
+        <li><p> npm i css-loader -D</p></li>
+        <li><p> npm i vue-template-compiler -D</p></li>
+        <li>
+            <p>在app.vue中</p>
+            <pre>《template>
+    《div id="app">《/div>
+《/template>
+《script>
+    export default {
+        data () {
+
+        }
+    }
+《/script></pre>
+        </li>
+        <li><p>在项目根目录下新建一个webpack.config.js文件</p></li>
+        <li>
+            <p>在src目录下新建一个index.js作为入口文件</p>
+            <pre>import Vue from 'vue'
+import App from './src/app.vue'
+
+const root = document.createElement('div')
+document.body.appendChild(root)
+
+new Vue({
+    render: (h) => h(App)
+}).$mount(root)</pre>
+            <pre>解析：当Vue实例没有el属性时，则该实例尚没有挂载到某个dom中；
+假如需要延迟挂载，可以在之后手动调用vm.$mount()方法来挂载。例如：
+
+new Vue({
+//el: '#app',
+router,
+render: h => h(App)
+// render: x => x(App)
+// 这里的render: x => x(App)是es6的写法
+// 转换过来就是：  暂且可理解为是渲染App组件
+// render:(function(x){
+//  return x(App);
+// });
+}).$mount("#app");</pre>
+            <h4>注：在npm install 时候 提示权限不够 可能是缓存问题 用npm cache clean --force 删除在C:\Users\{账户}\下的.npmrc文件..</h4>
+        </li>
+        <li><p>webpack.config.js</p>
+            <pre>const path = require('path')
+
+module.exports = {
+    entry:  path.join(__dirname, 'src/index.js'),
+    output: {
+        filename: 'bundle.js',
+        path: path.join(__dirname, 'dist')
+    }
+}</pre>
+        </li>
+        <li><p>在package.json 文件</p>
+            <pre>"scripts": {
+     "build": "webpack --config webpack.config.js"
+}</pre>
+            <pre>注："webpack --config webpack.config.js" -> 为什么要在这里面调用webpack而不是在terminal里面直接运行呢？
+只有在这里调用webpack，它才会优先调用我们项目里面安装的webpack版本，如果我们在命令行里面输入webpack，它会调动全局的webpack，这个时候全局的webpack可能会跟我们项目中的webpack版本不一致，所以我们还是采取这种方式比较稳妥。</pre>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
