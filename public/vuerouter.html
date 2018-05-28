@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VUE-Router</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <h4>路由钩子的使用</h4>
+            <pre>// router/routes.js
+// 在router里设置mate的title属性
+const routes = [
+  {
+    // 登陆之后的欢迎页，现在是客户管理
+    path: '/welcome',
+    name: 'welcome',
+    component: customerManagement,
+    meta: {
+      title: '卖家云--首页'
+    }
+  }
+]
+// router/index.js
+// 路由钩子，做一些跳转的配置
+router.beforeEach((to, from, next) => {
+  // 根据设置，修改页面title
+  window.document.title = to.meta.title
+  // LoadingBar
+  // 除了登录页，其他都会有Loadingbar
+  if (to.name !== 'Login') {
+    iView.LoadingBar.start()
+  }
+  next()
+})
+
+router.afterEach(route => {
+  // 跳转后滚动到顶端，目前没必要
+  // window.scrollTo(0, 0)
+  // LoadingBar
+  // 到登录页没有loadingbar，到404是红色loadingbar
+  if (route.name === 'Login') {
+    return
+  }
+  if (route.name === '404') {
+    iView.LoadingBar.error()
+    return
+  }
+  iView.LoadingBar.finish()
+})</pre>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

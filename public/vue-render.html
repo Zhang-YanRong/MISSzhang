@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VUE-Render</title>
+    <link rel="stylesheet" type="text/css" href="syntaxhighlighter_3.0.83/styles/shCore.css">
+    <link rel="stylesheet" type="text/css" href="syntaxhighlighter_3.0.83/styles/shThemeDefault.css">
+    <script type="text/javascript" src="syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="syntaxhighlighter_3.0.83/scripts/shBrushXml.js"></script>
+    <script type="text/javascript"> SyntaxHighlighter.all();  </script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 1200px;
+        height: auto;
+        padding: 50px;
+        margin: 50px auto 0;
+    }
+
+    P {
+        line-height: 30px;
+    }
+
+    .box ul {
+        box-sizing: border-box;
+        padding: 0 30px;
+    }
+
+    .box ul li {
+        box-sizing: border-box;
+        padding: 30px 0;
+    }
+    pre{
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <h4>createElement参数</h4>
+            <pre>createElement(
+  'div',
+  {
+    attrs: {
+      id: 'container'
+    },
+    on: {
+      click: this.clickHandler
+    },
+  },
+  [
+    createElement('p', 'Hello')
+  ]
+)
+            </pre>
+            <pre>简化：
+render (h) {
+    return (
+      《AnchoredHeading level={1}>
+        《span>Hello《/span> world!
+      《/AnchoredHeading>
+    )
+  }</pre>
+        </li>
+        <li>
+
+        </li>
+    </ul>
+</div>
+</body>
+</html>
