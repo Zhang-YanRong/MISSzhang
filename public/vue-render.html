@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>VUE-Render</title>
-    <link rel="stylesheet" type="text/css" href="syntaxhighlighter_3.0.83/styles/shCore.css">
-    <link rel="stylesheet" type="text/css" href="syntaxhighlighter_3.0.83/styles/shThemeDefault.css">
-    <script type="text/javascript" src="syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
-    <script type="text/javascript" src="syntaxhighlighter_3.0.83/scripts/shBrushXml.js"></script>
-    <script type="text/javascript"> SyntaxHighlighter.all();  </script>
+    <link rel="stylesheet" href="../prism.css">
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../prism.js"></script>
 </head>
 <style>
     * {
@@ -44,7 +42,7 @@
     <ul>
         <li>
             <h4>createElement参数</h4>
-            <pre>createElement(
+            <pre><code class="language-js">createElement(
   'div',
   {
     attrs: {
@@ -58,15 +56,15 @@
     createElement('p', 'Hello')
   ]
 )
-            </pre>
-            <pre>简化：
+            </code></pre>
+            <pre><code class="language-js">简化：
 render (h) {
     return (
       《AnchoredHeading level={1}>
         《span>Hello《/span> world!
       《/AnchoredHeading>
     )
-  }</pre>
+  }</code></pre>
         </li>
         <li>
 

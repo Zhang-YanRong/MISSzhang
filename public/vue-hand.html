@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="box" style="width: 1200px;margin: 100px auto">
+    <p>1 创建 根目录 letao</p>
+    <p>2 初始化仓库 git init</p>
+    <p>3 创建说明书package.json npm init -y</p>
+    <p>4 用yarn替代npm 快速 yarn --version 查版本</p>
+    <p>5创建源码目录src index.js文件 mkdir src</p>
+    <p>6安装webpack包 npm install --save-dev webpack webpack-cli npm 是 --save-dev === -D</p>
+    <p>7写webpack配置文件webpack.config.js
+        配置文件和package.json</p>
+    <p>8装可以打包CSS的包 npm i style-loader css-loader --dev</p>
+    <p>9装好打包CSS的配置文件</p>
+    <p>10安装图片的包 yarn add --dev file-loader npm install --save-dev file-loader 配置文件</p>
+    <p>11安装打包HTML文件安包 npm install --save-dev html-webpack-plugin 配置文件</p>
+    <p>12打包时清除旧的dist内容，重新创建dist npm install clean-webpack-plugin --save-dev 配置文件</p>
+    <p>13装bootstrap 有字体,配置打包字体项 npm i bootstrap@3.3.7</p>
+    <p>14装打包less的包 npm install --save-dev less-loader less 配置文件</p>
+    <p>15依赖less再装less npm i --dev less</p>
+    <p>es6转es5，，，处理小图片的base64内置处理</p>
+    <p>16 安装处理小图片包 npm install --save-dev url-loader</p>
+    <p>配置文件加个svg</p>
+    <p>17 装es6转es5的包 npm install "babel-loader@^8.0.0-beta" @babel/core @babel/preset-env 新的可以</p>
+    <p>npm install babel-loader babel-core babel-preset-env --dev 旧的</p>
+    <p>配置文件不转第三方包 ,presets配置不写@babel 和包对应 但是安新的 presets配置就不改了</p>
+    <p>18 设置mode在配置文件中与entry平级 mode: 'production',生产环境的（上线用的压缩的）不写默认压缩的 可选项 development（开发用的）</p>
+    <p>19 方便找错配置文件 和entry平级 devtool: 'inline-source-map'</p>
+    <p>20 开启监视模式不用手动打包，文件一变自动打包在package.json文件配置"scripts" "watch": "webpack --watch",</p>
+    <p>21 浏览器自动刷新装包相当于开个服务器 npm install --save-dev webpack-dev-server</p>
+    <p>配置文件和entry平级 将dist设制成www的 在package.json中"scripts" 配置 "dev": "webpack-dev-server --open --progress", 打包进度条</p>
+    <p>22 热更新 局部的配置文件 ①const webpack = require('webpack');②app: './src/index.js'不写③hot: true</p>
+    <p>④new webpack.NamedModulesPlugin(),</p>
+    <p>new webpack.HotModuleReplacementPlugin()</p>
+    <p>23 指定vue文件可以运行，装vue核心依赖 不用-dev npm i vue</p>
+    <p>配置vue的加载路径 和entry平级 resolve: { alias: { 'vue$': 'vue/dist/vue.js'} }</p>
+    <p>24 单文件组件解决组件繁琐问题css,js都有作用域 npm i --dev vue-loader vue-template-compiler</p>
+    <p>配置文件 在rules里 {test: /\.vue$/,use: 'vue-loader'}</p>
+    <p>25 依赖包安装node_modules npm install</p>
+    <p>26 安装路由，引包，挂载，在Vue程序中 npm i vue-router</p>
+    <p>27 配置路由表</p>
+</div>
+</body>
+</html>

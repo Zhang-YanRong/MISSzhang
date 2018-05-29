@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>VUE-axios</title>
+    <link rel="stylesheet" href="../prism.css">
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../prism.js"></script>
 </head>
 <style>
     * {
@@ -44,7 +47,7 @@
         </li>
         <li>
             <h4>执行 GET 请求</h4>
-            <pre>// 为给定 ID 的 user 创建请求
+            <pre><code class="language-js">// 为给定 ID 的 user 创建请求
 axios.get('/user?ID=12345')
   .then(function (response) {
     console.log(response);
@@ -64,11 +67,11 @@ axios.get('/user', {
   })
   .catch(function (error) {
     console.log(error);
-  });</pre>
+  });</code></pre>
         </li>
         <li>
             <h4>执行 POST 请求</h4>
-            <pre>axios.post('/user', {
+            <pre><code class="language-js">axios.post('/user', {
     firstName: 'Fred',
     lastName: 'Flintstone'
   })
@@ -77,11 +80,11 @@ axios.get('/user', {
   })
   .catch(function (error) {
     console.log(error);
-  });</pre>
+  });</code></pre>
         </li>
         <li>
             <h4>执行多个并发请求</h4>
-            <pre>function getUserAccount() {
+            <pre><code class="language-js">function getUserAccount() {
   return axios.get('/user/12345')
 }
 
@@ -92,11 +95,11 @@ function getUserPermissions() {
 axios.all([getUserAccount(),getUserPermissions()]).then(axios.spread((acct,perms) =>{
     // 两个请求现在都执行完成
 })
-            </pre>
+            </code></pre>
         </li>
         <li>
             <h4>拦截器的使用</h4>
-            <pre>//添加请求拦截器
+            <pre><code class="language-js">//添加请求拦截器
 axiox.interceptors.request.use(function (config) {
  // 在发送请求之前做些什么
   return config;
@@ -112,11 +115,11 @@ axios.interceptors.response.use(function (response) {
 }, function (error) {
   // 对响应错误做点什么
   return Promise.reject(error);
-});</pre>
+});</code></pre>
         </li>
         <li>
             <h4>常见的用途有：1. ajax模拟表单（自定义form这个method，然后配合qs包）；2. 根据本地和开发环境的区别，给ajax的url加上不同的前缀。，例如：</h4>
-            <pre>// main.js
+            <pre><code class="language-js">// main.js
 // 引入
 import Vue from 'vue'
 import axios from 'axios'
@@ -141,12 +144,12 @@ axios.interceptors.request.use((config) => {
   return Promise.reject(error)
 })
 // 挂载在Vue原型上
-Vue.prototype.$http = axios</pre>
+Vue.prototype.$http = axios</code></pre>
         </li>
         <li>
             <h4>文件下载（导出）</h4>
             <p>有时需要导出的功能，比如传给后端一些查询参数，后端返回一个excel文件下载下来，此时只要改变responseType即可：</p>
-            <pre>this.$http({
+            <pre><code class="language-js">this.$http({
   method: 'post',
   url: url,
   data: postData,
@@ -166,12 +169,12 @@ Vue.prototype.$http = axios</pre>
   this.tableLoading = false
   this.btnLoading = false
   alert('服务器错误！')
-})</pre>
+})</code></pre>
         </li>
         <li>
             <h4>可以通过向 axios 传递相关配置来创建请求</h4>
             <p>axios(config)</p>
-            <pre>// 发送 POST 请求
+            <pre><code class="language-js">// 发送 POST 请求
 axios({
   method: 'post',
   url: '/user/12345',
@@ -179,29 +182,29 @@ axios({
     firstName: 'Fred',
     lastName: 'Flintstone'
   }
-});</pre>
+});</code></pre>
             <p>axios(url[, config])</p>
             <pre>axios(url[, config])</pre>
             <p>请求方法的别名</p>
-            <pre>为方便起见，为所有支持的请求方法提供了别名
+            <pre><code class="language-js">为方便起见，为所有支持的请求方法提供了别名
 axios.request(config)
 axios.get(url[, config])
 axios.delete(url[, config])
 axios.head(url[, config])
 axios.post(url[, data[, config]])
 axios.put(url[, data[, config]])
-axios.patch(url[, data[, config]])</pre>
+axios.patch(url[, data[, config]])</code></pre>
         </li>
         <li>
             <h4>创建实例</h4>
             <p>axios.create([config])</p>
-            <pre>var instance = axios.create({
+            <pre><code class="language-js">var instance = axios.create({
   baseURL: 'https://some-domain.com/api/',
   timeout: 1000,
   headers: {'X-Custom-Header': 'foobar'}
-});</pre>
+});</code></pre>
             <h4>请求配置</h4>
-            <pre>{
+            <pre><code class="language-js">{
   // `url` 是用于请求的服务器 URL
   url: '/user',
 
@@ -325,11 +328,11 @@ axios.patch(url[, data[, config]])</pre>
   // （查看后面的 Cancellation 这节了解更多）
   cancelToken: new CancelToken(function (cancel) {
   })
-}</pre>
+}</code></pre>
         </li>
         <li>
             <h4>响应结构</h4>
-            <pre>{
+            <pre><code class="language-js">{
   // `data` 由服务器提供的响应
   data: {},
 
@@ -344,8 +347,8 @@ axios.patch(url[, data[, config]])</pre>
 
   // `config` 是为请求提供的配置信息
   config: {}
-}</pre>
-            <pre>// http request 拦截器
+}</code></pre>
+            <pre><code class="language-js">// http request 拦截器
 util.ajax.interceptors.request.use(
     config => {
        global.Storage.set(global.Param.userData , {
@@ -362,9 +365,8 @@ util.ajax.interceptors.request.use(
         return Promise.reject(err);
     }
 );
-</pre>
-            <pre>
-// http response 拦截器
+</code></pre>
+            <pre><code class="language-js">// http response 拦截器
 util.ajax.interceptors.response.use(
     response => {
         return response.data;
@@ -399,22 +401,22 @@ util.ajax.interceptors.response.use(
         });
         return Promise.reject(error);
     }
-);</pre>
+);</code></pre>
         </li>
         <li>
             <h4>使用 then 时，你将接收下面这样的响应：</h4>
-            <pre>axios.get('/user/12345')
+            <pre><code class="language-js">axios.get('/user/12345')
   .then(function(response) {
     console.log(response.data);
     console.log(response.status);
     console.log(response.statusText);
     console.log(response.headers);
     console.log(response.config);
-  });</pre>
+});</code></pre>
         </li>
         <li>
             <h4>拦截器</h4>
-            <pre>/ 添加请求拦截器
+            <pre><code class="language-js">/ 添加请求拦截器
 axios.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
     return config;
@@ -430,11 +432,11 @@ axios.interceptors.response.use(function (response) {
   }, function (error) {
     // 对响应错误做点什么
     return Promise.reject(error);
-  });</pre>
+});</code></pre>
         </li>
         <li>
             <h4>错误处理</h4>
-            <pre>axios.get('/user/12345')
+            <pre><code class="language-js">axios.get('/user/12345')
   .catch(function (error) {
     if (error.response) {
       // 请求已发出，但服务器响应的状态码不在 2xx 范围内
@@ -446,17 +448,17 @@ axios.interceptors.response.use(function (response) {
       console.log('Error', error.message);
     }
     console.log(error.config);
-  });</pre>
+});</code></pre>
             <p>可以使用 validateStatus 配置选项定义一个自定义 HTTP 状态码的错误范围。</p>
-            <pre>axios.get('/user/12345', {
+            <pre><code class="language-js">axios.get('/user/12345', {
   validateStatus: function (status) {
     return status < 500; // 状态码在大于或等于500时才会 reject
   }
-})</pre>
+})</code></pre>
         </li>
         <li>
             <h4>使用 cancel token 取消请求</h4>
-            <pre>var CancelToken = axios.CancelToken;
+            <pre><code class="language-js">var CancelToken = axios.CancelToken;
 var source = CancelToken.source();
 
 axios.get('/user/12345', {
@@ -470,9 +472,9 @@ axios.get('/user/12345', {
 });
 
 // 取消请求（message 参数是可选的）
-source.cancel('Operation canceled by the user.');</pre>
+source.cancel('Operation canceled by the user.');</code></pre>
             <p>还可以通过传递一个 executor 函数到 CancelToken 的构造函数来创建 cancel token：</p>
-            <pre>var CancelToken = axios.CancelToken;
+            <pre><code class="language-js">var CancelToken = axios.CancelToken;
 var cancel;
 
 axios.get('/user/12345', {
@@ -483,7 +485,7 @@ axios.get('/user/12345', {
 });
 
 // 取消请求
-cancel();</pre>
+cancel();</code></pre>
         </li>
     </ul>
 </div>

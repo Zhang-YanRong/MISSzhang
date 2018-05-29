@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>VUE-Router</title>
+    <link rel="stylesheet" href="../prism.css">
+    <script src="../jquery-3.2.1.min.js"></script>
+    <script src="../prism.js"></script>
 </head>
 <style>
     * {
@@ -39,7 +42,7 @@
     <ul>
         <li>
             <h4>路由钩子的使用</h4>
-            <pre>// router/routes.js
+            <pre><code class="language-js">// router/routes.js
 // 在router里设置mate的title属性
 const routes = [
   {
@@ -78,7 +81,7 @@ router.afterEach(route => {
     return
   }
   iView.LoadingBar.finish()
-})</pre>
+})</code></pre>
         </li>
     </ul>
 </div>
